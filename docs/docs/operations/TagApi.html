@@ -1,0 +1,158 @@
+<div class="main-content">
+  <h2><a name=""></a></h2>
+  <p>This is the  API</p>
+
+  <h2><a name="createTag"></a>createTag</h2>
+  <hr>
+  <p></p>
+  <p>Creates tag with given name and values</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/tag/tags</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_38"><a href="">inline_response_200_38</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">tag</span>
+      <span class="param-type">Tag(Tag)</span>
+      
+      <p class="param-description">The details of tag that will be created</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="deleteTag"></a>deleteTag</h2>
+  <hr>
+  <p></p>
+  <p>Delete tag with given name</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/tag/tags/{tagName}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">tagName</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getTag"></a>getTag</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/tag/tags/{tagName}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_38"><a href="">inline_response_200_38</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">tagName</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getTags"></a>getTags</h2>
+  <hr>
+  <p></p>
+  <p>Returns a list of all tags with values</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/tag/tags</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_38"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+  </ul>
+  <h2><a name="updateTag"></a>updateTag</h2>
+  <hr>
+  <p></p>
+  <p>Update some fields of a tag</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/tag/tags/{tagName}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">tag</span>
+      <span class="param-type">Tag_1(Tag_1)</span>
+      
+      <p class="param-description">The details of tag that will be updated</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">tagName</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+</div>

@@ -1,0 +1,241 @@
+<div class="main-content">
+  <h2><a name=""></a></h2>
+  <p>This is the  API</p>
+
+  <h2><a name="create"></a>create</h2>
+  <hr>
+  <p></p>
+  <p>Create new subscription. Provided credentials are validated against target platform</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/subscription/subscriptions</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_35"><a href="">inline_response_200_35</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">subscription</span>
+      <span class="param-type">Subscription(Subscription)</span>
+      
+      <p class="param-description">Details of the subscription that will be created</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">userid</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">User ID</p>
+	  </li>
+  </ul>
+  <h2><a name="delete"></a>delete</h2>
+  <hr>
+  <p></p>
+  <p>Delete subscription for given id</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/subscription/subscriptions/{subscription_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">subscription_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Id of a subscription</p>
+	  </li>
+  </ul>
+  <h2><a name="getAll"></a>getAll</h2>
+  <hr>
+  <p></p>
+  <p>Retrieve list of all subscriptions</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/subscription/subscriptions</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_35"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">username</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Return only subscriptions to which given user has an access to</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">platformId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Filter subscription by given platform id (openStack , aws, k5, ...).</p>
+	  </li>
+  </ul>
+  <h2><a name="getOne"></a>getOne</h2>
+  <hr>
+  <p></p>
+  <p>Get single subscription for specified subscription_id</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/subscription/subscriptions/{subscription_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_35"><a href="">inline_response_200_35</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">subscription_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Id of a subscription</p>
+	  </li>
+  </ul>
+  <h2><a name="getToken"></a>getToken</h2>
+  <hr>
+  <p></p>
+  <p>Get token for a subscription</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/subscription/subscriptions/{subscription_id}/tokens</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_36"><a href="">inline_response_200_36</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">subscription_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Id of a subscription</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">projectId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Generate token for given project Id</p>
+	  </li>
+  </ul>
+  <h2><a name="putSubscriptionValidateVm"></a>putSubscriptionValidateVm</h2>
+  <hr>
+  <p></p>
+  <p>Validate a VM against a policy.</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/subscription/validateVm</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_37"><a href="">inline_response_200_37</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">parameters</span>
+      <span class="param-type">Parameters(Parameters)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="putSubscriptionValidateWorkshift"></a>putSubscriptionValidateWorkshift</h2>
+  <hr>
+  <p></p>
+  <p>Validate a workshift against a policy.</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/subscription/validateWorkshift</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_37"><a href="">inline_response_200_37</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">parameters</span>
+      <span class="param-type">Parameters_1(Parameters_1)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="update"></a>update</h2>
+  <hr>
+  <p></p>
+  <p>Modify subscription for given id</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/subscription/subscriptions/{subscription_id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_35"><a href="">inline_response_200_35</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">subscription_id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Id of a subscription</p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">subscription</span>
+      <span class="param-type">Subscription_1(Subscription_1)</span>
+      
+      <p class="param-description">Details of the subscription that will be created</p>
+	  </li>
+  </ul>
+</div>

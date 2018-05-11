@@ -1,0 +1,438 @@
+<div class="main-content">
+  <h2><a name=""></a></h2>
+  <p>This is the  API</p>
+
+  <h2><a name="checkCredentials"></a>checkCredentials</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/checkCredentials</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_39"><a href="">inline_response_200_39</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">credentials</span>
+      <span class="param-type">Credentials_1(Credentials_1)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="createUser"></a>createUser</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/users</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_39"><a href="">inline_response_200_39</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">user</span>
+      <span class="param-type">User(User)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="deleteAuthLogin"></a>deleteAuthLogin</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/login</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+  </ul>
+  <h2><a name="deleteUser"></a>deleteUser</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/users/{userId}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="forgotPassword"></a>forgotPassword</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/forgotPassword</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">forgottenPassword</span>
+      <span class="param-type">ForgottenPassword(ForgottenPassword)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getUser"></a>getUser</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/users/{userId}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_39"><a href="">inline_response_200_39</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="getUsers"></a>getUsers</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/users</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_39"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="postAuthLogin"></a>postAuthLogin</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/login</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="string"><a href="">String</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">credentials</span>
+      <span class="param-type">Credentials(Credentials)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="resetPassword"></a>resetPassword</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/resetPassword</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">passwordReset</span>
+      <span class="param-type">PasswordReset(PasswordReset)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="setPassword"></a>setPassword</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/users/{userId}/setPassword</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">email</span>
+      <span class="param-type">Email(Email)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="setRoles"></a>setRoles</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/users/{userId}/setRoles</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">rolesUpdate</span>
+      <span class="param-type">RolesUpdate(RolesUpdate)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">roles</span>
+      <span class="param-type">List(String)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="updateUser"></a>updateUser</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/users/{userId}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>PUT</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">update</span>
+      <span class="param-type">Update(Update)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+	  <li class="parameter">
+      
+      
+      
+      <span class="param-in">Header: </span>
+      
+      <span class="param-name">userId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+  <h2><a name="validateToken"></a>validateToken</h2>
+  <hr>
+  <p></p>
+  
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/auth/validateToken</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">token</span>
+      <span class="param-type">Token(Token)</span>
+      
+      <p class="param-description"></p>
+	  </li>
+  </ul>
+</div>

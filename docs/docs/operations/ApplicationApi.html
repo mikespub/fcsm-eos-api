@@ -1,0 +1,232 @@
+<div class="main-content">
+  <h2><a name=""></a></h2>
+  <p>This is the  API</p>
+
+  <h2><a name="createApplication"></a>createApplication</h2>
+  <hr>
+  <p></p>
+  <p>Create Application. When &#39;vms&#39; list is given application&#39;s components will be deployed on selected vms.  Currenlty only single component Blueprint is supported for vms parameter. Addon application can be created only on standalone virtual machine (not created by application).</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/applications</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_8"><a href="">inline_response_200_8</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">application</span>
+      <span class="param-type">Application(Application)</span>
+      
+      <p class="param-description">Application to create</p>
+	  </li>
+  </ul>
+  <h2><a name="createBlueprint"></a>createBlueprint</h2>
+  <hr>
+  <p></p>
+  <p>Create blueprint</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/blueprints</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_7"><a href="">inline_response_200_7</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      
+      
+      <span class="param-in">Body: </span>
+      <span class="param-name">blueprint</span>
+      <span class="param-type">Blueprint(Blueprint)</span>
+      
+      <p class="param-description">Blueprint to create</p>
+	  </li>
+  </ul>
+  <h2><a name="deleteApplication"></a>deleteApplication</h2>
+  <hr>
+  <p></p>
+  <p>Delete application</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/applications/{id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Application identifier</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">vms</span>
+      <span class="param-type">Boolean</span>
+      
+      <p class="param-description">Flag to delete (True) or just unmanage virtual machines (False)</p>
+	  </li>
+  </ul>
+  <h2><a name="deleteBlueprint"></a>deleteBlueprint</h2>
+  <hr>
+  <p></p>
+  <p>Delete blueprint</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/blueprints/{id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Blueprint identifier</p>
+	  </li>
+  </ul>
+  <h2><a name="deleteVmFromApps"></a>deleteVmFromApps</h2>
+  <hr>
+  <p></p>
+  <p>Delete vm from application&#39;s components. It will only remove VM from database. It will not remove virtual machines from platforms.</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/vms/{id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>DELETE</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model=""><a href=""></a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Virtual Machine unique identifier</p>
+	  </li>
+  </ul>
+  <h2><a name="getApplication"></a>getApplication</h2>
+  <hr>
+  <p></p>
+  <p>Retrieve application</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/applications/{id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_8"><a href="">inline_response_200_8</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Application identifier</p>
+	  </li>
+  </ul>
+  <h2><a name="getApplications"></a>getApplications</h2>
+  <hr>
+  <p></p>
+  <p>Retrieve applications</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/applications</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_8"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">subscriptionId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Return applications only created using given subscription</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">vmId</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Return applications which are atteched to this vm</p>
+	  </li>
+  </ul>
+  <h2><a name="getBlueprint"></a>getBlueprint</h2>
+  <hr>
+  <p></p>
+  <p>Retrieve blueprint</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/blueprints/{id}</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_7"><a href="">inline_response_200_7</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      
+      <span class="param-in">Path: </span>
+      
+      
+      <span class="param-name">id</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">Blueprint identifier</p>
+	  </li>
+  </ul>
+  <h2><a name="getBlueprints"></a>getBlueprints</h2>
+  <hr>
+  <p></p>
+  <p>Retrieve all blueprints</p>
+  <h3 class="section">URL</h3>
+  <code>https://emeia.fcsm.io/api/v1/application/blueprints</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="inline_response_200_7"><a href="">List</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+  </ul>
+</div>

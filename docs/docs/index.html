@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-responsive.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script src="assets/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+  <script src="assets/js/main.js" type="text/javascript"></script>
+
+  <title>REST API Resources</title>
+</head>
+<body>
+  <div class="header">
+    <div class="top-bar">
+      <h1 id="logo"><a class="logo" href="/"><span>Swagger</span><span class="light">API Docs</span></a></h1>
+    </div>
+  </div>
+  <div class="model-container"></div>
+  <div class="content">
+    <div class="box clearfix">
+      <div class="sidebar">
+        <div class="section-box">
+          <div class="section-header">
+            Overview
+          </div>
+          <ul>
+            <li>Getting Started</li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/AnalyticsApi">AnalyticsApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/AnalyticsApi#getIssues">getIssues</a></li>
+            <li><a href="#!/AnalyticsApi#getMetrics">getMetrics</a></li>
+            <li><a href="#!/AnalyticsApi#getOperatingSystems">getOperatingSystems</a></li>
+            <li><a href="#!/AnalyticsApi#getPlatformMetrics">getPlatformMetrics</a></li>
+            <li><a href="#!/AnalyticsApi#getPlatformsUsage">getPlatformsUsage</a></li>
+            <li><a href="#!/AnalyticsApi#getSummary">getSummary</a></li>
+            <li><a href="#!/AnalyticsApi#getSummaryUsage">getSummaryUsage</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/ApplicationApi">ApplicationApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/ApplicationApi#createApplication">createApplication</a></li>
+            <li><a href="#!/ApplicationApi#createBlueprint">createBlueprint</a></li>
+            <li><a href="#!/ApplicationApi#deleteApplication">deleteApplication</a></li>
+            <li><a href="#!/ApplicationApi#deleteBlueprint">deleteBlueprint</a></li>
+            <li><a href="#!/ApplicationApi#deleteVmFromApps">deleteVmFromApps</a></li>
+            <li><a href="#!/ApplicationApi#getApplication">getApplication</a></li>
+            <li><a href="#!/ApplicationApi#getApplications">getApplications</a></li>
+            <li><a href="#!/ApplicationApi#getBlueprint">getBlueprint</a></li>
+            <li><a href="#!/ApplicationApi#getBlueprints">getBlueprints</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/AuthApi">AuthApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/AuthApi#checkCredentials">checkCredentials</a></li>
+            <li><a href="#!/AuthApi#createUser">createUser</a></li>
+            <li><a href="#!/AuthApi#deleteAuthLogin">deleteAuthLogin</a></li>
+            <li><a href="#!/AuthApi#deleteUser">deleteUser</a></li>
+            <li><a href="#!/AuthApi#forgotPassword">forgotPassword</a></li>
+            <li><a href="#!/AuthApi#getUser">getUser</a></li>
+            <li><a href="#!/AuthApi#getUsers">getUsers</a></li>
+            <li><a href="#!/AuthApi#postAuthLogin">postAuthLogin</a></li>
+            <li><a href="#!/AuthApi#resetPassword">resetPassword</a></li>
+            <li><a href="#!/AuthApi#setPassword">setPassword</a></li>
+            <li><a href="#!/AuthApi#setRoles">setRoles</a></li>
+            <li><a href="#!/AuthApi#updateUser">updateUser</a></li>
+            <li><a href="#!/AuthApi#validateToken">validateToken</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/AwsApi">AwsApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/AwsApi#deleteAwsComputeKeypair">deleteAwsComputeKeypair</a></li>
+            <li><a href="#!/AwsApi#deleteAwsComputeVm">deleteAwsComputeVm</a></li>
+            <li><a href="#!/AwsApi#deleteAwsComputeVmManagement">deleteAwsComputeVmManagement</a></li>
+            <li><a href="#!/AwsApi#deleteAwsComputeVmWorkshift">deleteAwsComputeVmWorkshift</a></li>
+            <li><a href="#!/AwsApi#deleteAwsNetworkInterface">deleteAwsNetworkInterface</a></li>
+            <li><a href="#!/AwsApi#deleteAwsNetworkNetwork">deleteAwsNetworkNetwork</a></li>
+            <li><a href="#!/AwsApi#deleteAwsNetworkSecurityGroup">deleteAwsNetworkSecurityGroup</a></li>
+            <li><a href="#!/AwsApi#deleteAwsNetworkSubnet">deleteAwsNetworkSubnet</a></li>
+            <li><a href="#!/AwsApi#deleteAwsNetworkVms&lt;vmId&gt;SecurityGroups&lt;securityGroupId&gt;">deleteAwsNetworkVms&lt;vmId&gt;SecurityGroups&lt;securityGroupId&gt;</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeFlavor">getAwsComputeFlavor</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeFlavors">getAwsComputeFlavors</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeImage">getAwsComputeImage</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeImages">getAwsComputeImages</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeKeypair">getAwsComputeKeypair</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeKeypairs">getAwsComputeKeypairs</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeValidateSubscription">getAwsComputeValidateSubscription</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeVm">getAwsComputeVm</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeVmDetails">getAwsComputeVmDetails</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeVmManagement">getAwsComputeVmManagement</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeVmPassword">getAwsComputeVmPassword</a></li>
+            <li><a href="#!/AwsApi#getAwsComputeVms">getAwsComputeVms</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkInterface">getAwsNetworkInterface</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkInterfaces">getAwsNetworkInterfaces</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkNetwork">getAwsNetworkNetwork</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkNetworkInterfaces">getAwsNetworkNetworkInterfaces</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkNetworkSubnets">getAwsNetworkNetworkSubnets</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkNetworks">getAwsNetworkNetworks</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkSecurityGroup">getAwsNetworkSecurityGroup</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkSecurityGroups">getAwsNetworkSecurityGroups</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkSubnet">getAwsNetworkSubnet</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkSubnetInterfaces">getAwsNetworkSubnetInterfaces</a></li>
+            <li><a href="#!/AwsApi#getAwsNetworkSubnets">getAwsNetworkSubnets</a></li>
+            <li><a href="#!/AwsApi#postAwsComputeKeypairsGenerate">postAwsComputeKeypairsGenerate</a></li>
+            <li><a href="#!/AwsApi#postAwsComputeKeypairsImport">postAwsComputeKeypairsImport</a></li>
+            <li><a href="#!/AwsApi#postAwsComputeVmWorkshift">postAwsComputeVmWorkshift</a></li>
+            <li><a href="#!/AwsApi#postAwsComputeVms">postAwsComputeVms</a></li>
+            <li><a href="#!/AwsApi#postAwsNetworkInterfaces">postAwsNetworkInterfaces</a></li>
+            <li><a href="#!/AwsApi#postAwsNetworkNetworkInterfaces">postAwsNetworkNetworkInterfaces</a></li>
+            <li><a href="#!/AwsApi#postAwsNetworkNetworkSubnets">postAwsNetworkNetworkSubnets</a></li>
+            <li><a href="#!/AwsApi#postAwsNetworkNetworks">postAwsNetworkNetworks</a></li>
+            <li><a href="#!/AwsApi#postAwsNetworkSecurityGroups">postAwsNetworkSecurityGroups</a></li>
+            <li><a href="#!/AwsApi#postAwsNetworkSubnetInterfaces">postAwsNetworkSubnetInterfaces</a></li>
+            <li><a href="#!/AwsApi#postAwsNetworkSubnets">postAwsNetworkSubnets</a></li>
+            <li><a href="#!/AwsApi#putAwsComputeVmCommand">putAwsComputeVmCommand</a></li>
+            <li><a href="#!/AwsApi#putAwsComputeVmSetTag">putAwsComputeVmSetTag</a></li>
+            <li><a href="#!/AwsApi#putAwsComputeVmUpdateTags">putAwsComputeVmUpdateTags</a></li>
+            <li><a href="#!/AwsApi#putAwsComputeVmWorkshift">putAwsComputeVmWorkshift</a></li>
+            <li><a href="#!/AwsApi#putAwsNetworkVms&lt;vmId&gt;SecurityGroups&lt;securityGroupId&gt;">putAwsNetworkVms&lt;vmId&gt;SecurityGroups&lt;securityGroupId&gt;</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/AzureApi">AzureApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/AzureApi#deleteKeypairResource">deleteKeypairResource</a></li>
+            <li><a href="#!/AzureApi#deleteNetworkInterface">deleteNetworkInterface</a></li>
+            <li><a href="#!/AzureApi#deleteResourceGroup">deleteResourceGroup</a></li>
+            <li><a href="#!/AzureApi#deleteSecurityGroup">deleteSecurityGroup</a></li>
+            <li><a href="#!/AzureApi#deleteSubnet">deleteSubnet</a></li>
+            <li><a href="#!/AzureApi#deleteVirtualNetwork">deleteVirtualNetwork</a></li>
+            <li><a href="#!/AzureApi#deleteVm">deleteVm</a></li>
+            <li><a href="#!/AzureApi#deleteVmWorkshiftResource">deleteVmWorkshiftResource</a></li>
+            <li><a href="#!/AzureApi#getAvailabilityZone">getAvailabilityZone</a></li>
+            <li><a href="#!/AzureApi#getAvailabilityZones">getAvailabilityZones</a></li>
+            <li><a href="#!/AzureApi#getFlavor">getFlavor</a></li>
+            <li><a href="#!/AzureApi#getFlavors">getFlavors</a></li>
+            <li><a href="#!/AzureApi#getImage">getImage</a></li>
+            <li><a href="#!/AzureApi#getImages">getImages</a></li>
+            <li><a href="#!/AzureApi#getKeypairResource">getKeypairResource</a></li>
+            <li><a href="#!/AzureApi#getKeypairsListResource">getKeypairsListResource</a></li>
+            <li><a href="#!/AzureApi#getNetworkInterface">getNetworkInterface</a></li>
+            <li><a href="#!/AzureApi#getNetworkInterfaces">getNetworkInterfaces</a></li>
+            <li><a href="#!/AzureApi#getPublicIpAddresses">getPublicIpAddresses</a></li>
+            <li><a href="#!/AzureApi#getRegion">getRegion</a></li>
+            <li><a href="#!/AzureApi#getRegions">getRegions</a></li>
+            <li><a href="#!/AzureApi#getResourceGroup">getResourceGroup</a></li>
+            <li><a href="#!/AzureApi#getResourceGroups">getResourceGroups</a></li>
+            <li><a href="#!/AzureApi#getSecurityGroup">getSecurityGroup</a></li>
+            <li><a href="#!/AzureApi#getSecurityGroups">getSecurityGroups</a></li>
+            <li><a href="#!/AzureApi#getSubnet">getSubnet</a></li>
+            <li><a href="#!/AzureApi#getSubnets">getSubnets</a></li>
+            <li><a href="#!/AzureApi#getVMs">getVMs</a></li>
+            <li><a href="#!/AzureApi#getVirtualNetwork">getVirtualNetwork</a></li>
+            <li><a href="#!/AzureApi#getVirtualNetworks">getVirtualNetworks</a></li>
+            <li><a href="#!/AzureApi#getVm">getVm</a></li>
+            <li><a href="#!/AzureApi#getVmDetails">getVmDetails</a></li>
+            <li><a href="#!/AzureApi#getVmManagement">getVmManagement</a></li>
+            <li><a href="#!/AzureApi#getVmPassword">getVmPassword</a></li>
+            <li><a href="#!/AzureApi#postKeypairCreate">postKeypairCreate</a></li>
+            <li><a href="#!/AzureApi#postKeypairImport">postKeypairImport</a></li>
+            <li><a href="#!/AzureApi#postNetworkInterfaces">postNetworkInterfaces</a></li>
+            <li><a href="#!/AzureApi#postResourceGroups">postResourceGroups</a></li>
+            <li><a href="#!/AzureApi#postSecurityGroups">postSecurityGroups</a></li>
+            <li><a href="#!/AzureApi#postSubnets">postSubnets</a></li>
+            <li><a href="#!/AzureApi#postVMs">postVMs</a></li>
+            <li><a href="#!/AzureApi#postVirtualNetworks">postVirtualNetworks</a></li>
+            <li><a href="#!/AzureApi#postVmWorkshiftResource">postVmWorkshiftResource</a></li>
+            <li><a href="#!/AzureApi#putSecurityGroupAttachment">putSecurityGroupAttachment</a></li>
+            <li><a href="#!/AzureApi#putVmCommand">putVmCommand</a></li>
+            <li><a href="#!/AzureApi#putVmSetTag">putVmSetTag</a></li>
+            <li><a href="#!/AzureApi#putVmUpdateTags">putVmUpdateTags</a></li>
+            <li><a href="#!/AzureApi#putVmWorkshiftResource">putVmWorkshiftResource</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/ComputeApi">ComputeApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/ComputeApi#becomeAffiliated">becomeAffiliated</a></li>
+            <li><a href="#!/ComputeApi#createProject">createProject</a></li>
+            <li><a href="#!/ComputeApi#createWorkshift">createWorkshift</a></li>
+            <li><a href="#!/ComputeApi#deleteAwsComputeKeypair">deleteAwsComputeKeypair</a></li>
+            <li><a href="#!/ComputeApi#deleteAwsComputeVm">deleteAwsComputeVm</a></li>
+            <li><a href="#!/ComputeApi#deleteAwsComputeVmManagement">deleteAwsComputeVmManagement</a></li>
+            <li><a href="#!/ComputeApi#deleteAwsComputeVmWorkshift">deleteAwsComputeVmWorkshift</a></li>
+            <li><a href="#!/ComputeApi#deleteK5ComputeKeypair">deleteK5ComputeKeypair</a></li>
+            <li><a href="#!/ComputeApi#deleteK5ComputeProjectVm">deleteK5ComputeProjectVm</a></li>
+            <li><a href="#!/ComputeApi#deleteK5ComputeProjectVmManagement">deleteK5ComputeProjectVmManagement</a></li>
+            <li><a href="#!/ComputeApi#deleteK5ComputeProjectVolume">deleteK5ComputeProjectVolume</a></li>
+            <li><a href="#!/ComputeApi#deleteKeypairResource">deleteKeypairResource</a></li>
+            <li><a href="#!/ComputeApi#deleteOpenstackComputeKeypair">deleteOpenstackComputeKeypair</a></li>
+            <li><a href="#!/ComputeApi#deleteOpenstackComputeVm">deleteOpenstackComputeVm</a></li>
+            <li><a href="#!/ComputeApi#deleteOpenstackComputeVmManagement">deleteOpenstackComputeVmManagement</a></li>
+            <li><a href="#!/ComputeApi#deleteOpenstackComputeVmWorkshift">deleteOpenstackComputeVmWorkshift</a></li>
+            <li><a href="#!/ComputeApi#deleteResourceGroup">deleteResourceGroup</a></li>
+            <li><a href="#!/ComputeApi#deleteVm">deleteVm</a></li>
+            <li><a href="#!/ComputeApi#deleteVmWorkshiftResource">deleteVmWorkshiftResource</a></li>
+            <li><a href="#!/ComputeApi#deleteWorkshift">deleteWorkshift</a></li>
+            <li><a href="#!/ComputeApi#getAvailabilityZone">getAvailabilityZone</a></li>
+            <li><a href="#!/ComputeApi#getAvailabilityZones">getAvailabilityZones</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeFlavor">getAwsComputeFlavor</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeFlavors">getAwsComputeFlavors</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeImage">getAwsComputeImage</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeImages">getAwsComputeImages</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeKeypair">getAwsComputeKeypair</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeKeypairs">getAwsComputeKeypairs</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeValidateSubscription">getAwsComputeValidateSubscription</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeVm">getAwsComputeVm</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeVmDetails">getAwsComputeVmDetails</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeVmManagement">getAwsComputeVmManagement</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeVmPassword">getAwsComputeVmPassword</a></li>
+            <li><a href="#!/ComputeApi#getAwsComputeVms">getAwsComputeVms</a></li>
+            <li><a href="#!/ComputeApi#getFlavor">getFlavor</a></li>
+            <li><a href="#!/ComputeApi#getFlavors">getFlavors</a></li>
+            <li><a href="#!/ComputeApi#getImage">getImage</a></li>
+            <li><a href="#!/ComputeApi#getImages">getImages</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeAvailabilityZones">getK5ComputeAvailabilityZones</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectFlavor">getK5ComputeProjectFlavor</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectImage">getK5ComputeProjectImage</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectImages">getK5ComputeProjectImages</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectVm">getK5ComputeProjectVm</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectVmDetails">getK5ComputeProjectVmDetails</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectVmManagement">getK5ComputeProjectVmManagement</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectVmPassword">getK5ComputeProjectVmPassword</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectVms">getK5ComputeProjectVms</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectVolume">getK5ComputeProjectVolume</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeProjectVolumes">getK5ComputeProjectVolumes</a></li>
+            <li><a href="#!/ComputeApi#getK5ComputeRegions">getK5ComputeRegions</a></li>
+            <li><a href="#!/ComputeApi#getKeypair">getKeypair</a></li>
+            <li><a href="#!/ComputeApi#getKeypairResource">getKeypairResource</a></li>
+            <li><a href="#!/ComputeApi#getKeypairs">getKeypairs</a></li>
+            <li><a href="#!/ComputeApi#getKeypairsListResource">getKeypairsListResource</a></li>
+            <li><a href="#!/ComputeApi#getMany">getMany</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeFlavor">getOpenstackComputeFlavor</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeFlavors">getOpenstackComputeFlavors</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeImage">getOpenstackComputeImage</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeImages">getOpenstackComputeImages</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeKeypair">getOpenstackComputeKeypair</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeKeypairs">getOpenstackComputeKeypairs</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeValidateSubscription">getOpenstackComputeValidateSubscription</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeVm">getOpenstackComputeVm</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeVmConsoleUrl">getOpenstackComputeVmConsoleUrl</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeVmDetails">getOpenstackComputeVmDetails</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeVmManagement">getOpenstackComputeVmManagement</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeVmPassword">getOpenstackComputeVmPassword</a></li>
+            <li><a href="#!/ComputeApi#getOpenstackComputeVms">getOpenstackComputeVms</a></li>
+            <li><a href="#!/ComputeApi#getProject">getProject</a></li>
+            <li><a href="#!/ComputeApi#getProjects">getProjects</a></li>
+            <li><a href="#!/ComputeApi#getRegion">getRegion</a></li>
+            <li><a href="#!/ComputeApi#getRegions">getRegions</a></li>
+            <li><a href="#!/ComputeApi#getResourceGroup">getResourceGroup</a></li>
+            <li><a href="#!/ComputeApi#getResourceGroups">getResourceGroups</a></li>
+            <li><a href="#!/ComputeApi#getVMs">getVMs</a></li>
+            <li><a href="#!/ComputeApi#getVm">getVm</a></li>
+            <li><a href="#!/ComputeApi#getVmDetails">getVmDetails</a></li>
+            <li><a href="#!/ComputeApi#getVmManagement">getVmManagement</a></li>
+            <li><a href="#!/ComputeApi#getVmPassword">getVmPassword</a></li>
+            <li><a href="#!/ComputeApi#postAwsComputeKeypairsGenerate">postAwsComputeKeypairsGenerate</a></li>
+            <li><a href="#!/ComputeApi#postAwsComputeKeypairsImport">postAwsComputeKeypairsImport</a></li>
+            <li><a href="#!/ComputeApi#postAwsComputeVmWorkshift">postAwsComputeVmWorkshift</a></li>
+            <li><a href="#!/ComputeApi#postAwsComputeVms">postAwsComputeVms</a></li>
+            <li><a href="#!/ComputeApi#postK5ComputeKeypairsGenerate">postK5ComputeKeypairsGenerate</a></li>
+            <li><a href="#!/ComputeApi#postK5ComputeKeypairsImport">postK5ComputeKeypairsImport</a></li>
+            <li><a href="#!/ComputeApi#postK5ComputeProjectVms">postK5ComputeProjectVms</a></li>
+            <li><a href="#!/ComputeApi#postK5ComputeProjectVolumes">postK5ComputeProjectVolumes</a></li>
+            <li><a href="#!/ComputeApi#postKeypairCreate">postKeypairCreate</a></li>
+            <li><a href="#!/ComputeApi#postKeypairImport">postKeypairImport</a></li>
+            <li><a href="#!/ComputeApi#postOpenstackComputeKeypairsGenerate">postOpenstackComputeKeypairsGenerate</a></li>
+            <li><a href="#!/ComputeApi#postOpenstackComputeKeypairsImport">postOpenstackComputeKeypairsImport</a></li>
+            <li><a href="#!/ComputeApi#postOpenstackComputeVmWorkshift">postOpenstackComputeVmWorkshift</a></li>
+            <li><a href="#!/ComputeApi#postOpenstackComputeVms">postOpenstackComputeVms</a></li>
+            <li><a href="#!/ComputeApi#postResourceGroups">postResourceGroups</a></li>
+            <li><a href="#!/ComputeApi#postVMs">postVMs</a></li>
+            <li><a href="#!/ComputeApi#postVmWorkshiftResource">postVmWorkshiftResource</a></li>
+            <li><a href="#!/ComputeApi#putAwsComputeVmCommand">putAwsComputeVmCommand</a></li>
+            <li><a href="#!/ComputeApi#putAwsComputeVmSetTag">putAwsComputeVmSetTag</a></li>
+            <li><a href="#!/ComputeApi#putAwsComputeVmUpdateTags">putAwsComputeVmUpdateTags</a></li>
+            <li><a href="#!/ComputeApi#putAwsComputeVmWorkshift">putAwsComputeVmWorkshift</a></li>
+            <li><a href="#!/ComputeApi#putK5ComputeProjectVmCommand">putK5ComputeProjectVmCommand</a></li>
+            <li><a href="#!/ComputeApi#putK5ComputeProjectVmSetTag">putK5ComputeProjectVmSetTag</a></li>
+            <li><a href="#!/ComputeApi#putK5ComputeProjectVmUpdateTags">putK5ComputeProjectVmUpdateTags</a></li>
+            <li><a href="#!/ComputeApi#putK5ComputeProjectVolume">putK5ComputeProjectVolume</a></li>
+            <li><a href="#!/ComputeApi#putK5ComputeProjectVolumeAttach">putK5ComputeProjectVolumeAttach</a></li>
+            <li><a href="#!/ComputeApi#putK5ComputeProjectVolumeDetach">putK5ComputeProjectVolumeDetach</a></li>
+            <li><a href="#!/ComputeApi#putOpenstackComputeVmCommand">putOpenstackComputeVmCommand</a></li>
+            <li><a href="#!/ComputeApi#putOpenstackComputeVmSetTag">putOpenstackComputeVmSetTag</a></li>
+            <li><a href="#!/ComputeApi#putOpenstackComputeVmUpdateTags">putOpenstackComputeVmUpdateTags</a></li>
+            <li><a href="#!/ComputeApi#putOpenstackComputeVmWorkshift">putOpenstackComputeVmWorkshift</a></li>
+            <li><a href="#!/ComputeApi#putVmCommand">putVmCommand</a></li>
+            <li><a href="#!/ComputeApi#putVmSetTag">putVmSetTag</a></li>
+            <li><a href="#!/ComputeApi#putVmUpdateTags">putVmUpdateTags</a></li>
+            <li><a href="#!/ComputeApi#putVmWorkshiftResource">putVmWorkshiftResource</a></li>
+            <li><a href="#!/ComputeApi#updateProject">updateProject</a></li>
+            <li><a href="#!/ComputeApi#updateWorkshift">updateWorkshift</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/ConfigurationApi">ConfigurationApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/ConfigurationApi#addMailProvider">addMailProvider</a></li>
+            <li><a href="#!/ConfigurationApi#deleteConfigurationMailProvider">deleteConfigurationMailProvider</a></li>
+            <li><a href="#!/ConfigurationApi#deleteConfigurationMailProvidersDefault">deleteConfigurationMailProvidersDefault</a></li>
+            <li><a href="#!/ConfigurationApi#editMailProvider">editMailProvider</a></li>
+            <li><a href="#!/ConfigurationApi#editPlatformAccess">editPlatformAccess</a></li>
+            <li><a href="#!/ConfigurationApi#getAllPlatformAccess">getAllPlatformAccess</a></li>
+            <li><a href="#!/ConfigurationApi#getConfigurationLogo">getConfigurationLogo</a></li>
+            <li><a href="#!/ConfigurationApi#getConfigurationManagementTool">getConfigurationManagementTool</a></li>
+            <li><a href="#!/ConfigurationApi#getConfigurationManagementToolTypes">getConfigurationManagementToolTypes</a></li>
+            <li><a href="#!/ConfigurationApi#getConfigurationManagementTools">getConfigurationManagementTools</a></li>
+            <li><a href="#!/ConfigurationApi#getMailProvider">getMailProvider</a></li>
+            <li><a href="#!/ConfigurationApi#getMailProviders">getMailProviders</a></li>
+            <li><a href="#!/ConfigurationApi#getPlatformAccess">getPlatformAccess</a></li>
+            <li><a href="#!/ConfigurationApi#postConfigurationLogo">postConfigurationLogo</a></li>
+            <li><a href="#!/ConfigurationApi#postConfigurationManagementTools">postConfigurationManagementTools</a></li>
+            <li><a href="#!/ConfigurationApi#putConfigurationMailProvidersDefault">putConfigurationMailProvidersDefault</a></li>
+            <li><a href="#!/ConfigurationApi#putConfigurationManagementTool">putConfigurationManagementTool</a></li>
+            <li><a href="#!/ConfigurationApi#setDefaultMailProvider">setDefaultMailProvider</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/K5Api">K5Api</a>
+          </div>
+          <ul>
+            <li><a href="#!/K5Api#assignInterfaceToVm">assignInterfaceToVm</a></li>
+            <li><a href="#!/K5Api#becomeAffiliated">becomeAffiliated</a></li>
+            <li><a href="#!/K5Api#createFloatingIp">createFloatingIp</a></li>
+            <li><a href="#!/K5Api#createInterface">createInterface</a></li>
+            <li><a href="#!/K5Api#createNetwork">createNetwork</a></li>
+            <li><a href="#!/K5Api#createProject">createProject</a></li>
+            <li><a href="#!/K5Api#createRouter">createRouter</a></li>
+            <li><a href="#!/K5Api#createSubnet">createSubnet</a></li>
+            <li><a href="#!/K5Api#createWorkshift">createWorkshift</a></li>
+            <li><a href="#!/K5Api#deleteInterface">deleteInterface</a></li>
+            <li><a href="#!/K5Api#deleteK5ComputeKeypair">deleteK5ComputeKeypair</a></li>
+            <li><a href="#!/K5Api#deleteK5ComputeProjectVm">deleteK5ComputeProjectVm</a></li>
+            <li><a href="#!/K5Api#deleteK5ComputeProjectVmManagement">deleteK5ComputeProjectVmManagement</a></li>
+            <li><a href="#!/K5Api#deleteK5ComputeProjectVolume">deleteK5ComputeProjectVolume</a></li>
+            <li><a href="#!/K5Api#deleteK5NetworkProjectFloatingIp">deleteK5NetworkProjectFloatingIp</a></li>
+            <li><a href="#!/K5Api#deleteK5NetworkProjectInterfacesDetach">deleteK5NetworkProjectInterfacesDetach</a></li>
+            <li><a href="#!/K5Api#deleteK5NetworkProjectRouterExternalGateway">deleteK5NetworkProjectRouterExternalGateway</a></li>
+            <li><a href="#!/K5Api#deleteK5NetworkProjectSecurityGroup">deleteK5NetworkProjectSecurityGroup</a></li>
+            <li><a href="#!/K5Api#deleteK5NetworkProjectSecurityGroupRule">deleteK5NetworkProjectSecurityGroupRule</a></li>
+            <li><a href="#!/K5Api#deleteK5NetworkProjectSubnet">deleteK5NetworkProjectSubnet</a></li>
+            <li><a href="#!/K5Api#deleteK5NetworkProjectVmSecurityGroup">deleteK5NetworkProjectVmSecurityGroup</a></li>
+            <li><a href="#!/K5Api#deleteK5NetworkProjectVmUnassignFloatingIp">deleteK5NetworkProjectVmUnassignFloatingIp</a></li>
+            <li><a href="#!/K5Api#deleteNetwork">deleteNetwork</a></li>
+            <li><a href="#!/K5Api#deleteRouter">deleteRouter</a></li>
+            <li><a href="#!/K5Api#deleteWorkshift">deleteWorkshift</a></li>
+            <li><a href="#!/K5Api#detachInterfaceFromVm">detachInterfaceFromVm</a></li>
+            <li><a href="#!/K5Api#editInterface">editInterface</a></li>
+            <li><a href="#!/K5Api#editRouter">editRouter</a></li>
+            <li><a href="#!/K5Api#getInterface">getInterface</a></li>
+            <li><a href="#!/K5Api#getInterfaces">getInterfaces</a></li>
+            <li><a href="#!/K5Api#getK5ComputeAvailabilityZones">getK5ComputeAvailabilityZones</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectFlavor">getK5ComputeProjectFlavor</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectImage">getK5ComputeProjectImage</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectImages">getK5ComputeProjectImages</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectVm">getK5ComputeProjectVm</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectVmDetails">getK5ComputeProjectVmDetails</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectVmManagement">getK5ComputeProjectVmManagement</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectVmPassword">getK5ComputeProjectVmPassword</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectVms">getK5ComputeProjectVms</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectVolume">getK5ComputeProjectVolume</a></li>
+            <li><a href="#!/K5Api#getK5ComputeProjectVolumes">getK5ComputeProjectVolumes</a></li>
+            <li><a href="#!/K5Api#getK5ComputeRegions">getK5ComputeRegions</a></li>
+            <li><a href="#!/K5Api#getK5NetworkProjectFloatingIp">getK5NetworkProjectFloatingIp</a></li>
+            <li><a href="#!/K5Api#getK5NetworkProjectFloatingIps">getK5NetworkProjectFloatingIps</a></li>
+            <li><a href="#!/K5Api#getK5NetworkProjectSecurityGroupRule">getK5NetworkProjectSecurityGroupRule</a></li>
+            <li><a href="#!/K5Api#getK5NetworkProjectSecurityGroupRules">getK5NetworkProjectSecurityGroupRules</a></li>
+            <li><a href="#!/K5Api#getK5NetworkProjectSubnet">getK5NetworkProjectSubnet</a></li>
+            <li><a href="#!/K5Api#getK5NetworkProjectSubnets">getK5NetworkProjectSubnets</a></li>
+            <li><a href="#!/K5Api#getK5NetworkVmSecurityGroups">getK5NetworkVmSecurityGroups</a></li>
+            <li><a href="#!/K5Api#getKeypair">getKeypair</a></li>
+            <li><a href="#!/K5Api#getKeypairs">getKeypairs</a></li>
+            <li><a href="#!/K5Api#getMany">getMany</a></li>
+            <li><a href="#!/K5Api#getNetwork">getNetwork</a></li>
+            <li><a href="#!/K5Api#getNetworks">getNetworks</a></li>
+            <li><a href="#!/K5Api#getProject">getProject</a></li>
+            <li><a href="#!/K5Api#getProjects">getProjects</a></li>
+            <li><a href="#!/K5Api#getRouter">getRouter</a></li>
+            <li><a href="#!/K5Api#getRouters">getRouters</a></li>
+            <li><a href="#!/K5Api#getSecurityGroup">getSecurityGroup</a></li>
+            <li><a href="#!/K5Api#getSecurityGroups">getSecurityGroups</a></li>
+            <li><a href="#!/K5Api#postK5ComputeKeypairsGenerate">postK5ComputeKeypairsGenerate</a></li>
+            <li><a href="#!/K5Api#postK5ComputeKeypairsImport">postK5ComputeKeypairsImport</a></li>
+            <li><a href="#!/K5Api#postK5ComputeProjectVms">postK5ComputeProjectVms</a></li>
+            <li><a href="#!/K5Api#postK5ComputeProjectVolumes">postK5ComputeProjectVolumes</a></li>
+            <li><a href="#!/K5Api#postK5NetworkProjectSecurityGroupRules">postK5NetworkProjectSecurityGroupRules</a></li>
+            <li><a href="#!/K5Api#postK5NetworkProjectSecurityGroups">postK5NetworkProjectSecurityGroups</a></li>
+            <li><a href="#!/K5Api#putK5ComputeProjectVmCommand">putK5ComputeProjectVmCommand</a></li>
+            <li><a href="#!/K5Api#putK5ComputeProjectVmSetTag">putK5ComputeProjectVmSetTag</a></li>
+            <li><a href="#!/K5Api#putK5ComputeProjectVmUpdateTags">putK5ComputeProjectVmUpdateTags</a></li>
+            <li><a href="#!/K5Api#putK5ComputeProjectVolume">putK5ComputeProjectVolume</a></li>
+            <li><a href="#!/K5Api#putK5ComputeProjectVolumeAttach">putK5ComputeProjectVolumeAttach</a></li>
+            <li><a href="#!/K5Api#putK5ComputeProjectVolumeDetach">putK5ComputeProjectVolumeDetach</a></li>
+            <li><a href="#!/K5Api#putK5NetworkProjectInterfacesAttach">putK5NetworkProjectInterfacesAttach</a></li>
+            <li><a href="#!/K5Api#putK5NetworkProjectRouterExternalGateway">putK5NetworkProjectRouterExternalGateway</a></li>
+            <li><a href="#!/K5Api#putK5NetworkProjectSecurityGroup">putK5NetworkProjectSecurityGroup</a></li>
+            <li><a href="#!/K5Api#putK5NetworkProjectVmAssignFloatingIp">putK5NetworkProjectVmAssignFloatingIp</a></li>
+            <li><a href="#!/K5Api#putK5NetworkProjectVmSecurityGroup">putK5NetworkProjectVmSecurityGroup</a></li>
+            <li><a href="#!/K5Api#updateNetwork">updateNetwork</a></li>
+            <li><a href="#!/K5Api#updateProject">updateProject</a></li>
+            <li><a href="#!/K5Api#updateSubnet">updateSubnet</a></li>
+            <li><a href="#!/K5Api#updateWorkshift">updateWorkshift</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/NetworkApi">NetworkApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/NetworkApi#assignInterfaceToVm">assignInterfaceToVm</a></li>
+            <li><a href="#!/NetworkApi#createFloatingIp">createFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#createInterface">createInterface</a></li>
+            <li><a href="#!/NetworkApi#createNetwork">createNetwork</a></li>
+            <li><a href="#!/NetworkApi#createRouter">createRouter</a></li>
+            <li><a href="#!/NetworkApi#createSubnet">createSubnet</a></li>
+            <li><a href="#!/NetworkApi#deleteAwsNetworkInterface">deleteAwsNetworkInterface</a></li>
+            <li><a href="#!/NetworkApi#deleteAwsNetworkNetwork">deleteAwsNetworkNetwork</a></li>
+            <li><a href="#!/NetworkApi#deleteAwsNetworkSecurityGroup">deleteAwsNetworkSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#deleteAwsNetworkSubnet">deleteAwsNetworkSubnet</a></li>
+            <li><a href="#!/NetworkApi#deleteAwsNetworkVms&lt;vmId&gt;SecurityGroups&lt;securityGroupId&gt;">deleteAwsNetworkVms&lt;vmId&gt;SecurityGroups&lt;securityGroupId&gt;</a></li>
+            <li><a href="#!/NetworkApi#deleteInterface">deleteInterface</a></li>
+            <li><a href="#!/NetworkApi#deleteK5NetworkProjectFloatingIp">deleteK5NetworkProjectFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#deleteK5NetworkProjectInterfacesDetach">deleteK5NetworkProjectInterfacesDetach</a></li>
+            <li><a href="#!/NetworkApi#deleteK5NetworkProjectRouterExternalGateway">deleteK5NetworkProjectRouterExternalGateway</a></li>
+            <li><a href="#!/NetworkApi#deleteK5NetworkProjectSecurityGroup">deleteK5NetworkProjectSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#deleteK5NetworkProjectSecurityGroupRule">deleteK5NetworkProjectSecurityGroupRule</a></li>
+            <li><a href="#!/NetworkApi#deleteK5NetworkProjectSubnet">deleteK5NetworkProjectSubnet</a></li>
+            <li><a href="#!/NetworkApi#deleteK5NetworkProjectVmSecurityGroup">deleteK5NetworkProjectVmSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#deleteK5NetworkProjectVmUnassignFloatingIp">deleteK5NetworkProjectVmUnassignFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#deleteNetwork">deleteNetwork</a></li>
+            <li><a href="#!/NetworkApi#deleteNetworkInterface">deleteNetworkInterface</a></li>
+            <li><a href="#!/NetworkApi#deleteOpenstackNetworkSecurityGroup">deleteOpenstackNetworkSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#deleteOpenstackNetworkVmSecurityGroup">deleteOpenstackNetworkVmSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#deleteOpenstackNetworkVmUnassignFloatingIp">deleteOpenstackNetworkVmUnassignFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#deleteRouter">deleteRouter</a></li>
+            <li><a href="#!/NetworkApi#deleteSecurityGroup">deleteSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#deleteSubnet">deleteSubnet</a></li>
+            <li><a href="#!/NetworkApi#deleteVirtualNetwork">deleteVirtualNetwork</a></li>
+            <li><a href="#!/NetworkApi#detachInterfaceFromVm">detachInterfaceFromVm</a></li>
+            <li><a href="#!/NetworkApi#editInterface">editInterface</a></li>
+            <li><a href="#!/NetworkApi#editRouter">editRouter</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkInterface">getAwsNetworkInterface</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkInterfaces">getAwsNetworkInterfaces</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkNetwork">getAwsNetworkNetwork</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkNetworkInterfaces">getAwsNetworkNetworkInterfaces</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkNetworkSubnets">getAwsNetworkNetworkSubnets</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkNetworks">getAwsNetworkNetworks</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkSecurityGroup">getAwsNetworkSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkSecurityGroups">getAwsNetworkSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkSubnet">getAwsNetworkSubnet</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkSubnetInterfaces">getAwsNetworkSubnetInterfaces</a></li>
+            <li><a href="#!/NetworkApi#getAwsNetworkSubnets">getAwsNetworkSubnets</a></li>
+            <li><a href="#!/NetworkApi#getInterface">getInterface</a></li>
+            <li><a href="#!/NetworkApi#getInterfaces">getInterfaces</a></li>
+            <li><a href="#!/NetworkApi#getK5NetworkProjectFloatingIp">getK5NetworkProjectFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#getK5NetworkProjectFloatingIps">getK5NetworkProjectFloatingIps</a></li>
+            <li><a href="#!/NetworkApi#getK5NetworkProjectSecurityGroupRule">getK5NetworkProjectSecurityGroupRule</a></li>
+            <li><a href="#!/NetworkApi#getK5NetworkProjectSecurityGroupRules">getK5NetworkProjectSecurityGroupRules</a></li>
+            <li><a href="#!/NetworkApi#getK5NetworkProjectSubnet">getK5NetworkProjectSubnet</a></li>
+            <li><a href="#!/NetworkApi#getK5NetworkProjectSubnets">getK5NetworkProjectSubnets</a></li>
+            <li><a href="#!/NetworkApi#getK5NetworkVmSecurityGroups">getK5NetworkVmSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#getNetwork">getNetwork</a></li>
+            <li><a href="#!/NetworkApi#getNetworkInterface">getNetworkInterface</a></li>
+            <li><a href="#!/NetworkApi#getNetworkInterfaces">getNetworkInterfaces</a></li>
+            <li><a href="#!/NetworkApi#getNetworks">getNetworks</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkFloatingIp">getOpenstackNetworkFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkFloatingIps">getOpenstackNetworkFloatingIps</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkInterface">getOpenstackNetworkInterface</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkInterfaces">getOpenstackNetworkInterfaces</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkNetwork">getOpenstackNetworkNetwork</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkNetworks">getOpenstackNetworkNetworks</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkSecurityGroup">getOpenstackNetworkSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkSecurityGroupRules">getOpenstackNetworkSecurityGroupRules</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkSecurityGroups">getOpenstackNetworkSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkVmFloatingIp">getOpenstackNetworkVmFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkVmInterface">getOpenstackNetworkVmInterface</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkVmInterfaces">getOpenstackNetworkVmInterfaces</a></li>
+            <li><a href="#!/NetworkApi#getOpenstackNetworkVmSecurityGroups">getOpenstackNetworkVmSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#getPublicIpAddresses">getPublicIpAddresses</a></li>
+            <li><a href="#!/NetworkApi#getRouter">getRouter</a></li>
+            <li><a href="#!/NetworkApi#getRouters">getRouters</a></li>
+            <li><a href="#!/NetworkApi#getSecurityGroup">getSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#getSecurityGroup_1">getSecurityGroup_1</a></li>
+            <li><a href="#!/NetworkApi#getSecurityGroups">getSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#getSecurityGroups_2">getSecurityGroups_2</a></li>
+            <li><a href="#!/NetworkApi#getSubnet">getSubnet</a></li>
+            <li><a href="#!/NetworkApi#getSubnets">getSubnets</a></li>
+            <li><a href="#!/NetworkApi#getVirtualNetwork">getVirtualNetwork</a></li>
+            <li><a href="#!/NetworkApi#getVirtualNetworks">getVirtualNetworks</a></li>
+            <li><a href="#!/NetworkApi#postAwsNetworkInterfaces">postAwsNetworkInterfaces</a></li>
+            <li><a href="#!/NetworkApi#postAwsNetworkNetworkInterfaces">postAwsNetworkNetworkInterfaces</a></li>
+            <li><a href="#!/NetworkApi#postAwsNetworkNetworkSubnets">postAwsNetworkNetworkSubnets</a></li>
+            <li><a href="#!/NetworkApi#postAwsNetworkNetworks">postAwsNetworkNetworks</a></li>
+            <li><a href="#!/NetworkApi#postAwsNetworkSecurityGroups">postAwsNetworkSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#postAwsNetworkSubnetInterfaces">postAwsNetworkSubnetInterfaces</a></li>
+            <li><a href="#!/NetworkApi#postAwsNetworkSubnets">postAwsNetworkSubnets</a></li>
+            <li><a href="#!/NetworkApi#postK5NetworkProjectSecurityGroupRules">postK5NetworkProjectSecurityGroupRules</a></li>
+            <li><a href="#!/NetworkApi#postK5NetworkProjectSecurityGroups">postK5NetworkProjectSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#postNetworkInterfaces">postNetworkInterfaces</a></li>
+            <li><a href="#!/NetworkApi#postOpenstackNetworkSecurityGroupRules">postOpenstackNetworkSecurityGroupRules</a></li>
+            <li><a href="#!/NetworkApi#postOpenstackNetworkSecurityGroups">postOpenstackNetworkSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#postSecurityGroups">postSecurityGroups</a></li>
+            <li><a href="#!/NetworkApi#postSubnets">postSubnets</a></li>
+            <li><a href="#!/NetworkApi#postVirtualNetworks">postVirtualNetworks</a></li>
+            <li><a href="#!/NetworkApi#putAwsNetworkVms&lt;vmId&gt;SecurityGroups&lt;securityGroupId&gt;">putAwsNetworkVms&lt;vmId&gt;SecurityGroups&lt;securityGroupId&gt;</a></li>
+            <li><a href="#!/NetworkApi#putK5NetworkProjectInterfacesAttach">putK5NetworkProjectInterfacesAttach</a></li>
+            <li><a href="#!/NetworkApi#putK5NetworkProjectRouterExternalGateway">putK5NetworkProjectRouterExternalGateway</a></li>
+            <li><a href="#!/NetworkApi#putK5NetworkProjectSecurityGroup">putK5NetworkProjectSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#putK5NetworkProjectVmAssignFloatingIp">putK5NetworkProjectVmAssignFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#putK5NetworkProjectVmSecurityGroup">putK5NetworkProjectVmSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#putOpenstackNetworkVmAssignFloatingIp">putOpenstackNetworkVmAssignFloatingIp</a></li>
+            <li><a href="#!/NetworkApi#putOpenstackNetworkVmSecurityGroup">putOpenstackNetworkVmSecurityGroup</a></li>
+            <li><a href="#!/NetworkApi#putSecurityGroupAttachment">putSecurityGroupAttachment</a></li>
+            <li><a href="#!/NetworkApi#updateNetwork">updateNetwork</a></li>
+            <li><a href="#!/NetworkApi#updateSubnet">updateSubnet</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/NotificationApi">NotificationApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/NotificationApi#sendEmail">sendEmail</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/OpenstackApi">OpenstackApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/OpenstackApi#deleteOpenstackComputeKeypair">deleteOpenstackComputeKeypair</a></li>
+            <li><a href="#!/OpenstackApi#deleteOpenstackComputeVm">deleteOpenstackComputeVm</a></li>
+            <li><a href="#!/OpenstackApi#deleteOpenstackComputeVmManagement">deleteOpenstackComputeVmManagement</a></li>
+            <li><a href="#!/OpenstackApi#deleteOpenstackComputeVmWorkshift">deleteOpenstackComputeVmWorkshift</a></li>
+            <li><a href="#!/OpenstackApi#deleteOpenstackNetworkSecurityGroup">deleteOpenstackNetworkSecurityGroup</a></li>
+            <li><a href="#!/OpenstackApi#deleteOpenstackNetworkVmSecurityGroup">deleteOpenstackNetworkVmSecurityGroup</a></li>
+            <li><a href="#!/OpenstackApi#deleteOpenstackNetworkVmUnassignFloatingIp">deleteOpenstackNetworkVmUnassignFloatingIp</a></li>
+            <li><a href="#!/OpenstackApi#deleteOpenstackStorageVolume">deleteOpenstackStorageVolume</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeFlavor">getOpenstackComputeFlavor</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeFlavors">getOpenstackComputeFlavors</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeImage">getOpenstackComputeImage</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeImages">getOpenstackComputeImages</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeKeypair">getOpenstackComputeKeypair</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeKeypairs">getOpenstackComputeKeypairs</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeValidateSubscription">getOpenstackComputeValidateSubscription</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeVm">getOpenstackComputeVm</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeVmConsoleUrl">getOpenstackComputeVmConsoleUrl</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeVmDetails">getOpenstackComputeVmDetails</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeVmManagement">getOpenstackComputeVmManagement</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeVmPassword">getOpenstackComputeVmPassword</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackComputeVms">getOpenstackComputeVms</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkFloatingIp">getOpenstackNetworkFloatingIp</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkFloatingIps">getOpenstackNetworkFloatingIps</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkInterface">getOpenstackNetworkInterface</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkInterfaces">getOpenstackNetworkInterfaces</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkNetwork">getOpenstackNetworkNetwork</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkNetworks">getOpenstackNetworkNetworks</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkSecurityGroup">getOpenstackNetworkSecurityGroup</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkSecurityGroupRules">getOpenstackNetworkSecurityGroupRules</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkSecurityGroups">getOpenstackNetworkSecurityGroups</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkVmFloatingIp">getOpenstackNetworkVmFloatingIp</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkVmInterface">getOpenstackNetworkVmInterface</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkVmInterfaces">getOpenstackNetworkVmInterfaces</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackNetworkVmSecurityGroups">getOpenstackNetworkVmSecurityGroups</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackStorageVolume">getOpenstackStorageVolume</a></li>
+            <li><a href="#!/OpenstackApi#getOpenstackStorageVolumes">getOpenstackStorageVolumes</a></li>
+            <li><a href="#!/OpenstackApi#postOpenstackComputeKeypairsGenerate">postOpenstackComputeKeypairsGenerate</a></li>
+            <li><a href="#!/OpenstackApi#postOpenstackComputeKeypairsImport">postOpenstackComputeKeypairsImport</a></li>
+            <li><a href="#!/OpenstackApi#postOpenstackComputeVmWorkshift">postOpenstackComputeVmWorkshift</a></li>
+            <li><a href="#!/OpenstackApi#postOpenstackComputeVms">postOpenstackComputeVms</a></li>
+            <li><a href="#!/OpenstackApi#postOpenstackNetworkSecurityGroupRules">postOpenstackNetworkSecurityGroupRules</a></li>
+            <li><a href="#!/OpenstackApi#postOpenstackNetworkSecurityGroups">postOpenstackNetworkSecurityGroups</a></li>
+            <li><a href="#!/OpenstackApi#postOpenstackStorageVolumes">postOpenstackStorageVolumes</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackComputeVmCommand">putOpenstackComputeVmCommand</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackComputeVmSetTag">putOpenstackComputeVmSetTag</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackComputeVmUpdateTags">putOpenstackComputeVmUpdateTags</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackComputeVmWorkshift">putOpenstackComputeVmWorkshift</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackNetworkVmAssignFloatingIp">putOpenstackNetworkVmAssignFloatingIp</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackNetworkVmSecurityGroup">putOpenstackNetworkVmSecurityGroup</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackStorageVolume">putOpenstackStorageVolume</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackStorageVolumeAttatch">putOpenstackStorageVolumeAttatch</a></li>
+            <li><a href="#!/OpenstackApi#putOpenstackStorageVolumeDetach">putOpenstackStorageVolumeDetach</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/PolicyApi">PolicyApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/PolicyApi#deletePolicyWorkshift">deletePolicyWorkshift</a></li>
+            <li><a href="#!/PolicyApi#findWorkshifts">findWorkshifts</a></li>
+            <li><a href="#!/PolicyApi#getPolicyWorkshift">getPolicyWorkshift</a></li>
+            <li><a href="#!/PolicyApi#postPolicyWorkshifts">postPolicyWorkshifts</a></li>
+            <li><a href="#!/PolicyApi#putPolicyWorkshift">putPolicyWorkshift</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/StorageApi">StorageApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/StorageApi#deleteOpenstackStorageVolume">deleteOpenstackStorageVolume</a></li>
+            <li><a href="#!/StorageApi#getOpenstackStorageVolume">getOpenstackStorageVolume</a></li>
+            <li><a href="#!/StorageApi#getOpenstackStorageVolumes">getOpenstackStorageVolumes</a></li>
+            <li><a href="#!/StorageApi#postOpenstackStorageVolumes">postOpenstackStorageVolumes</a></li>
+            <li><a href="#!/StorageApi#putOpenstackStorageVolume">putOpenstackStorageVolume</a></li>
+            <li><a href="#!/StorageApi#putOpenstackStorageVolumeAttatch">putOpenstackStorageVolumeAttatch</a></li>
+            <li><a href="#!/StorageApi#putOpenstackStorageVolumeDetach">putOpenstackStorageVolumeDetach</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/SubscriptionApi">SubscriptionApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/SubscriptionApi#create">create</a></li>
+            <li><a href="#!/SubscriptionApi#delete">delete</a></li>
+            <li><a href="#!/SubscriptionApi#getAll">getAll</a></li>
+            <li><a href="#!/SubscriptionApi#getOne">getOne</a></li>
+            <li><a href="#!/SubscriptionApi#getToken">getToken</a></li>
+            <li><a href="#!/SubscriptionApi#putSubscriptionValidateVm">putSubscriptionValidateVm</a></li>
+            <li><a href="#!/SubscriptionApi#putSubscriptionValidateWorkshift">putSubscriptionValidateWorkshift</a></li>
+            <li><a href="#!/SubscriptionApi#update">update</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/TagApi">TagApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/TagApi#createTag">createTag</a></li>
+            <li><a href="#!/TagApi#deleteTag">deleteTag</a></li>
+            <li><a href="#!/TagApi#getTag">getTag</a></li>
+            <li><a href="#!/TagApi#getTags">getTags</a></li>
+            <li><a href="#!/TagApi#updateTag">updateTag</a></li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <div class="section-header">
+            <a href="#!/WorkshiftApi">WorkshiftApi</a>
+          </div>
+          <ul>
+            <li><a href="#!/WorkshiftApi#deletePolicyWorkshift">deletePolicyWorkshift</a></li>
+            <li><a href="#!/WorkshiftApi#findWorkshifts">findWorkshifts</a></li>
+            <li><a href="#!/WorkshiftApi#getPolicyWorkshift">getPolicyWorkshift</a></li>
+            <li><a href="#!/WorkshiftApi#postPolicyWorkshifts">postPolicyWorkshifts</a></li>
+            <li><a href="#!/WorkshiftApi#putPolicyWorkshift">putPolicyWorkshift</a></li>
+          </ul>
+        </div>
+      </div>
+    <div class="non-sidebar">
+      <div class="main-content">
+        <h2>Getting Started</h2>
+        <p>To begin using your fancy HTTP API, follow the steps below.</p>
+        <p>You can add some helpful tips, here</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

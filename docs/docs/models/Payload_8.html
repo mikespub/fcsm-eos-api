@@ -1,0 +1,67 @@
+
+<h2>Payload_8</h2>
+<ul class="parameter">
+  <li class="param-required-true">name : String
+    <br/>name for virtual machine
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">imageId : String
+    <br/>imageId: id of the image used to create a new machine
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">flavorId : String
+    <br/>flavorId: flavor (size) of new machine
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">keypairId : String
+    <br/>keypairId or adminUsername/adminPassword is required to create a new machine
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">managementEnabled : Boolean
+    <br/>managementEnabled: if set to true, management service is installed to virtual machine
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">volumeSize : Integer
+    <br/>volumeSize (in GB) specifies size of the data volume.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">nics : String
+    <br/>nics (list). List of network interfaces to be attached to new instance.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">securityGroups : String
+    <br/>securityGroups (list). List of security groups to be attached to each network interface.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">publicIp : Boolean
+    <br/>publicIp. Set to true to automatically assign public IP
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">resourceGroupId : String
+    <br/>Name of the resource group for new machine. If not specified, new resource group will be created. If non-existant, creating a new machine will fail.
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">tags : List
+    <br/>
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">workshift : apiv1azurecomputevms_workshift
+    <br/>
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">managementToolId : String
+    <br/>Id of the management tool. Required if managementEnabled is set to True
+  </li>
+</ul>

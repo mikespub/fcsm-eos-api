@@ -1,0 +1,73 @@
+
+<h2>Inline_response_200_8</h2>
+<ul class="parameter">
+  <li class="param-required-false">id : String
+    <br/>Application identifier
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">state : String
+    <br/>Component deployment state
+      <dl class="param-enum">
+        <dt>Enum:
+            <dd>queued</dd>
+            <dd>building</dd>
+            <dd>deploying</dd>
+            <dd>active</dd>
+            <dd>error</dd>
+            <dd>deleting</dd>
+        </dt>
+      </dl>
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">details : String
+    <br/>Used when state is error. Error details
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">created : String
+    <br/>Application creation date
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-true">name : String
+    <br/>Name
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">subscriptionId : String
+    <br/>Subscription id used to created and manage application
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">source : String
+    <br/>Type of application. Default standalone, addon when deployed on existing vm
+      <dl class="param-enum">
+        <dt>Enum:
+            <dd>standalone</dd>
+            <dd>addon</dd>
+        </dt>
+      </dl>
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">platformId : String
+    <br/>Platform ID. Used to detect to which service connect to. OpenStack/AWS/K5
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">blueprintId : String
+    <br/>Id of the Blueprint used to create application
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">blueprintName : String
+    <br/>Name of the Blueprint used to create application
+  </li>
+</ul>
+<ul class="parameter">
+  <li class="param-required-false">components : List
+    <br/>Components of this application. e.g. Apache, MongoDB
+  </li>
+</ul>
