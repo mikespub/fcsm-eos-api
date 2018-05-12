@@ -2,6 +2,8 @@
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
+[FCSM EOS API via the Swagger UI](./swagger-ui.html).
+
 [Link to another page](./another-page.html).
 
 There should be whitespace between paragraphs.
