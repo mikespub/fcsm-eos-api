@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: Eos swagger definition
-  version: 1.0.3
+  version: 1.0.4
 host: emeia.fcsm.io
 schemes:
   - https
@@ -4965,7 +4965,7 @@ paths:
         - network
         - aws
       operationId: delete_aws_network_securityGroup
-  /api/v1/aws/network/vms/<vm_id>/securityGroups/<security_group_id>:
+  /api/v1/aws/network/vms/{vm_id}/securityGroups/{security_group_id}:
     put:
       summary: >-
         Assign Security Group (specified by ID) to a specified VM (specified by
@@ -5004,7 +5004,7 @@ paths:
       tags:
         - network
         - aws
-      operationId: put_aws_network_vms_<vm_id>_securityGroups_<security_group_id>
+      operationId: put_aws_network_vm_securityGroup
     delete:
       summary: >-
         Delete Security Group (specified by ID) from a specified VM (specified
@@ -5043,7 +5043,7 @@ paths:
       tags:
         - network
         - aws
-      operationId: delete_aws_network_vms_<vm_id>_securityGroups_<security_group_id>
+      operationId: delete_aws_network_vm_securityGroup
   /api/v1/azure/network/interfaces:
     get:
       responses:
