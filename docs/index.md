@@ -33,3 +33,4 @@
 *    [Compute/Net [VMWare]](./swagger/vmware.json)
 *    [Compute/Net [Azure]](./swagger/azure.json)
 *    [Compute/Net [AWS]](./swagger/aws.json)
+*    [Combined OpenAPI for CodeGen](./swagger/combined.json)

@@ -33,3 +33,4 @@
 *    [Compute/Net [VMWare]](https://github.mikespub.net/fcsm-eos-api/swagger/vmware.json)
 *    [Compute/Net [Azure]](https://github.mikespub.net/fcsm-eos-api/swagger/azure.json)
 *    [Compute/Net [AWS]](https://github.mikespub.net/fcsm-eos-api/swagger/aws.json)
+*    [Combined OpenAPI for CodeGen](https://github.mikespub.net/fcsm-eos-api/swagger/combined.json)
