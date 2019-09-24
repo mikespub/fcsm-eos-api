@@ -1,4 +1,4 @@
-# FCSM EOS API (draft v1.0.4)
+# FCSM EOS API (draft v1.2.0)
 
 [Overview of the FCSM EOS API](./api_overview.html)
 
@@ -21,4 +21,4 @@
 
 [Details of the FCSM EOS API via Swagger UI (offline)](./swagger-ui.html)
 
-[OpenAPI 2.0 Swagger file for FCSM EOS API](./fcsm-eos-api.swagger.yaml)
+[OpenAPI 2.0 Swagger files for FCSM EOS API](./swagger/)

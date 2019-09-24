@@ -1,0 +1,15 @@
+# OpenAPI 2.0 Swagger files for FCSM EOS API
+
+*    [Analytics](./analytics.json)
+*    [Authorization](./auth.json)
+*    [Users](./user.json)
+*    [Configuration](./config.json)
+*    [Subscription](./subscr.json)
+*    [Management](./mgmt.json)
+*    [Tags](./tag.json)
+*    [Notifications](./notif.json)
+*    [Webhooks](./webhook.json)
+*    [Image Whitelist](./img_whitelist.json)
+*    [Compute/Net [VMWare]](./vmware.json)
+*    [Compute/Net [Azure]](./azure.json)
+*    [Compute/Net [AWS]](./aws.json)
