@@ -1,4 +1,4 @@
-# FCSM EOS API (draft v1.2.0)
+# FCSM EOS API (draft v1.2.1)
 
 [Overview of the FCSM EOS API](https://github.mikespub.net/fcsm-eos-api/api_overview.html)
 

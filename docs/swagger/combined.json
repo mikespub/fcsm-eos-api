@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Combined FCSM EOS API",
-    "version": "1.2.0"
+    "version": "1.2.1"
   },
   "servers": [
     {
@@ -217,19 +217,7 @@
           "auth"
         ]
       },
-      "parameters": [
-        {
-          "in": "header",
-          "name": "role",
-          "schema": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "user"
-            ]
-          }
-        }
-      ],
+      "parameters": [],
       "post": {
         "description": "Adds new external identity provider for saml",
         "operationId": "addExternalProvider",
@@ -393,17 +381,6 @@
         ]
       },
       "parameters": [
-        {
-          "in": "header",
-          "name": "role",
-          "schema": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "user"
-            ]
-          }
-        },
         {
           "in": "path",
           "name": "providerId",
@@ -663,18 +640,6 @@
         "parameters": [
           {
             "in": "header",
-            "name": "role",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
-          },
-          {
-            "in": "header",
             "name": "external",
             "required": true,
             "schema": {
@@ -883,20 +848,7 @@
           "user"
         ]
       },
-      "parameters": [
-        {
-          "in": "header",
-          "name": "role",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "user"
-            ]
-          }
-        }
-      ],
+      "parameters": [],
       "post": {
         "operationId": "createUser",
         "parameters": [
@@ -987,18 +939,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "in": "header",
-            "name": "role",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
           }
         ],
         "responses": {
@@ -1062,20 +1002,6 @@
       },
       "get": {
         "operationId": "getUser",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "role",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "The user with the given user id",
@@ -1267,18 +1193,6 @@
           "schema": {
             "type": "string"
           }
-        },
-        {
-          "in": "header",
-          "name": "role",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "user"
-            ]
-          }
         }
       ],
       "put": {
@@ -1369,18 +1283,6 @@
           "required": true,
           "schema": {
             "type": "string"
-          }
-        },
-        {
-          "in": "header",
-          "name": "role",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "user"
-            ]
           }
         }
       ],
@@ -1480,18 +1382,6 @@
           "required": true,
           "schema": {
             "type": "string"
-          }
-        },
-        {
-          "in": "header",
-          "name": "role",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "user"
-            ]
           }
         }
       ],
@@ -2151,14 +2041,6 @@
         "description": "Retrieve list of all subscriptions",
         "operationId": "getSubscriptions",
         "parameters": [
-          {
-            "name": "role",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "subscriptions",
             "in": "header",
@@ -3194,17 +3076,6 @@
             "type": "string",
             "format": "uuid"
           }
-        },
-        {
-          "name": "role",
-          "in": "header",
-          "schema": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "user"
-            ]
-          }
         }
       ],
       "get": {
@@ -3455,17 +3326,6 @@
         "parameters": [
           {
             "in": "header",
-            "name": "role",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
-          },
-          {
-            "in": "header",
             "name": "email",
             "schema": {
               "type": "string"
@@ -3545,17 +3405,6 @@
         "description": "Delete tag with given name",
         "operationId": "DeleteTag",
         "parameters": [
-          {
-            "in": "header",
-            "name": "role",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
-          },
           {
             "in": "header",
             "name": "email",
@@ -3686,17 +3535,6 @@
         "description": "Update some fields of a tag",
         "operationId": "UpdateTag",
         "parameters": [
-          {
-            "in": "header",
-            "name": "role",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
-          },
           {
             "in": "header",
             "name": "email",
@@ -3936,17 +3774,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "in": "header",
-            "name": "role",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
           }
         ],
         "requestBody": {
@@ -4020,17 +3847,6 @@
             "name": "email",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "role",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
             }
           }
         ],
@@ -4162,17 +3978,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "in": "header",
-            "name": "role",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
           }
         ],
         "requestBody": {
@@ -4265,17 +4070,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "in": "header",
-            "name": "role",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
-            }
           }
         ],
         "responses": {
@@ -4366,17 +4160,6 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "role",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "admin",
-                "user"
-              ]
             }
           }
         ],
