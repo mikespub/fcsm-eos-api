@@ -1,1 +1,342 @@
-{"definitions": {"Error": {"properties": {"message": {"type": "string"}}, "type": "object", "x-error": true}, "InvalidInput": {"$ref": "#/definitions/Error", "x-error": true}, "ServiceUnavailable": {"$ref": "#/definitions/Error", "x-error": true}, "Tag": {"properties": {"description": {"type": "string"}, "isRequired": {"type": "boolean"}, "name": {"maxLength": 60, "minLength": 1, "pattern": "^[a-zA-Z0-9_-]+$", "type": "string"}, "values": {"items": {"$ref": "#/definitions/TagValue"}, "minItems": 1, "type": "array"}}, "required": ["name", "isRequired", "values"], "type": "object"}, "TagNotFound": {"$ref": "#/definitions/Error", "x-error": true}, "TagUpdate": {"properties": {"description": {"type": "string"}, "isRequired": {"type": "boolean"}, "values": {"items": {"$ref": "#/definitions/TagValue"}, "minItems": 1, "type": "array"}}, "required": ["isRequired", "values"], "type": "object"}, "TagValue": {"properties": {"description": {"type": "string"}, "value": {"maxLength": 60, "minLength": 1, "pattern": "^[ a-zA-Z0-9_\\\\\\\\/-]+$", "type": "string"}}, "required": ["value"], "type": "object"}, "Tags": {"items": {"$ref": "#/definitions/Tag"}, "type": "array"}, "Unauthorized": {"$ref": "#/definitions/Error", "x-error": true}, "UnexpectedError": {"$ref": "#/definitions/Error", "x-error": true}}, "host": "emeia-eos.fcsm.io", "info": {"description": "For managing tags", "title": "Fujitsu tag service", "version": "1.0.0"}, "paths": {"/tags": {"get": {"description": "Returns a list of all tags with values", "operationId": "GetTags", "responses": {"200": {"description": "An array of Tag objects", "schema": {"$ref": "#/definitions/Tags"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database is unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}, "post": {"description": "Creates tag with given name and values", "operationId": "CreateTag", "parameters": [{"description": "The details of tag that will be created", "in": "body", "name": "tag", "required": true, "schema": {"$ref": "#/definitions/Tag"}}, {"enum": ["admin", "user"], "in": "header", "name": "role", "type": "string"}, {"in": "header", "name": "email", "type": "string"}], "responses": {"200": {"description": "The newly created tag", "schema": {"$ref": "#/definitions/Tag"}}, "400": {"description": "Invalid json payload", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Insufficient access rights", "schema": {"$ref": "#/definitions/Unauthorized"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database is unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/tags/{tagName}": {"delete": {"description": "Delete tag with given name", "operationId": "DeleteTag", "parameters": [{"enum": ["admin", "user"], "in": "header", "name": "role", "type": "string"}, {"in": "header", "name": "email", "type": "string"}], "responses": {"200": {"description": "Successfully deleted tag"}, "400": {"description": "Invalid role", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Insufficient access rights", "schema": {"$ref": "#/definitions/Unauthorized"}}, "404": {"description": "Unknown tagId", "schema": {"$ref": "#/definitions/TagNotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database is unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}, "get": {"operationId": "GetTag", "responses": {"200": {"description": "The tag data for given name", "schema": {"$ref": "#/definitions/Tag"}}, "404": {"description": "Unknown tagName", "schema": {"$ref": "#/definitions/TagNotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database is unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}, "summary": "Returns the specified tag"}, "parameters": [{"in": "path", "name": "tagName", "required": true, "type": "string"}], "put": {"description": "Update some fields of a tag", "operationId": "UpdateTag", "parameters": [{"description": "The details of tag that will be updated", "in": "body", "name": "tag", "required": true, "schema": {"$ref": "#/definitions/TagUpdate"}}, {"enum": ["admin", "user"], "in": "header", "name": "role", "type": "string"}, {"in": "header", "name": "email", "type": "string"}], "responses": {"200": {"description": "Successfully updated tag"}, "400": {"description": "Invalid role", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Insufficient access rights", "schema": {"$ref": "#/definitions/Unauthorized"}}, "404": {"description": "Unknown tagId", "schema": {"$ref": "#/definitions/TagNotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database is unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}}, "produces": ["application/json"], "schemes": ["https"], "swagger": "2.0", "basePath": "/api/v1/tag"}
+{
+  "definitions": {
+    "Error": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "x-error": true
+    },
+    "InvalidInput": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "ServiceUnavailable": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "Tag": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "isRequired": {
+          "type": "boolean"
+        },
+        "name": {
+          "maxLength": 60,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/TagValue"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "isRequired",
+        "values"
+      ],
+      "type": "object"
+    },
+    "TagNotFound": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "TagUpdate": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "isRequired": {
+          "type": "boolean"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/TagValue"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "isRequired",
+        "values"
+      ],
+      "type": "object"
+    },
+    "TagValue": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 60,
+          "minLength": 1,
+          "pattern": "^[ a-zA-Z0-9_\\\\\\\\/-]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "Tags": {
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array"
+    },
+    "Unauthorized": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "UnexpectedError": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    }
+  },
+  "host": "emeia-eos.fcsm.io",
+  "info": {
+    "description": "For managing tags",
+    "title": "Fujitsu tag service",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/tags": {
+      "get": {
+        "description": "Returns a list of all tags with values",
+        "operationId": "GetTags",
+        "responses": {
+          "200": {
+            "description": "An array of Tag objects",
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database is unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates tag with given name and values",
+        "operationId": "CreateTag",
+        "parameters": [
+          {
+            "description": "The details of tag that will be created",
+            "in": "body",
+            "name": "tag",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          {
+            "in": "header",
+            "name": "email",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The newly created tag",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "400": {
+            "description": "Invalid json payload",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Insufficient access rights",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database is unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/tags/{tagName}": {
+      "delete": {
+        "description": "Delete tag with given name",
+        "operationId": "DeleteTag",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "email",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted tag"
+          },
+          "400": {
+            "description": "Invalid role",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Insufficient access rights",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Unknown tagId",
+            "schema": {
+              "$ref": "#/definitions/TagNotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database is unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetTag",
+        "responses": {
+          "200": {
+            "description": "The tag data for given name",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "404": {
+            "description": "Unknown tagName",
+            "schema": {
+              "$ref": "#/definitions/TagNotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database is unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        },
+        "summary": "Returns the specified tag"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "tagName",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "description": "Update some fields of a tag",
+        "operationId": "UpdateTag",
+        "parameters": [
+          {
+            "description": "The details of tag that will be updated",
+            "in": "body",
+            "name": "tag",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          },
+          {
+            "in": "header",
+            "name": "email",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated tag"
+          },
+          "400": {
+            "description": "Invalid role",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Insufficient access rights",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Unknown tagId",
+            "schema": {
+              "$ref": "#/definitions/TagNotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database is unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "basePath": "/api/v1/tag"
+}

@@ -1,1 +1,2425 @@
-{"components": {"parameters": {"AvailabilityZoneId": {"description": "Availability zone to filter by", "in": "query", "name": "availabilityZoneId", "required": false, "schema": {"type": "string"}}, "FilterVolumeStatus": {"description": "Volume status to filter by", "in": "query", "name": "status", "required": false, "schema": {"$ref": "#/components/schemas/VolumeStatus"}}, "ImageName": {"description": "Name of the image to filter", "in": "query", "name": "name", "required": false, "schema": {"minLength": 1, "type": "string"}}, "SubscriptionId": {"description": "Id of subscription", "in": "query", "name": "subscriptionId", "required": true, "schema": {"$ref": "#/components/schemas/SubscriptionId"}}, "VMId": {"description": "Id of VM", "in": "path", "name": "vmId", "required": true, "schema": {"$ref": "#/components/schemas/VMId"}}, "VMIdQuery": {"description": "Id of VM in query", "in": "query", "name": "vmId", "required": false, "schema": {"$ref": "#/components/schemas/VMId"}}, "VolumeId": {"description": "ID of Volume", "in": "path", "name": "volume_id", "required": true, "schema": {"$ref": "#/components/schemas/VolumeId"}}}, "schemas": {"Action": {"enum": ["start", "poweroff", "softReboot", "hardReboot"], "example": "start", "title": "action", "type": "string"}, "AvailabilityZone": {"properties": {"available": {"description": "Determines whether the availability zone is available for use", "type": "boolean"}, "id": {"type": "string"}, "name": {"type": "string"}}, "required": ["available", "name", "id"], "title": "AvailabilityZone", "type": "object"}, "CreateSnapshot": {"properties": {"description": {"nullable": true, "type": "string"}, "name": {"type": "string"}, "vmId": {"type": "string"}}, "required": ["vmId", "name", "description"], "title": "Craete Snapshot", "type": "object"}, "Day": {"enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], "example": "mon", "title": "Day", "type": "string"}, "Flavor": {"description": "Flavor", "properties": {"compatibleVolumeTypeIds": {"description": "List of compatible volume type ids", "items": {"type": "string"}, "type": "array", "uniqueItems": true}, "diskInGb": {"description": "Disk size in GB", "type": "integer"}, "id": {"description": "Flavor id", "type": "string"}, "name": {"description": "Flavor name", "type": "string"}, "ramInMb": {"description": "Memory size in MB", "type": "integer"}, "vcpus": {"description": "Number of virtual CPUs", "type": "integer"}}, "required": ["id", "name", "ramInMb", "vcpus"], "title": "Flavor", "type": "object"}, "GenerateKeypair": {"properties": {"name": {"type": "string"}}, "required": ["name"], "title": "GenerateKeypair", "type": "object"}, "IPv4Address": {"description": "Ip address", "properties": {"id": {"description": "Id", "type": "string"}, "ip": {"description": "IP address", "format": "ipv4", "type": "string"}, "isDirectlyAssociated": {"description": "Specifies if IP is directly associated", "type": "boolean"}, "isFloating": {"description": "Specifies if IP is floating", "type": "boolean"}, "isPublic": {"description": "Specifies if IP is public", "type": "boolean"}}, "required": ["id", "ip"], "title": "IPv4Address", "type": "object"}, "Image": {"description": "Image", "properties": {"id": {"description": "Image id", "type": "string"}, "isPrivate": {"type": "boolean"}, "maxDiskInGb": {"description": "Maximum disk size in GB", "type": "integer"}, "minDiskInGb": {"description": "Minimum disk size in GB", "type": "integer"}, "minRamInMb": {"description": "Minimum memory size in MB", "type": "integer"}, "name": {"type": "string"}}, "required": ["id", "name", "minRamInMb", "minDiskInGb", "maxDiskInGb", "isPrivate"], "title": "Image", "type": "object"}, "ImportKeypair": {"description": "Upload a keypair", "properties": {"name": {"description": "Keypair name", "type": "string"}, "publicKey": {"description": "Public key to import", "type": "string"}}, "required": ["name", "publicKey"], "title": "ImportKeypair", "type": "object"}, "Interface": {"properties": {"attachment": {"$ref": "#/components/schemas/InterfaceAttachment"}, "id": {"type": "string"}, "ipv4Addresses": {"description": "List of IPs", "items": {"$ref": "#/components/schemas/IPv4Address"}, "type": "array", "uniqueItems": true}, "macAddress": {"description": "Interface mac address", "type": "string"}, "name": {"type": "string"}, "networkId": {"description": "Network id", "type": "string"}, "networkName": {"description": "Network name", "type": "string"}, "vmId": {"type": "string"}}, "required": ["id", "name", "macAddress", "ipv4Addresses"], "title": "Interface", "type": "object"}, "InterfaceAttachment": {"properties": {"subnetId": {"description": "subnet id", "type": "string"}, "vmId": {"description": "vm id", "type": "string"}}, "required": ["vmId", "subnetId"], "title": "InterfaceAttachment", "type": "object"}, "Keypair": {"properties": {"fingerprint": {"type": "string"}, "id": {"type": "string"}, "name": {"type": "string"}}, "required": ["name", "id", "fingerprint"], "title": "Keypair", "type": "object"}, "Management": {"properties": {"status": {"$ref": "#/components/schemas/Status"}}, "required": ["status"], "title": "Management", "type": "object"}, "Network": {"properties": {"id": {"type": "string"}, "name": {"type": "string"}}, "required": ["name", "id"], "title": "Network", "type": "object"}, "NewKeypair": {"properties": {"fingerprint": {"type": "string"}, "id": {"type": "string"}, "name": {"type": "string"}, "privateKey": {"type": "string"}, "publicKey": {"type": "string"}}, "required": ["name", "id", "fingerprint", "privateKey"], "title": "NewKeypair", "type": "object"}, "NewVolume": {"properties": {"availabilityZone": {"type": "string"}, "name": {"type": "string"}, "size": {"description": "Volume size in GB", "type": "integer"}, "typeId": {"type": "string"}, "vmId": {"type": "string"}}, "required": ["size", "typeId", "availabilityZone", "name", "vmId"], "title": "NewVolume", "type": "object"}, "OptionalWorkshift": {"nullable": true, "properties": {"start": {"$ref": "#/components/schemas/WorkshiftSchedule"}, "stop": {"$ref": "#/components/schemas/WorkshiftSchedule"}}, "title": "OptionalWorkshift", "type": "object"}, "Password": {"properties": {"encryptedPassword": {"type": "string"}}, "required": ["encryptedPassword"], "title": "Password", "type": "object"}, "PowerState": {"enum": ["running", "unknown", "noState", "pending", "paused", "stopped", "crashed", "terminated", "terminating", "rebooting"], "example": "running", "title": "PowerState", "type": "string"}, "PublicPrivateImage": {"properties": {"id": {"description": "Image id", "type": "string"}, "isPrivate": {"description": "Describe if image is private or not", "type": "boolean"}, "maxDiskInGb": {"description": "Maximum disk size in GB", "type": "integer"}, "minDiskInGb": {"description": "Minimum disk size in GB", "type": "integer"}, "minRamInMb": {"description": "Minimum memory size in MB", "type": "integer"}, "name": {"type": "string"}}, "required": ["id", "name", "minRamInMb", "minDiskInGb", "maxDiskInGb", "isPrivate"], "title": "PublicPrivateImage", "type": "object"}, "Region": {"properties": {"id": {"type": "string"}, "name": {"type": "string"}}, "required": ["name", "id"], "title": "Region", "type": "object"}, "Snapshot": {"properties": {"createdAt": {"type": "string"}, "description": {"nullable": true, "type": "string"}, "id": {"type": "string"}, "name": {"type": "string"}, "vmId": {"type": "string"}}, "required": ["id", "vmId", "name", "createdAt", "description"], "title": "Snapshot", "type": "object"}, "Status": {"enum": ["available", "notAvailable", "notEnabled"], "example": "available", "title": "Status", "type": "string"}, "Subnet": {"properties": {"cidr": {"type": "string"}, "id": {"type": "string"}, "name": {"type": "string"}}, "required": ["id"], "title": "Subnet", "type": "object"}, "Subscription": {"properties": {"authenticationUrl": {"type": "string"}, "password": {"type": "string"}, "regionId": {"type": "string"}, "username": {"type": "string"}}, "required": ["username", "password", "authenticationUrl", "regionId"], "title": "Subscription", "type": "object"}, "SubscriptionId": {"example": "75e0fc6a-1675-4e90-9d5e-3d004dc3e4ff", "type": "string"}, "Tag": {"properties": {"name": {"description": "Name (key) of the tag", "type": "string"}, "value": {"description": "Value of the tag", "nullable": true, "type": "string"}}, "required": ["name", "value"], "title": "Tag", "type": "object"}, "TagUpdate": {"description": "Tag update data. It will unset tag from a VM if null value is passed.", "properties": {"name": {"description": "Name (key) of the tag", "type": "string"}, "value": {"description": "Value of the tag", "nullable": true, "type": "string"}}, "required": ["name", "value"], "type": "object"}, "UpdateVmParams": {"properties": {"flavorId": {"description": "Id of VM flavor", "type": "string"}}, "title": "UpdateVmParams", "type": "object"}, "UpdateVolumeParams": {"properties": {"sizeInGb": {"description": "New volume size in GB", "type": "integer"}}, "title": "UpdateVolumeParams", "type": "object"}, "VM": {"properties": {"allowedPowerActions": {"description": "A list of power actions that are allowed in the current VM state", "items": {"type": "string"}, "type": "array", "uniqueItems": true}, "availabilityZone": {"deprecated": true, "type": "string"}, "availabilityZoneId": {"type": "string"}, "createdAt": {"type": "string"}, "flavorId": {"type": "string"}, "id": {"type": "string"}, "imageId": {"type": "string"}, "interfaces": {"description": "A list of VM network interface ids", "items": {"type": "string"}, "type": "array", "uniqueItems": true}, "isManaged": {"deprecated": true, "type": "boolean"}, "keypairId": {"type": "string"}, "managementToolId": {"nullable": true, "type": "string"}, "name": {"type": "string"}, "powerState": {"type": "string"}, "status": {"type": "string"}, "statusMessage": {"nullable": true, "readOnly": true, "type": "string"}, "tags": {"description": "A list of VM tags", "items": {"$ref": "#/components/schemas/Tag"}, "type": "array", "uniqueItems": true}, "volumes": {"description": "A list of volume ids attached to the VM", "items": {"type": "string"}, "type": "array", "uniqueItems": true}, "workshift": {"$ref": "#/components/schemas/OptionalWorkshift"}}, "required": ["id", "name", "powerState", "allowedPowerActions", "flavorId", "volumes", "interfaces", "isManaged", "managementToolId", "imageId", "keypairId", "tags", "availabilityZoneId"], "title": "VM", "type": "object"}, "VMCreate": {"description": "Create VM", "properties": {"availabilityZone": {"description": "Availability zone", "type": "string"}, "flavorId": {"description": "Flavor id", "type": "string"}, "imageId": {"description": "Id of an image used for VM creation", "type": "string"}, "keypairId": {"description": "Keypair id", "type": "string"}, "managementEnabled": {"deprecated": true, "description": "Specifies if management of a VM in EOS is enabled", "type": "boolean"}, "managementToolId": {"nullable": true, "type": "string"}, "name": {"description": "VM name", "type": "string"}, "nics": {"description": "List of network ids", "items": {"type": "string"}, "type": "array", "uniqueItems": true}, "securityGroups": {"description": "List of security group ids. The list is always empty because there are no security groups in VMware.", "items": {"type": "string"}, "maxItems": 0, "type": "array"}, "subnetId": {"description": "Subnet id in which VM should be created", "type": "string"}, "tags": {"description": "Tags (name and value) assigned to this VM", "items": {"$ref": "#/components/schemas/Tag"}, "type": "array", "uniqueItems": true}, "volumeSize": {"description": "Volume size in GB", "type": "integer"}, "volumeTypeId": {"description": "Volume type id that will be used for OS volume", "example": "default", "type": "string"}, "workshift": {"$ref": "#/components/schemas/OptionalWorkshift"}}, "required": ["name", "imageId", "flavorId", "keypairId", "volumeSize", "volumeTypeId", "securityGroups", "availabilityZone", "tags"], "title": "VMCreate", "type": "object"}, "VMId": {"example": "pc000xvcsam24.pc000x.fmpcs.local~vm-1316", "type": "string"}, "VMdetails": {"description": "List of VM details", "properties": {"key": {"type": "string"}, "value": {"type": "string"}}, "required": ["key", "value"], "title": "VM details", "type": "object"}, "VmSimple": {"properties": {"availabilityZone": {"deprecated": true, "type": "string"}, "availabilityZoneId": {"type": "string"}, "createdAt": {"type": "string"}, "flavorId": {"type": "string"}, "id": {"type": "string"}, "imageId": {"type": "string"}, "isManaged": {"deprecated": true, "type": "boolean"}, "managementToolId": {"nullable": true, "type": "string"}, "name": {"type": "string"}, "powerState": {"$ref": "#/components/schemas/PowerState"}, "tags": {"description": "A list of VM tags", "items": {"$ref": "#/components/schemas/Tag"}, "type": "array", "uniqueItems": true}}, "required": ["id", "name", "powerState", "flavorId", "imageId", "isManaged", "managementToolId", "availabilityZoneId", "tags"], "title": "VmSimple", "type": "object"}, "Volume": {"example": {"attachment": {"device": "0:1", "vmId": "pc000xvcsam24.pc000x.fmpcs.local~vm-1370"}, "id": "pc000xvcsam24.pc000x.fmpcs.local~vm-1370~0:1", "isOsDisk": false, "name": "Volume 1", "sizeInGb": 120, "status": "inUse", "tags": [], "typeId": "009ee6e0-a5e4-43eb-8a3d-7e0de6d776b6"}, "properties": {"attachment": {"nullable": true, "properties": {"device": {"type": "string"}, "vmId": {"type": "string"}}, "required": ["device", "vmId"], "type": "object"}, "id": {"type": "string"}, "isOsDisk": {"type": "boolean"}, "name": {"maxLength": 300, "minLength": 1, "type": "string"}, "sizeInGb": {"type": "integer"}, "status": {"$ref": "#/components/schemas/VolumeStatus"}, "tags": {"description": "A list of tags", "items": {"$ref": "#/components/schemas/Tag"}, "type": "array", "uniqueItems": true}, "typeId": {"type": "string"}}, "required": ["id", "name", "sizeInGb", "status", "typeId", "isOsDisk", "attachment"], "type": "object"}, "VolumeId": {"example": "pc000xvcsam24.pc000x.fmpcs.local~vm-1570~0:5", "type": "string"}, "VolumeStatus": {"enum": ["available", "inUse", "error", "unknown"], "type": "string"}, "VolumeType": {"properties": {"id": {"description": "Id of volume type", "type": "string"}, "isOsCompatible": {"description": "States if volume can be used as OS volume", "type": "boolean"}, "maxVolumeSizeInGb": {"description": "Highest volume size that can be created with given volume type", "type": "integer"}, "minVolumeSizeInGb": {"description": "Minimal volume size that can be created with given volume type", "type": "integer"}, "name": {"description": "Human readable name of the volume type", "type": "string"}}, "title": "VolumeType", "type": "object"}, "Workshift": {"properties": {"start": {"$ref": "#/components/schemas/WorkshiftSchedule"}, "stop": {"$ref": "#/components/schemas/WorkshiftSchedule"}}, "title": "Workshift", "type": "object"}, "WorkshiftSchedule": {"properties": {"days": {"description": "A list of week days on which the schedule is planned to be executed", "items": {"$ref": "#/components/schemas/Day"}, "minItems": 1, "type": "array", "uniqueItems": true}, "hour": {"maximum": 23, "minimum": 0, "type": "integer"}, "minute": {"maximum": 59, "minimum": 0, "type": "integer"}}, "title": "WorkshiftSchedule", "type": "object"}, "vmware_service.resources.status.getResponse": {"properties": {"status": {"example": "health-check-ok", "type": "string"}}, "title": "vmware_service.resources.status.getResponse", "type": "object"}}}, "info": {"description": "EOS VMware (vRO) connector", "title": "VMware service", "version": "1.0.0"}, "openapi": "3.0.2", "paths": {"/availabilityZones": {"get": {"description": "List all Availability Zones", "operationId": "vmware_service.resources.availability_zones.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}], "responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/AvailabilityZone"}, "type": "array", "uniqueItems": true}}}, "description": "A list of availability zones"}}, "summary": "List availability zones"}}, "/flavors": {"get": {"description": "Get the list of all flavors", "operationId": "vmware_service.resources.flavors.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}], "responses": {"200": {"content": {"application/json": {"schema": {"description": "OK", "items": {"$ref": "#/components/schemas/Flavor"}, "type": "array", "uniqueItems": true}}}, "description": "OK"}}, "summary": "List flavors"}}, "/flavors/{flavorId}": {"get": {"description": "Get specific flavor by id", "operationId": "vmware_service.resources.flavor.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Flavor id", "in": "path", "name": "flavorId", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Flavor", "description": "OK"}}}, "description": "OK"}}, "summary": "Get flavor by id"}}, "/images": {"get": {"description": "The endpoint is used only by the analytics service and should be deprecated in favor of whitelist/images.", "operationId": "vmware_service.resources.images.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/ImageName"}], "responses": {"200": {"content": {"application/json": {"schema": {"description": "OK", "items": {"$ref": "#/components/schemas/PublicPrivateImage"}, "type": "array", "uniqueItems": false}}}, "description": "OK"}}, "summary": "Get images"}}, "/images/{imageId}": {"get": {"deprecated": true, "description": "Get specific images by id", "operationId": "vmware_service.resources.image.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Image id", "in": "path", "name": "imageId", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Image", "description": "OK"}}}, "description": "OK"}}, "summary": "Get image by id"}}, "/interfaces": {"get": {"description": "List of network interfaces", "operationId": "vmware_service.resources.interfaces.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Filter interfaces for VM id", "in": "query", "name": "vmId", "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"description": "OK", "items": {"$ref": "#/components/schemas/Interface"}, "type": "array", "uniqueItems": true}}}, "description": "OK"}}, "summary": "List network interfaces"}}, "/keypairs": {"get": {"description": "List all keypairs", "operationId": "vmware_service.resources.keypairs.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}], "responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/Keypair"}, "type": "array", "uniqueItems": true}}}, "description": "A list of keypairs"}}, "summary": "List keypairs"}}, "/keypairs/generate": {"post": {"description": "Create a new keypair", "operationId": "vmware_service.resources.keypairs.post", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/GenerateKeypair", "description": "Keypair data"}}}, "description": "Keypair data", "required": true}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/NewKeypair"}}}, "description": "Keypair created successfully"}}, "summary": "Create a new keypair"}}, "/keypairs/import": {"post": {"description": "Import a new public keypair", "operationId": "vmware_service.resources.keypairs.upload", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/ImportKeypair", "description": "Public keypair to import"}}}, "description": "Public keypair to import", "required": true}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Keypair"}}}, "description": "Keypair imported successfully"}}, "summary": "Import a keypair"}}, "/keypairs/{keypairId}": {"delete": {"description": "Delete a specific keypair", "operationId": "vmware_service.resources.keypair.delete", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Keypair id", "in": "path", "name": "keypairId", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"description": "Keypair deleted successfully"}}, "summary": "Delete a keypair"}}, "/networks": {"get": {"description": "List all networks", "operationId": "vmware_service.resources.networks.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Availability zone to filter by", "in": "query", "name": "availabilityZone", "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/Network"}, "type": "array", "uniqueItems": true}}}, "description": "A list of networks"}}, "summary": "List networks"}}, "/networks/{networkId}/subnets": {"get": {"description": "List all subnets which belong to the given network", "operationId": "vmware_service.resources.subnets.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Network id", "in": "path", "name": "networkId", "required": true, "schema": {"type": "string"}}, {"description": "Availability zone to filter by", "in": "query", "name": "availabilityZone", "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/Subnet"}, "type": "array", "uniqueItems": true}}}, "description": "A list of subnets"}}, "summary": "List network subnets"}}, "/privateImages": {"get": {"description": "Get private images", "operationId": "vmware_service.resources.images.get_private", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/ImageName"}, {"description": "Image id to filter by", "in": "query", "name": "id", "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"description": "OK", "items": {"$ref": "#/components/schemas/PublicPrivateImage"}, "type": "array", "uniqueItems": false}}}, "description": "OK"}, "400": {"description": "Too many filtration params were specified. Choose either name or id."}}, "summary": "Get private images"}}, "/privateImages/{imageId}": {"get": {"description": "Get specific private image by id", "operationId": "vmware_service.resources.image.get_private", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Image id", "in": "path", "name": "imageId", "required": true, "schema": {"type": "string"}}], "responses": {"404": {"description": "Image does not exist"}}, "summary": "Get private image by id"}}, "/publicImages": {"get": {"description": "Get public images", "operationId": "vmware_service.resources.images.get_public", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/ImageName"}, {"description": "Image id to filter by", "in": "query", "name": "id", "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"description": "OK", "items": {"$ref": "#/components/schemas/PublicPrivateImage"}, "type": "array", "uniqueItems": false}}}, "description": "OK"}, "400": {"description": "Too many filtration params were specified. Choose either name or id."}}, "summary": "Get public images"}}, "/publicImages/{imageId}": {"get": {"description": "Get specific public image by id", "operationId": "vmware_service.resources.image.get_public", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Image id", "in": "path", "name": "imageId", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Image", "description": "OK"}}}, "description": "OK"}, "404": {"description": "Image does not exist"}}, "summary": "Get public image by id"}}, "/regions": {"get": {"description": "List all regions", "operationId": "vmware_service.resources.regions.get", "responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/Region"}, "type": "array", "uniqueItems": true}}}, "description": "A list of regions"}}, "summary": "List regions"}}, "/securityGroups": {"get": {"description": "List of security groups. The result is always an empty list. There are no security groups in VMWare.", "operationId": "vmware_service.resources.security_groups.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "VM id", "in": "query", "name": "vmId", "schema": {"type": "string"}}], "responses": {"200": {"content": {"application/json": {"schema": {"description": "Empty list. There are no security groups in VMWare.", "items": {"type": "object"}, "maxItems": 0, "type": "array"}}}, "description": "Empty list. There are no security groups in VMWare."}}, "summary": "List security groups"}}, "/snapshots": {"get": {"description": "Get list of all snapshots", "operationId": "vmware_service.resources.snapshots.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMIdQuery"}], "responses": {"501": {"description": "Not implemented"}}, "summary": "List snapshots"}, "post": {"description": "Create a new snapshot", "operationId": "vmware_service.resources.snapshots.post", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/CreateSnapshot"}}}, "description": "A create snapshot object", "required": true}, "responses": {"501": {"description": "Not implemented"}}, "summary": "Create a new snapshot"}}, "/snapshots/{snapshotId}": {"delete": {"description": "Delete snapshot", "operationId": "vmware_service.resources.snapshot.delete", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "snapshot id", "in": "path", "name": "snapshotId", "required": true, "schema": {"type": "string"}}], "responses": {"501": {"description": "Not implemented"}}, "summary": "Delete snapshot"}}, "/validateSubscription": {"post": {"description": "Validate subscription before adding it", "operationId": "vmware_service.resources.validate_subscription.post", "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Subscription", "description": "Validate subscription data"}}}, "description": "Validate subscription data"}, "responses": {"204": {"description": "Subscription successfully validated"}, "400": {"description": "Invalid subscription"}, "500": {"description": "Internal server error"}}, "summary": "Validate subscription"}}, "/vms": {"get": {"description": "List all virtual machines", "operationId": "vmware_service.resources.vms.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/AvailabilityZoneId"}], "responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/VmSimple"}, "type": "array", "uniqueItems": true}}}, "description": "A list of VMs"}}, "summary": "List VMs"}, "post": {"description": "Create a new VM", "operationId": "vmware_service.resources.vms.post", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/VMCreate", "description": "VM creation data"}}}, "description": "VM creation data", "required": true}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/VM"}}}, "description": "A VM object"}}, "summary": "Create a VM"}}, "/vms/{vmId}": {"delete": {"description": "Delete a VM", "operationId": "vmware_service.resources.vm.delete", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "responses": {"204": {"description": "VM is deleted and marked as unmanaged"}}, "summary": "Delete a VM"}, "get": {"description": "Get virtual machine by id", "operationId": "vmware_service.resources.vm.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/VM"}}}, "description": "A VM object"}}, "summary": "Get VM by id"}, "patch": {"description": "Modify VM properties. Currently it is possible to modify the VM flavor.", "operationId": "vmware_service.resources.vm.patch", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/UpdateVmParams", "description": "VM properties"}}}, "description": "VM properties", "required": true}, "responses": {"204": {"description": "Response body is empty"}}, "summary": "Update VM"}}, "/vms/{vmId}/command/{action}": {"put": {"description": "Execute action on a VM. Actions are start, poweroff, softReboot, hardReboot.", "operationId": "vmware_service.resources.vm_command.put", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}, {"description": "Power action to be invoked on the VM", "in": "path", "name": "action", "required": true, "schema": {"$ref": "#/components/schemas/Action"}}], "responses": {"202": {"description": "OK"}}, "summary": "Execute a power action on a VM"}}, "/vms/{vmId}/details": {"get": {"description": "Get VM details", "operationId": "vmware_service.resources.vm_details.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "responses": {"200": {"content": {"application/json": {"schema": {"description": "OK", "items": {"$ref": "#/components/schemas/VMdetails"}, "type": "array", "uniqueItems": true}}}, "description": "OK"}}, "summary": "Get VM details"}}, "/vms/{vmId}/management": {"get": {"description": "Check if management service for the VM is available", "operationId": "vmware_service.resources.management.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Management"}}}, "description": "VM management status"}}, "summary": "Get VM management status"}}, "/vms/{vmId}/password": {"get": {"description": "Get the password in an encrypted form for the virtual machine", "operationId": "vmware_service.resources.vm_password.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Password"}}}, "description": "Encrypted VM password"}}, "summary": "Get the VM password"}}, "/vms/{vmId}/setTag": {"put": {"description": "Set a tag value for a VM", "operationId": "vmware_service.resources.vm_tag.put", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/TagUpdate"}}}, "description": "Tag object to be updated", "required": true}, "responses": {"200": {"description": "Empty response"}}, "summary": "Tag VM"}}, "/vms/{vmId}/workshift": {"delete": {"description": "Delete the VM Workshift", "operationId": "vmware_service.resources.vm_workshift.delete", "parameters": [{"$ref": "#/components/parameters/VMId"}, {"$ref": "#/components/parameters/SubscriptionId"}], "responses": {"204": {"description": "Workshift deleted successfully"}, "400": {"description": "Bad request"}, "404": {"description": "Workshift does not exist"}, "500": {"description": "Internal server error"}}, "summary": "Delete the VM Workshift"}, "post": {"description": "Create a VM Workshift", "operationId": "vmware_service.resources.vm_workshifts.post", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Workshift"}}}, "description": "Workshift object", "required": true}, "responses": {"201": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Workshift", "description": "Workshift created successfully"}}}, "description": "Workshift created successfully"}, "400": {"description": "Bad request"}, "404": {"description": "Workshift does not exist"}, "500": {"description": "Internal server error"}}, "summary": "Add a workshift to the VM"}, "put": {"description": "Update the VM Workshift", "operationId": "vmware_service.resources.vm_workshift.put", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VMId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Workshift"}}}, "description": "Workshift object", "required": true}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Workshift", "description": "Workshift updated successfully"}}}, "description": "Workshift updated successfully"}, "400": {"description": "Bad request"}, "404": {"description": "Workshift does not exist"}, "500": {"description": "Internal server error"}}, "summary": "Update the VM workshift"}}, "/volumeTypes": {"get": {"description": "Get a list of all volume types user can create volume with", "operationId": "vmware_service.resources.volume_types.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"description": "Availability zone to filter by", "in": "query", "name": "availabilityZoneId", "schema": {"type": "string"}}, {"description": "If true, show only volumes on which OS can be installed", "in": "query", "name": "isOsCompatible", "schema": {"type": "boolean"}}], "responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/VolumeType"}, "type": "array", "uniqueItems": true}}}, "description": "A list of objects"}}, "summary": "List volume types"}}, "/volumes": {"get": {"description": "Get list of all volumes", "operationId": "vmware_service.resources.volumes.get", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/FilterVolumeStatus"}, {"description": "Availability zone to filter by", "in": "query", "name": "availabilityZone", "schema": {"type": "string"}}, {"description": "Filter volumes by isOsDisk value", "in": "query", "name": "isOsDisk", "schema": {"type": "boolean"}}], "responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/Volume"}, "type": "array", "uniqueItems": true}}}, "description": "A list of volumes"}}, "summary": "List volumes"}, "post": {"description": "Create a new volume", "operationId": "vmware_service.resources.volumes.post", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/NewVolume"}}}, "description": "A volume object", "required": true}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Volume"}}}, "description": "OK"}, "400": {"description": "Bad request"}, "500": {"description": "Internal server error"}}, "summary": "Create a new volume"}}, "/volumes/{volume_id}": {"patch": {"description": "Modify volume properties. Currently it is possible to change to volume size.", "operationId": "vmware_service.resources.volume.patch", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VolumeId"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/UpdateVolumeParams", "description": "Volume properties"}}}, "description": "Volume properties", "required": true}, "responses": {"204": {"description": "Volume was updated successfully"}}, "summary": "Update a volume"}}, "/volumes/{volume_id}/detach": {"delete": {"operationId": "vmware_service.resources.volume_attachment.delete", "parameters": [{"$ref": "#/components/parameters/SubscriptionId"}, {"$ref": "#/components/parameters/VolumeId"}, {"$ref": "#/components/parameters/VMIdQuery"}], "responses": {"204": {"description": "Volume detached from the VM successfully"}}, "summary": "Dettaches and deletes a volume"}}}, "servers": [{"description": "VMware connector API", "url": "/api/v1/vmware/compute"}], "tags": []}
+{
+  "components": {
+    "parameters": {
+      "AvailabilityZoneId": {
+        "description": "Availability zone to filter by",
+        "in": "query",
+        "name": "availabilityZoneId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "FilterVolumeStatus": {
+        "description": "Volume status to filter by",
+        "in": "query",
+        "name": "status",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/VolumeStatus"
+        }
+      },
+      "ImageName": {
+        "description": "Name of the image to filter",
+        "in": "query",
+        "name": "name",
+        "required": false,
+        "schema": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "SubscriptionId": {
+        "description": "Id of subscription",
+        "in": "query",
+        "name": "subscriptionId",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/SubscriptionId"
+        }
+      },
+      "VMId": {
+        "description": "Id of VM",
+        "in": "path",
+        "name": "vmId",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/VMId"
+        }
+      },
+      "VMIdQuery": {
+        "description": "Id of VM in query",
+        "in": "query",
+        "name": "vmId",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/VMId"
+        }
+      },
+      "VolumeId": {
+        "description": "ID of Volume",
+        "in": "path",
+        "name": "volume_id",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/VolumeId"
+        }
+      }
+    },
+    "schemas": {
+      "Action": {
+        "enum": [
+          "start",
+          "poweroff",
+          "softReboot",
+          "hardReboot"
+        ],
+        "example": "start",
+        "title": "action",
+        "type": "string"
+      },
+      "AvailabilityZone": {
+        "properties": {
+          "available": {
+            "description": "Determines whether the availability zone is available for use",
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "available",
+          "name",
+          "id"
+        ],
+        "title": "AvailabilityZone",
+        "type": "object"
+      },
+      "CreateSnapshot": {
+        "properties": {
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "vmId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "vmId",
+          "name",
+          "description"
+        ],
+        "title": "Craete Snapshot",
+        "type": "object"
+      },
+      "Day": {
+        "enum": [
+          "mon",
+          "tue",
+          "wed",
+          "thu",
+          "fri",
+          "sat",
+          "sun"
+        ],
+        "example": "mon",
+        "title": "Day",
+        "type": "string"
+      },
+      "Flavor": {
+        "description": "Flavor",
+        "properties": {
+          "compatibleVolumeTypeIds": {
+            "description": "List of compatible volume type ids",
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "diskInGb": {
+            "description": "Disk size in GB",
+            "type": "integer"
+          },
+          "id": {
+            "description": "Flavor id",
+            "type": "string"
+          },
+          "name": {
+            "description": "Flavor name",
+            "type": "string"
+          },
+          "ramInMb": {
+            "description": "Memory size in MB",
+            "type": "integer"
+          },
+          "vcpus": {
+            "description": "Number of virtual CPUs",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "ramInMb",
+          "vcpus"
+        ],
+        "title": "Flavor",
+        "type": "object"
+      },
+      "GenerateKeypair": {
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "GenerateKeypair",
+        "type": "object"
+      },
+      "IPv4Address": {
+        "description": "Ip address",
+        "properties": {
+          "id": {
+            "description": "Id",
+            "type": "string"
+          },
+          "ip": {
+            "description": "IP address",
+            "format": "ipv4",
+            "type": "string"
+          },
+          "isDirectlyAssociated": {
+            "description": "Specifies if IP is directly associated",
+            "type": "boolean"
+          },
+          "isFloating": {
+            "description": "Specifies if IP is floating",
+            "type": "boolean"
+          },
+          "isPublic": {
+            "description": "Specifies if IP is public",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "ip"
+        ],
+        "title": "IPv4Address",
+        "type": "object"
+      },
+      "Image": {
+        "description": "Image",
+        "properties": {
+          "id": {
+            "description": "Image id",
+            "type": "string"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "maxDiskInGb": {
+            "description": "Maximum disk size in GB",
+            "type": "integer"
+          },
+          "minDiskInGb": {
+            "description": "Minimum disk size in GB",
+            "type": "integer"
+          },
+          "minRamInMb": {
+            "description": "Minimum memory size in MB",
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "minRamInMb",
+          "minDiskInGb",
+          "maxDiskInGb",
+          "isPrivate"
+        ],
+        "title": "Image",
+        "type": "object"
+      },
+      "ImportKeypair": {
+        "description": "Upload a keypair",
+        "properties": {
+          "name": {
+            "description": "Keypair name",
+            "type": "string"
+          },
+          "publicKey": {
+            "description": "Public key to import",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "publicKey"
+        ],
+        "title": "ImportKeypair",
+        "type": "object"
+      },
+      "Interface": {
+        "properties": {
+          "attachment": {
+            "$ref": "#/components/schemas/InterfaceAttachment"
+          },
+          "id": {
+            "type": "string"
+          },
+          "ipv4Addresses": {
+            "description": "List of IPs",
+            "items": {
+              "$ref": "#/components/schemas/IPv4Address"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "macAddress": {
+            "description": "Interface mac address",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "networkId": {
+            "description": "Network id",
+            "type": "string"
+          },
+          "networkName": {
+            "description": "Network name",
+            "type": "string"
+          },
+          "vmId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "macAddress",
+          "ipv4Addresses"
+        ],
+        "title": "Interface",
+        "type": "object"
+      },
+      "InterfaceAttachment": {
+        "properties": {
+          "subnetId": {
+            "description": "subnet id",
+            "type": "string"
+          },
+          "vmId": {
+            "description": "vm id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "vmId",
+          "subnetId"
+        ],
+        "title": "InterfaceAttachment",
+        "type": "object"
+      },
+      "Keypair": {
+        "properties": {
+          "fingerprint": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "fingerprint"
+        ],
+        "title": "Keypair",
+        "type": "object"
+      },
+      "Management": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "Management",
+        "type": "object"
+      },
+      "Network": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "id"
+        ],
+        "title": "Network",
+        "type": "object"
+      },
+      "NewKeypair": {
+        "properties": {
+          "fingerprint": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "privateKey": {
+            "type": "string"
+          },
+          "publicKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "fingerprint",
+          "privateKey"
+        ],
+        "title": "NewKeypair",
+        "type": "object"
+      },
+      "NewVolume": {
+        "properties": {
+          "availabilityZone": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "description": "Volume size in GB",
+            "type": "integer"
+          },
+          "typeId": {
+            "type": "string"
+          },
+          "vmId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "size",
+          "typeId",
+          "availabilityZone",
+          "name",
+          "vmId"
+        ],
+        "title": "NewVolume",
+        "type": "object"
+      },
+      "OptionalWorkshift": {
+        "nullable": true,
+        "properties": {
+          "start": {
+            "$ref": "#/components/schemas/WorkshiftSchedule"
+          },
+          "stop": {
+            "$ref": "#/components/schemas/WorkshiftSchedule"
+          }
+        },
+        "title": "OptionalWorkshift",
+        "type": "object"
+      },
+      "Password": {
+        "properties": {
+          "encryptedPassword": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "encryptedPassword"
+        ],
+        "title": "Password",
+        "type": "object"
+      },
+      "PowerState": {
+        "enum": [
+          "running",
+          "unknown",
+          "noState",
+          "pending",
+          "paused",
+          "stopped",
+          "crashed",
+          "terminated",
+          "terminating",
+          "rebooting"
+        ],
+        "example": "running",
+        "title": "PowerState",
+        "type": "string"
+      },
+      "PublicPrivateImage": {
+        "properties": {
+          "id": {
+            "description": "Image id",
+            "type": "string"
+          },
+          "isPrivate": {
+            "description": "Describe if image is private or not",
+            "type": "boolean"
+          },
+          "maxDiskInGb": {
+            "description": "Maximum disk size in GB",
+            "type": "integer"
+          },
+          "minDiskInGb": {
+            "description": "Minimum disk size in GB",
+            "type": "integer"
+          },
+          "minRamInMb": {
+            "description": "Minimum memory size in MB",
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "minRamInMb",
+          "minDiskInGb",
+          "maxDiskInGb",
+          "isPrivate"
+        ],
+        "title": "PublicPrivateImage",
+        "type": "object"
+      },
+      "Region": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "id"
+        ],
+        "title": "Region",
+        "type": "object"
+      },
+      "Snapshot": {
+        "properties": {
+          "createdAt": {
+            "type": "string"
+          },
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "vmId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "vmId",
+          "name",
+          "createdAt",
+          "description"
+        ],
+        "title": "Snapshot",
+        "type": "object"
+      },
+      "Status": {
+        "enum": [
+          "available",
+          "notAvailable",
+          "notEnabled"
+        ],
+        "example": "available",
+        "title": "Status",
+        "type": "string"
+      },
+      "Subnet": {
+        "properties": {
+          "cidr": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Subnet",
+        "type": "object"
+      },
+      "Subscription": {
+        "properties": {
+          "authenticationUrl": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "regionId": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password",
+          "authenticationUrl",
+          "regionId"
+        ],
+        "title": "Subscription",
+        "type": "object"
+      },
+      "SubscriptionId": {
+        "example": "75e0fc6a-1675-4e90-9d5e-3d004dc3e4ff",
+        "type": "string"
+      },
+      "Tag": {
+        "properties": {
+          "name": {
+            "description": "Name (key) of the tag",
+            "type": "string"
+          },
+          "value": {
+            "description": "Value of the tag",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ],
+        "title": "Tag",
+        "type": "object"
+      },
+      "TagUpdate": {
+        "description": "Tag update data. It will unset tag from a VM if null value is passed.",
+        "properties": {
+          "name": {
+            "description": "Name (key) of the tag",
+            "type": "string"
+          },
+          "value": {
+            "description": "Value of the tag",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ],
+        "type": "object"
+      },
+      "UpdateVmParams": {
+        "properties": {
+          "flavorId": {
+            "description": "Id of VM flavor",
+            "type": "string"
+          }
+        },
+        "title": "UpdateVmParams",
+        "type": "object"
+      },
+      "UpdateVolumeParams": {
+        "properties": {
+          "sizeInGb": {
+            "description": "New volume size in GB",
+            "type": "integer"
+          }
+        },
+        "title": "UpdateVolumeParams",
+        "type": "object"
+      },
+      "VM": {
+        "properties": {
+          "allowedPowerActions": {
+            "description": "A list of power actions that are allowed in the current VM state",
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "availabilityZone": {
+            "deprecated": true,
+            "type": "string"
+          },
+          "availabilityZoneId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "flavorId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "imageId": {
+            "type": "string"
+          },
+          "interfaces": {
+            "description": "A list of VM network interface ids",
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "isManaged": {
+            "deprecated": true,
+            "type": "boolean"
+          },
+          "keypairId": {
+            "type": "string"
+          },
+          "managementToolId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "powerState": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "statusMessage": {
+            "nullable": true,
+            "readOnly": true,
+            "type": "string"
+          },
+          "tags": {
+            "description": "A list of VM tags",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "volumes": {
+            "description": "A list of volume ids attached to the VM",
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "workshift": {
+            "$ref": "#/components/schemas/OptionalWorkshift"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "powerState",
+          "allowedPowerActions",
+          "flavorId",
+          "volumes",
+          "interfaces",
+          "isManaged",
+          "managementToolId",
+          "imageId",
+          "keypairId",
+          "tags",
+          "availabilityZoneId"
+        ],
+        "title": "VM",
+        "type": "object"
+      },
+      "VMCreate": {
+        "description": "Create VM",
+        "properties": {
+          "availabilityZone": {
+            "description": "Availability zone",
+            "type": "string"
+          },
+          "flavorId": {
+            "description": "Flavor id",
+            "type": "string"
+          },
+          "imageId": {
+            "description": "Id of an image used for VM creation",
+            "type": "string"
+          },
+          "keypairId": {
+            "description": "Keypair id",
+            "type": "string"
+          },
+          "managementEnabled": {
+            "deprecated": true,
+            "description": "Specifies if management of a VM in EOS is enabled",
+            "type": "boolean"
+          },
+          "managementToolId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "VM name",
+            "type": "string"
+          },
+          "nics": {
+            "description": "List of network ids",
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "securityGroups": {
+            "description": "List of security group ids. The list is always empty because there are no security groups in VMware.",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 0,
+            "type": "array"
+          },
+          "subnetId": {
+            "description": "Subnet id in which VM should be created",
+            "type": "string"
+          },
+          "tags": {
+            "description": "Tags (name and value) assigned to this VM",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "volumeSize": {
+            "description": "Volume size in GB",
+            "type": "integer"
+          },
+          "volumeTypeId": {
+            "description": "Volume type id that will be used for OS volume",
+            "example": "default",
+            "type": "string"
+          },
+          "workshift": {
+            "$ref": "#/components/schemas/OptionalWorkshift"
+          }
+        },
+        "required": [
+          "name",
+          "imageId",
+          "flavorId",
+          "keypairId",
+          "volumeSize",
+          "volumeTypeId",
+          "securityGroups",
+          "availabilityZone",
+          "tags"
+        ],
+        "title": "VMCreate",
+        "type": "object"
+      },
+      "VMId": {
+        "example": "pc000xvcsam24.pc000x.fmpcs.local~vm-1316",
+        "type": "string"
+      },
+      "VMdetails": {
+        "description": "List of VM details",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ],
+        "title": "VM details",
+        "type": "object"
+      },
+      "VmSimple": {
+        "properties": {
+          "availabilityZone": {
+            "deprecated": true,
+            "type": "string"
+          },
+          "availabilityZoneId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "flavorId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "imageId": {
+            "type": "string"
+          },
+          "isManaged": {
+            "deprecated": true,
+            "type": "boolean"
+          },
+          "managementToolId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "powerState": {
+            "$ref": "#/components/schemas/PowerState"
+          },
+          "tags": {
+            "description": "A list of VM tags",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "powerState",
+          "flavorId",
+          "imageId",
+          "isManaged",
+          "managementToolId",
+          "availabilityZoneId",
+          "tags"
+        ],
+        "title": "VmSimple",
+        "type": "object"
+      },
+      "Volume": {
+        "example": {
+          "attachment": {
+            "device": "0:1",
+            "vmId": "pc000xvcsam24.pc000x.fmpcs.local~vm-1370"
+          },
+          "id": "pc000xvcsam24.pc000x.fmpcs.local~vm-1370~0:1",
+          "isOsDisk": false,
+          "name": "Volume 1",
+          "sizeInGb": 120,
+          "status": "inUse",
+          "tags": [],
+          "typeId": "009ee6e0-a5e4-43eb-8a3d-7e0de6d776b6"
+        },
+        "properties": {
+          "attachment": {
+            "nullable": true,
+            "properties": {
+              "device": {
+                "type": "string"
+              },
+              "vmId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "device",
+              "vmId"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isOsDisk": {
+            "type": "boolean"
+          },
+          "name": {
+            "maxLength": 300,
+            "minLength": 1,
+            "type": "string"
+          },
+          "sizeInGb": {
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/VolumeStatus"
+          },
+          "tags": {
+            "description": "A list of tags",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "typeId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "sizeInGb",
+          "status",
+          "typeId",
+          "isOsDisk",
+          "attachment"
+        ],
+        "type": "object"
+      },
+      "VolumeId": {
+        "example": "pc000xvcsam24.pc000x.fmpcs.local~vm-1570~0:5",
+        "type": "string"
+      },
+      "VolumeStatus": {
+        "enum": [
+          "available",
+          "inUse",
+          "error",
+          "unknown"
+        ],
+        "type": "string"
+      },
+      "VolumeType": {
+        "properties": {
+          "id": {
+            "description": "Id of volume type",
+            "type": "string"
+          },
+          "isOsCompatible": {
+            "description": "States if volume can be used as OS volume",
+            "type": "boolean"
+          },
+          "maxVolumeSizeInGb": {
+            "description": "Highest volume size that can be created with given volume type",
+            "type": "integer"
+          },
+          "minVolumeSizeInGb": {
+            "description": "Minimal volume size that can be created with given volume type",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Human readable name of the volume type",
+            "type": "string"
+          }
+        },
+        "title": "VolumeType",
+        "type": "object"
+      },
+      "Workshift": {
+        "properties": {
+          "start": {
+            "$ref": "#/components/schemas/WorkshiftSchedule"
+          },
+          "stop": {
+            "$ref": "#/components/schemas/WorkshiftSchedule"
+          }
+        },
+        "title": "Workshift",
+        "type": "object"
+      },
+      "WorkshiftSchedule": {
+        "properties": {
+          "days": {
+            "description": "A list of week days on which the schedule is planned to be executed",
+            "items": {
+              "$ref": "#/components/schemas/Day"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "hour": {
+            "maximum": 23,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "minute": {
+            "maximum": 59,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "title": "WorkshiftSchedule",
+        "type": "object"
+      },
+      "vmware_service.resources.status.getResponse": {
+        "properties": {
+          "status": {
+            "example": "health-check-ok",
+            "type": "string"
+          }
+        },
+        "title": "vmware_service.resources.status.getResponse",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "EOS VMware (vRO) connector",
+    "title": "VMware service",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.2",
+  "paths": {
+    "/availabilityZones": {
+      "get": {
+        "description": "List all Availability Zones",
+        "operationId": "vmware_service.resources.availability_zones.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AvailabilityZone"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "A list of availability zones"
+          }
+        },
+        "summary": "List availability zones"
+      }
+    },
+    "/flavors": {
+      "get": {
+        "description": "Get the list of all flavors",
+        "operationId": "vmware_service.resources.flavors.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "OK",
+                  "items": {
+                    "$ref": "#/components/schemas/Flavor"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "List flavors"
+      }
+    },
+    "/flavors/{flavorId}": {
+      "get": {
+        "description": "Get specific flavor by id",
+        "operationId": "vmware_service.resources.flavor.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Flavor id",
+            "in": "path",
+            "name": "flavorId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Flavor",
+                  "description": "OK"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get flavor by id"
+      }
+    },
+    "/images": {
+      "get": {
+        "description": "The endpoint is used only by the analytics service and should be deprecated in favor of whitelist/images.",
+        "operationId": "vmware_service.resources.images.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/ImageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "OK",
+                  "items": {
+                    "$ref": "#/components/schemas/PublicPrivateImage"
+                  },
+                  "type": "array",
+                  "uniqueItems": false
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get images"
+      }
+    },
+    "/images/{imageId}": {
+      "get": {
+        "deprecated": true,
+        "description": "Get specific images by id",
+        "operationId": "vmware_service.resources.image.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Image id",
+            "in": "path",
+            "name": "imageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Image",
+                  "description": "OK"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get image by id"
+      }
+    },
+    "/interfaces": {
+      "get": {
+        "description": "List of network interfaces",
+        "operationId": "vmware_service.resources.interfaces.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Filter interfaces for VM id",
+            "in": "query",
+            "name": "vmId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "OK",
+                  "items": {
+                    "$ref": "#/components/schemas/Interface"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "List network interfaces"
+      }
+    },
+    "/keypairs": {
+      "get": {
+        "description": "List all keypairs",
+        "operationId": "vmware_service.resources.keypairs.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Keypair"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "A list of keypairs"
+          }
+        },
+        "summary": "List keypairs"
+      }
+    },
+    "/keypairs/generate": {
+      "post": {
+        "description": "Create a new keypair",
+        "operationId": "vmware_service.resources.keypairs.post",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateKeypair",
+                "description": "Keypair data"
+              }
+            }
+          },
+          "description": "Keypair data",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewKeypair"
+                }
+              }
+            },
+            "description": "Keypair created successfully"
+          }
+        },
+        "summary": "Create a new keypair"
+      }
+    },
+    "/keypairs/import": {
+      "post": {
+        "description": "Import a new public keypair",
+        "operationId": "vmware_service.resources.keypairs.upload",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportKeypair",
+                "description": "Public keypair to import"
+              }
+            }
+          },
+          "description": "Public keypair to import",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Keypair"
+                }
+              }
+            },
+            "description": "Keypair imported successfully"
+          }
+        },
+        "summary": "Import a keypair"
+      }
+    },
+    "/keypairs/{keypairId}": {
+      "delete": {
+        "description": "Delete a specific keypair",
+        "operationId": "vmware_service.resources.keypair.delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Keypair id",
+            "in": "path",
+            "name": "keypairId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Keypair deleted successfully"
+          }
+        },
+        "summary": "Delete a keypair"
+      }
+    },
+    "/networks": {
+      "get": {
+        "description": "List all networks",
+        "operationId": "vmware_service.resources.networks.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Availability zone to filter by",
+            "in": "query",
+            "name": "availabilityZone",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Network"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "A list of networks"
+          }
+        },
+        "summary": "List networks"
+      }
+    },
+    "/networks/{networkId}/subnets": {
+      "get": {
+        "description": "List all subnets which belong to the given network",
+        "operationId": "vmware_service.resources.subnets.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Network id",
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Availability zone to filter by",
+            "in": "query",
+            "name": "availabilityZone",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Subnet"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "A list of subnets"
+          }
+        },
+        "summary": "List network subnets"
+      }
+    },
+    "/privateImages": {
+      "get": {
+        "description": "Get private images",
+        "operationId": "vmware_service.resources.images.get_private",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/ImageName"
+          },
+          {
+            "description": "Image id to filter by",
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "OK",
+                  "items": {
+                    "$ref": "#/components/schemas/PublicPrivateImage"
+                  },
+                  "type": "array",
+                  "uniqueItems": false
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Too many filtration params were specified. Choose either name or id."
+          }
+        },
+        "summary": "Get private images"
+      }
+    },
+    "/privateImages/{imageId}": {
+      "get": {
+        "description": "Get specific private image by id",
+        "operationId": "vmware_service.resources.image.get_private",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Image id",
+            "in": "path",
+            "name": "imageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Image does not exist"
+          }
+        },
+        "summary": "Get private image by id"
+      }
+    },
+    "/publicImages": {
+      "get": {
+        "description": "Get public images",
+        "operationId": "vmware_service.resources.images.get_public",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/ImageName"
+          },
+          {
+            "description": "Image id to filter by",
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "OK",
+                  "items": {
+                    "$ref": "#/components/schemas/PublicPrivateImage"
+                  },
+                  "type": "array",
+                  "uniqueItems": false
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Too many filtration params were specified. Choose either name or id."
+          }
+        },
+        "summary": "Get public images"
+      }
+    },
+    "/publicImages/{imageId}": {
+      "get": {
+        "description": "Get specific public image by id",
+        "operationId": "vmware_service.resources.image.get_public",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Image id",
+            "in": "path",
+            "name": "imageId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Image",
+                  "description": "OK"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Image does not exist"
+          }
+        },
+        "summary": "Get public image by id"
+      }
+    },
+    "/regions": {
+      "get": {
+        "description": "List all regions",
+        "operationId": "vmware_service.resources.regions.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Region"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "A list of regions"
+          }
+        },
+        "summary": "List regions"
+      }
+    },
+    "/securityGroups": {
+      "get": {
+        "description": "List of security groups. The result is always an empty list. There are no security groups in VMWare.",
+        "operationId": "vmware_service.resources.security_groups.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "VM id",
+            "in": "query",
+            "name": "vmId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Empty list. There are no security groups in VMWare.",
+                  "items": {
+                    "type": "object"
+                  },
+                  "maxItems": 0,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Empty list. There are no security groups in VMWare."
+          }
+        },
+        "summary": "List security groups"
+      }
+    },
+    "/snapshots": {
+      "get": {
+        "description": "Get list of all snapshots",
+        "operationId": "vmware_service.resources.snapshots.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMIdQuery"
+          }
+        ],
+        "responses": {
+          "501": {
+            "description": "Not implemented"
+          }
+        },
+        "summary": "List snapshots"
+      },
+      "post": {
+        "description": "Create a new snapshot",
+        "operationId": "vmware_service.resources.snapshots.post",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSnapshot"
+              }
+            }
+          },
+          "description": "A create snapshot object",
+          "required": true
+        },
+        "responses": {
+          "501": {
+            "description": "Not implemented"
+          }
+        },
+        "summary": "Create a new snapshot"
+      }
+    },
+    "/snapshots/{snapshotId}": {
+      "delete": {
+        "description": "Delete snapshot",
+        "operationId": "vmware_service.resources.snapshot.delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "snapshot id",
+            "in": "path",
+            "name": "snapshotId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "501": {
+            "description": "Not implemented"
+          }
+        },
+        "summary": "Delete snapshot"
+      }
+    },
+    "/validateSubscription": {
+      "post": {
+        "description": "Validate subscription before adding it",
+        "operationId": "vmware_service.resources.validate_subscription.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Subscription",
+                "description": "Validate subscription data"
+              }
+            }
+          },
+          "description": "Validate subscription data"
+        },
+        "responses": {
+          "204": {
+            "description": "Subscription successfully validated"
+          },
+          "400": {
+            "description": "Invalid subscription"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Validate subscription"
+      }
+    },
+    "/vms": {
+      "get": {
+        "description": "List all virtual machines",
+        "operationId": "vmware_service.resources.vms.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/AvailabilityZoneId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VmSimple"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "A list of VMs"
+          }
+        },
+        "summary": "List VMs"
+      },
+      "post": {
+        "description": "Create a new VM",
+        "operationId": "vmware_service.resources.vms.post",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VMCreate",
+                "description": "VM creation data"
+              }
+            }
+          },
+          "description": "VM creation data",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM"
+                }
+              }
+            },
+            "description": "A VM object"
+          }
+        },
+        "summary": "Create a VM"
+      }
+    },
+    "/vms/{vmId}": {
+      "delete": {
+        "description": "Delete a VM",
+        "operationId": "vmware_service.resources.vm.delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "VM is deleted and marked as unmanaged"
+          }
+        },
+        "summary": "Delete a VM"
+      },
+      "get": {
+        "description": "Get virtual machine by id",
+        "operationId": "vmware_service.resources.vm.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM"
+                }
+              }
+            },
+            "description": "A VM object"
+          }
+        },
+        "summary": "Get VM by id"
+      },
+      "patch": {
+        "description": "Modify VM properties. Currently it is possible to modify the VM flavor.",
+        "operationId": "vmware_service.resources.vm.patch",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVmParams",
+                "description": "VM properties"
+              }
+            }
+          },
+          "description": "VM properties",
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Response body is empty"
+          }
+        },
+        "summary": "Update VM"
+      }
+    },
+    "/vms/{vmId}/command/{action}": {
+      "put": {
+        "description": "Execute action on a VM. Actions are start, poweroff, softReboot, hardReboot.",
+        "operationId": "vmware_service.resources.vm_command.put",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          },
+          {
+            "description": "Power action to be invoked on the VM",
+            "in": "path",
+            "name": "action",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Action"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK"
+          }
+        },
+        "summary": "Execute a power action on a VM"
+      }
+    },
+    "/vms/{vmId}/details": {
+      "get": {
+        "description": "Get VM details",
+        "operationId": "vmware_service.resources.vm_details.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "OK",
+                  "items": {
+                    "$ref": "#/components/schemas/VMdetails"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get VM details"
+      }
+    },
+    "/vms/{vmId}/management": {
+      "get": {
+        "description": "Check if management service for the VM is available",
+        "operationId": "vmware_service.resources.management.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Management"
+                }
+              }
+            },
+            "description": "VM management status"
+          }
+        },
+        "summary": "Get VM management status"
+      }
+    },
+    "/vms/{vmId}/password": {
+      "get": {
+        "description": "Get the password in an encrypted form for the virtual machine",
+        "operationId": "vmware_service.resources.vm_password.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Password"
+                }
+              }
+            },
+            "description": "Encrypted VM password"
+          }
+        },
+        "summary": "Get the VM password"
+      }
+    },
+    "/vms/{vmId}/setTag": {
+      "put": {
+        "description": "Set a tag value for a VM",
+        "operationId": "vmware_service.resources.vm_tag.put",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagUpdate"
+              }
+            }
+          },
+          "description": "Tag object to be updated",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          }
+        },
+        "summary": "Tag VM"
+      }
+    },
+    "/vms/{vmId}/workshift": {
+      "delete": {
+        "description": "Delete the VM Workshift",
+        "operationId": "vmware_service.resources.vm_workshift.delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VMId"
+          },
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Workshift deleted successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Workshift does not exist"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete the VM Workshift"
+      },
+      "post": {
+        "description": "Create a VM Workshift",
+        "operationId": "vmware_service.resources.vm_workshifts.post",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workshift"
+              }
+            }
+          },
+          "description": "Workshift object",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workshift",
+                  "description": "Workshift created successfully"
+                }
+              }
+            },
+            "description": "Workshift created successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Workshift does not exist"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Add a workshift to the VM"
+      },
+      "put": {
+        "description": "Update the VM Workshift",
+        "operationId": "vmware_service.resources.vm_workshift.put",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VMId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workshift"
+              }
+            }
+          },
+          "description": "Workshift object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workshift",
+                  "description": "Workshift updated successfully"
+                }
+              }
+            },
+            "description": "Workshift updated successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Workshift does not exist"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update the VM workshift"
+      }
+    },
+    "/volumeTypes": {
+      "get": {
+        "description": "Get a list of all volume types user can create volume with",
+        "operationId": "vmware_service.resources.volume_types.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "description": "Availability zone to filter by",
+            "in": "query",
+            "name": "availabilityZoneId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "If true, show only volumes on which OS can be installed",
+            "in": "query",
+            "name": "isOsCompatible",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VolumeType"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "A list of objects"
+          }
+        },
+        "summary": "List volume types"
+      }
+    },
+    "/volumes": {
+      "get": {
+        "description": "Get list of all volumes",
+        "operationId": "vmware_service.resources.volumes.get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/FilterVolumeStatus"
+          },
+          {
+            "description": "Availability zone to filter by",
+            "in": "query",
+            "name": "availabilityZone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter volumes by isOsDisk value",
+            "in": "query",
+            "name": "isOsDisk",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Volume"
+                  },
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              }
+            },
+            "description": "A list of volumes"
+          }
+        },
+        "summary": "List volumes"
+      },
+      "post": {
+        "description": "Create a new volume",
+        "operationId": "vmware_service.resources.volumes.post",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewVolume"
+              }
+            }
+          },
+          "description": "A volume object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Volume"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create a new volume"
+      }
+    },
+    "/volumes/{volume_id}": {
+      "patch": {
+        "description": "Modify volume properties. Currently it is possible to change to volume size.",
+        "operationId": "vmware_service.resources.volume.patch",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VolumeId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVolumeParams",
+                "description": "Volume properties"
+              }
+            }
+          },
+          "description": "Volume properties",
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Volume was updated successfully"
+          }
+        },
+        "summary": "Update a volume"
+      }
+    },
+    "/volumes/{volume_id}/detach": {
+      "delete": {
+        "operationId": "vmware_service.resources.volume_attachment.delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/components/parameters/VolumeId"
+          },
+          {
+            "$ref": "#/components/parameters/VMIdQuery"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Volume detached from the VM successfully"
+          }
+        },
+        "summary": "Dettaches and deletes a volume"
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "VMware connector API",
+      "url": "/api/v1/vmware/compute"
+    }
+  ],
+  "tags": []
+}

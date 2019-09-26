@@ -1,1 +1,294 @@
-{"swagger": "2.0", "info": {"version": "1.0.0", "title": "Analytics service", "description": "Service for monitoring"}, "host": "emeia-eos.fcsm.io", "schemes": ["https"], "basePath": "/api/v1/analytics", "paths": {"/metrics": {"get": {"description": "Retrieve all metrics", "operationId": "get_metrics", "parameters": [{"name": "startDate", "in": "query", "type": "string", "format": "date", "description": "Start date for showing metrics (YYYY-MM-DD)"}, {"name": "endDate", "in": "query", "type": "string", "format": "date", "description": "End date for showing metrics (YYYY-MM-DD)"}], "responses": {"200": {"description": "A list of all metrics", "schema": {"$ref": "#/definitions/Metrics"}}}}}, "/platforms/{platformId}": {"get": {"description": "Retrieve metrics for specific platform", "operationId": "get_platform_metrics", "parameters": [{"name": "platformId", "in": "path", "type": "string", "required": true, "description": "ID of platform"}], "responses": {"200": {"description": "Metrics for one platform", "schema": {"$ref": "#/definitions/PlatformMetrics"}}}}}, "/summary": {"get": {"description": "Retrieve usage summary", "operationId": "get_summary", "responses": {"200": {"description": "Summary response", "schema": {"$ref": "#/definitions/Summary"}}}}}, "/summaryUsage": {"get": {"description": "Retrieve usage summary for all platforms", "operationId": "get_summary_usage", "responses": {"200": {"description": "Summarized usage of resources", "schema": {"$ref": "#/definitions/SummaryUsage"}}}}}, "/platformsUsage": {"get": {"description": "Retrieve percentage platforms usage", "operationId": "get_platforms_usage", "responses": {"200": {"description": "Response may be empty object if all platforms are disabled", "schema": {"$ref": "#/definitions/PlatformsUsage"}}}}}, "/operatingSystems": {"get": {"description": "Retrieve information about operating systems in use", "operationId": "get_operating_systems", "responses": {"200": {"description": "Response may be empty list if all platforms are disabled", "schema": {"$ref": "#/definitions/OperatingSystems"}}}}}}, "definitions": {"Metric": {"type": "object", "description": "Metric with date and value fields", "properties": {"date": {"type": "string", "format": "date-time"}, "value": {"type": "integer", "description": "Metric value"}}}, "Metrics": {"type": "object", "properties": {"totalStorageUsage": {"type": "array", "description": "Total disk usage", "items": {"$ref": "#/definitions/Metric"}}, "totalComputeInstances": {"type": "array", "description": "Total number of VMs", "items": {"$ref": "#/definitions/Metric"}}, "totalMemoryUsage": {"type": "array", "description": "Total memory usage", "items": {"$ref": "#/definitions/Metric"}}}}, "PlatformMetrics": {"type": "object", "properties": {"vms": {"type": "integer", "description": "Total number of VMs"}, "memory": {"type": "integer", "description": "Current memory usage"}, "storage": {"type": "integer", "description": "Current storage usage"}, "vcpus": {"type": "integer", "description": "Amount of virtual CPU"}}}, "Summary": {"type": "object", "properties": {"subscriptions": {"type": "integer", "description": "Total number of subscriptions"}, "platforms": {"type": "integer", "description": "Number of platforms with valid subscriptions"}}}, "SummaryUsage": {"type": "object", "properties": {"memoryUsage": {"type": "integer", "description": "Total memory usage"}, "networkTraffic": {"type": "integer", "description": "Total network traffic"}, "storageUsage": {"type": "integer", "description": "Total storage usage"}}}, "PlatformsUsage": {"type": "object", "properties": {"k5": {"type": "number", "description": "Percentage platform usage"}, "vmware": {"type": "number", "description": "Percentage platform usage"}, "azure": {"type": "number", "description": "Percentage platform usage"}, "openstack": {"type": "number", "description": "Percentage platform usage"}, "aws": {"type": "number", "description": "Percentage platform usage"}}}, "OperatingSystems": {"type": "array", "items": {"$ref": "#/definitions/OperatingSystem"}}, "OperatingSystem": {"type": "object", "properties": {"name": {"type": "string", "description": "Operating system"}, "value": {"type": "integer", "description": "amount of servers"}}}, "Error": {"type": "object", "required": ["message"], "properties": {"message": {"type": "string"}}}, "BadRequest": {"type": "object", "properties": {"message": {"type": "string"}}}}, "responses": {"InternalError": {"description": "Poor Implementation", "schema": {"$ref": "#/definitions/Error"}}, "BadRequest": {"description": "Bad request parameters/data", "schema": {"$ref": "#/definitions/BadRequest"}}}}
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Analytics service",
+    "description": "Service for monitoring"
+  },
+  "host": "emeia-eos.fcsm.io",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1/analytics",
+  "paths": {
+    "/metrics": {
+      "get": {
+        "description": "Retrieve all metrics",
+        "operationId": "get_metrics",
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "description": "Start date for showing metrics (YYYY-MM-DD)"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "type": "string",
+            "format": "date",
+            "description": "End date for showing metrics (YYYY-MM-DD)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all metrics",
+            "schema": {
+              "$ref": "#/definitions/Metrics"
+            }
+          }
+        }
+      }
+    },
+    "/platforms/{platformId}": {
+      "get": {
+        "description": "Retrieve metrics for specific platform",
+        "operationId": "get_platform_metrics",
+        "parameters": [
+          {
+            "name": "platformId",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "ID of platform"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Metrics for one platform",
+            "schema": {
+              "$ref": "#/definitions/PlatformMetrics"
+            }
+          }
+        }
+      }
+    },
+    "/summary": {
+      "get": {
+        "description": "Retrieve usage summary",
+        "operationId": "get_summary",
+        "responses": {
+          "200": {
+            "description": "Summary response",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          }
+        }
+      }
+    },
+    "/summaryUsage": {
+      "get": {
+        "description": "Retrieve usage summary for all platforms",
+        "operationId": "get_summary_usage",
+        "responses": {
+          "200": {
+            "description": "Summarized usage of resources",
+            "schema": {
+              "$ref": "#/definitions/SummaryUsage"
+            }
+          }
+        }
+      }
+    },
+    "/platformsUsage": {
+      "get": {
+        "description": "Retrieve percentage platforms usage",
+        "operationId": "get_platforms_usage",
+        "responses": {
+          "200": {
+            "description": "Response may be empty object if all platforms are disabled",
+            "schema": {
+              "$ref": "#/definitions/PlatformsUsage"
+            }
+          }
+        }
+      }
+    },
+    "/operatingSystems": {
+      "get": {
+        "description": "Retrieve information about operating systems in use",
+        "operationId": "get_operating_systems",
+        "responses": {
+          "200": {
+            "description": "Response may be empty list if all platforms are disabled",
+            "schema": {
+              "$ref": "#/definitions/OperatingSystems"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Metric": {
+      "type": "object",
+      "description": "Metric with date and value fields",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "type": "integer",
+          "description": "Metric value"
+        }
+      }
+    },
+    "Metrics": {
+      "type": "object",
+      "properties": {
+        "totalStorageUsage": {
+          "type": "array",
+          "description": "Total disk usage",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        },
+        "totalComputeInstances": {
+          "type": "array",
+          "description": "Total number of VMs",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        },
+        "totalMemoryUsage": {
+          "type": "array",
+          "description": "Total memory usage",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        }
+      }
+    },
+    "PlatformMetrics": {
+      "type": "object",
+      "properties": {
+        "vms": {
+          "type": "integer",
+          "description": "Total number of VMs"
+        },
+        "memory": {
+          "type": "integer",
+          "description": "Current memory usage"
+        },
+        "storage": {
+          "type": "integer",
+          "description": "Current storage usage"
+        },
+        "vcpus": {
+          "type": "integer",
+          "description": "Amount of virtual CPU"
+        }
+      }
+    },
+    "Summary": {
+      "type": "object",
+      "properties": {
+        "subscriptions": {
+          "type": "integer",
+          "description": "Total number of subscriptions"
+        },
+        "platforms": {
+          "type": "integer",
+          "description": "Number of platforms with valid subscriptions"
+        }
+      }
+    },
+    "SummaryUsage": {
+      "type": "object",
+      "properties": {
+        "memoryUsage": {
+          "type": "integer",
+          "description": "Total memory usage"
+        },
+        "networkTraffic": {
+          "type": "integer",
+          "description": "Total network traffic"
+        },
+        "storageUsage": {
+          "type": "integer",
+          "description": "Total storage usage"
+        }
+      }
+    },
+    "PlatformsUsage": {
+      "type": "object",
+      "properties": {
+        "k5": {
+          "type": "number",
+          "description": "Percentage platform usage"
+        },
+        "vmware": {
+          "type": "number",
+          "description": "Percentage platform usage"
+        },
+        "azure": {
+          "type": "number",
+          "description": "Percentage platform usage"
+        },
+        "openstack": {
+          "type": "number",
+          "description": "Percentage platform usage"
+        },
+        "aws": {
+          "type": "number",
+          "description": "Percentage platform usage"
+        }
+      }
+    },
+    "OperatingSystems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/OperatingSystem"
+      }
+    },
+    "OperatingSystem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operating system"
+        },
+        "value": {
+          "type": "integer",
+          "description": "amount of servers"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "BadRequest": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "responses": {
+    "InternalError": {
+      "description": "Poor Implementation",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "BadRequest": {
+      "description": "Bad request parameters/data",
+      "schema": {
+        "$ref": "#/definitions/BadRequest"
+      }
+    }
+  }
+}

@@ -1,1 +1,1107 @@
-{"swagger": "2.0", "info": {"version": "1.0.0", "title": "Management service", "description": "Service for VM management"}, "host": "emeia-eos.fcsm.io", "schemes": ["https"], "basePath": "/api/v1/management", "paths": {"/registerVm": {"post": {"description": "Register Vm in management tool", "parameters": [{"name": "data", "in": "body", "required": true, "description": "Vm and management tool information", "schema": {"$ref": "#/definitions/RegisterVm"}}], "responses": {"204": {"description": "OK"}, "504": {"description": "Timeout error communicating with management tool"}}}}, "/unregisterVm": {"delete": {"summary": "Unregister Vm from management tool", "description": "Unregister Vm from management tool", "parameters": [{"name": "data", "in": "body", "required": true, "description": "Vm information", "schema": {"$ref": "#/definitions/ManageVm"}}], "responses": {"204": {"description": "OK"}, "404": {"description": "Given vm was not found", "schema": {"$ref": "#/definitions/HttpNotFoundError"}}, "504": {"description": "Timeout error communicating with management tool"}}}}, "/isManaged": {"get": {"summary": "Check if a vm is managed", "deprecated": true, "parameters": [{"name": "data", "in": "body", "required": true, "description": "Vm information", "schema": {"$ref": "#/definitions/ManageVm"}}], "responses": {"200": {"description": "OK", "schema": {"type": "boolean", "description": "True if VM is managed, false otherwise"}}, "404": {"description": "No management information for given VM exists", "schema": {"$ref": "#/definitions/HttpNotFoundError"}}, "500": {"description": "Internal server error"}}}}, "/managedVms": {"get": {"summary": "Return list of managed VM ids", "parameters": [{"name": "subscriptionId", "in": "query", "type": "string", "required": true}, {"name": "vmId", "in": "query", "type": "string", "required": false}], "responses": {"200": {"description": "OK", "schema": {"type": "array", "items": {"$ref": "#/definitions/ManagedVms"}}}, "500": {"description": "Internal server error"}}}}, "/testConnectivity": {"post": {"summary": "Check connection with Vm", "description": "Check connection with Vm", "parameters": [{"name": "data", "in": "body", "required": true, "description": "Vm information", "schema": {"$ref": "#/definitions/ManageVm"}}], "responses": {"200": {"description": "OK", "schema": {"type": "boolean", "description": "True or False if Vm is available"}}, "404": {"description": "Given vm was not found", "schema": {"$ref": "#/definitions/HttpNotFoundError"}}}}}, "/installApp": {"post": {"summary": "Install application", "description": "Install application", "x-deprecated": true, "parameters": [{"name": "data", "in": "body", "required": true, "description": "Application and VM information", "schema": {"$ref": "#/definitions/Application"}}], "responses": {"200": {"description": "OK", "schema": {"type": "boolean", "description": "True or False if application was installed correctly"}}, "404": {"description": "Given vm was not found", "schema": {"$ref": "#/definitions/HttpNotFoundError"}}, "504": {"description": "Timeout error communicating with management tool"}}}}, "/uninstallApp": {"delete": {"summary": "Uninstall application", "description": "Uninstall application", "x-deprecated": true, "parameters": [{"name": "data", "in": "body", "required": true, "description": "Application and Vm information", "schema": {"$ref": "#/definitions/Application"}}], "responses": {"200": {"description": "OK", "schema": {"type": "boolean", "description": "True or False if application was uninstalled correctly"}}, "404": {"description": "Given vm was not found", "schema": {"$ref": "#/definitions/HttpNotFoundError"}}, "504": {"description": "Timeout error communicating with management tool"}}}}, "/details": {"get": {"summary": "Get vm details", "description": "Get vm details", "parameters": [{"name": "data", "in": "body", "required": true, "description": "Operating system and Vm information", "schema": {"$ref": "#/definitions/VmDetailsParams"}}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/VmDetails"}}, "404": {"description": "Given vm was not found", "schema": {"$ref": "#/definitions/HttpNotFoundError"}}, "504": {"description": "Timeout error communicating with management tool"}}}}, "/getBootstrapScript": {"get": {"summary": "Get bootstrap script", "description": "Get bootstrap script", "parameters": [{"name": "data", "in": "body", "required": true, "description": "Platform and Vm information", "schema": {"$ref": "#/definitions/BootstrapScript"}}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/BootstrapScriptReturn"}}, "400": {"description": "Error while processing input information"}}}}, "/unregisterSubscriptionVms": {"delete": {"summary": "Unregister vms from subscription", "description": "Unregister vms from subscription", "parameters": [{"name": "subscriptionId", "in": "body", "required": true, "description": "Subscription id", "schema": {"type": "string"}}], "responses": {"204": {"description": "OK"}, "400": {"description": "Error while processing input information"}}}}, "/replaceApps": {"post": {"summary": "Upload apps metadata", "description": "Upload apps metadata", "parameters": [{"name": "X-Tool-Token", "in": "header", "required": true, "description": "A token that gives permission to upload apps for specific tool.", "type": "string"}, {"name": "data", "in": "body", "required": true, "description": "Apps metadata", "schema": {"type": "object", "properties": {"apps": {"type": "array", "items": {"$ref": "#/definitions/ReplaceApp"}}}}}], "responses": {"204": {"description": "OK"}, "400": {"description": "Bad Request"}, "401": {"description": "Unauthorized"}, "500": {"description": "Internal Server Error"}}}}, "/apps": {"get": {"summary": "List apps", "parameters": [{"name": "tool_id", "in": "query", "required": false, "type": "string", "format": "uuid"}], "responses": {"200": {"description": "OK", "schema": {"type": "array", "items": {"$ref": "#/definitions/App"}}}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}}, "/apps/{app_id}": {"get": {"summary": "Get app by id", "parameters": [{"name": "app_id", "in": "path", "required": true, "type": "string"}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/App"}}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}}, "/tools/{tool_id}/apps/{app_name}": {"get": {"summary": "Get app by name", "parameters": [{"name": "tool_id", "in": "path", "required": true, "type": "string", "format": "uuid"}, {"name": "app_name", "in": "path", "required": true, "type": "string"}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/App"}}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}}, "/appInstances": {"get": {"summary": "List apps instances", "parameters": [{"name": "subscriptionId", "in": "query", "required": true, "type": "string", "format": "uuid", "description": "subscription id"}, {"name": "toolId", "in": "query", "required": false, "type": "string", "format": "uuid", "description": "Optional filter"}, {"name": "vmId", "in": "query", "required": false, "type": "string", "description": "Optional filter."}, {"name": "state", "in": "query", "required": false, "type": "string", "enum": ["INITIAL", "INSTALLING", "INSTALL_SUCCEEDED", "INSTALL_FAILED", "UNINSTALLING", "UNINSTALL_SUCCEEDED", "UNINSTALL_FAILED"], "description": "Optional filter."}], "responses": {"200": {"description": "OK", "schema": {"type": "array", "items": {"$ref": "#/definitions/AppInstance"}}}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}, "post": {"summary": "Create an app instance", "parameters": [{"name": "subscriptionId", "in": "query", "required": true, "type": "string", "format": "uuid", "description": "subscription id"}, {"name": "body", "in": "body", "required": true, "schema": {"type": "object", "required": ["vmId", "toolId", "appId"], "properties": {"vmId": {"type": "string"}, "appId": {"$ref": "#/definitions/App/properties/id"}}}}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/AppInstance"}}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}}, "/appInstances/{app_instance_id}": {"parameters": [{"name": "subscriptionId", "in": "query", "required": true, "type": "string", "format": "uuid", "description": "subscription id"}, {"name": "app_instance_id", "in": "path", "required": true, "type": "string", "format": "uuid"}, {"name": "role", "in": "header", "type": "string", "enum": ["admin", "user"]}], "get": {"summary": "Get an app instance", "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/AppInstance"}}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}, "delete": {"summary": "Delete an app instance", "description": "It is allowed to delete app instances that are in one of the following states: INITIAL, INSTALL_FAILED, UNINSTALL_SUCCEEDED, UNINSTALL_FAILED.\n", "parameters": [{"name": "forceDelete", "in": "query", "type": "boolean", "description": "Forcely delete app_instance not checking the state. This option is only available for administrators\n", "required": false}], "responses": {"204": {"description": "OK"}, "400": {"description": "Bad Request"}, "403": {"description": "Forbidden"}, "404": {"description": "App instance not found"}, "500": {"description": "Internal Server Error"}}}}, "/appInstances/{app_instance_id}/uninstall": {"parameters": [{"name": "subscriptionId", "in": "query", "required": true, "type": "string", "format": "uuid", "description": "subscription id"}, {"name": "app_instance_id", "in": "path", "required": true, "type": "string", "format": "uuid"}], "put": {"responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/AppInstance"}}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}}, "/tools/{tool_id}/tokens": {"post": {"summary": "Generate a new token for the given tool", "parameters": [{"name": "tool_id", "in": "path", "required": true, "type": "string", "format": "uuid"}, {"name": "body", "in": "body", "required": true, "schema": {"type": "object", "required": ["name"], "properties": {"name": {"$ref": "#/definitions/ToolToken/properties/name"}}}}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/ToolToken"}}, "503": {"description": "Service Unavailable"}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}}, "/tools/{tool_id}/tokens/{token_value}": {"delete": {"summary": "Delete the token", "parameters": [{"name": "tool_id", "in": "path", "required": true, "type": "string", "format": "uuid"}, {"name": "token_value", "in": "path", "required": true, "type": "string"}], "responses": {"204": {"description": "OK"}, "400": {"description": "Bad Request"}, "500": {"description": "Internal Server Error"}}}}}, "definitions": {"RegisterVm": {"type": "object", "properties": {"managementToolId": {"type": "string", "description": "Management tool id"}, "subscriptionId": {"type": "string", "description": "Subscription id"}, "operatingSystem": {"type": "string", "description": "Operating system", "enum": ["linux", "windows"]}}}, "ManagedVms": {"type": "object", "properties": {"vmId": {"type": "string", "description": "VM id"}, "managementToolId": {"type": "string", "description": "Management tool id"}}}, "ManageVm": {"type": "object", "properties": {"vmId": {"type": "string", "description": "VM id"}}}, "Application": {"type": "object", "properties": {"applicationName": {"type": "string", "description": "Name of application to be installed/uninstalled."}, "vmId": {"type": "string", "description": "VM id"}}}, "VmDetailsParams": {"type": "object", "properties": {"vmId": {"type": "string", "description": "VM id"}}}, "VmDetails": {"type": "object", "properties": {"cpuinfo": {"type": "object", "description": "Cpu info"}, "diskusage": {"type": "object", "description": "Disk usage info"}, "meminfo": {"type": "object", "description": "Memory information"}, "netdev": {"type": "object", "description": "Network information"}, "uptime": {"type": "object", "description": "Uptime information"}, "loadavg": {"type": "object", "description": "Avg load"}}}, "BootstrapScript": {"type": "object", "properties": {"vmManagementId": {"type": "string", "description": "Management uuid"}}}, "BootstrapScriptReturn": {"type": "object", "properties": {"script": {"type": "string"}}, "description": "Generated bootstrap script"}, "Error": {"type": "object", "required": ["message"], "properties": {"message": {"type": "string"}}}, "BadRequest": {"type": "object", "properties": {"message": {"type": "string"}}}, "HttpNotFoundError": {"description": "Resource on requested url does not exists", "properties": {"schema": {"$ref": "#/definitions/Error"}}}, "Subscrption": {"type": "object", "required": ["subscriptionId"], "properties": {"subscriptionId": {"type": "string", "description": "Subscription id"}}}, "ReplaceApp": {"type": "object", "required": ["name", "installCommand", "uninstallCommand", "description"], "properties": {"name": {"type": "string", "minLength": 3, "maxLength": 255}, "installCommand": {"type": "string", "minLength": 3, "maxLength": 255}, "uninstallCommand": {"type": "string", "minLength": 3, "maxLength": 255}, "description": {"type": "string", "maxLength": 3000}}}, "App": {"type": "object", "required": ["id", "name", "installCommand", "uninstallCommand", "description", "toolId", "updatedAt"], "properties": {"id": {"type": "string"}, "name": {"type": "string", "minLength": 3, "maxLength": 255}, "installCommand": {"type": "string", "minLength": 3, "maxLength": 255}, "uninstallCommand": {"type": "string", "minLength": 3, "maxLength": 255}, "description": {"type": "string", "maxLength": 3000}, "toolId": {"type": "string", "format": "uuid"}, "updatedAt": {"type": "string", "format": "date-time"}}}, "Task": {"type": "object", "required": ["id", "toolId", "payload"], "properties": {"id": {"type": "string", "format": "uuid"}, "toolId": {"type": "string", "format": "uuid"}, "payload": {"type": "object", "description": "Management tool-specific information about the task."}}}, "AppInstance": {"type": "object", "required": ["id", "createdAt", "subscriptionId", "vmId", "appName", "state", "installTaskId"], "properties": {"id": {"type": "string", "format": "uuid"}, "createdAt": {"type": "string", "format": "date-time"}, "subscriptionId": {"type": "string", "format": "uuid"}, "vmId": {"type": "string"}, "appName": {"$ref": "#/definitions/App/properties/name"}, "state": {"type": "string", "enum": ["INITIAL", "INSTALLING", "INSTALL_SUCCEEDED", "INSTALL_FAILED", "UNINSTALLING", "UNINSTALL_SUCCEEDED", "UNINSTALL_FAILED"]}, "installTaskId": {"$ref": "#/definitions/Task/properties/id"}, "uninstallTaskId": {"allOf": [{"$ref": "#/definitions/Task/properties/id"}, {"x-nullable": true}]}, "failureReason": {"type": "string", "x-nullable": true}}}, "ToolToken": {"type": "object", "required": ["name", "toolId", "value", "createdAt"], "properties": {"name": {"type": "string", "minLength": 3, "maxLength": 64}, "toolId": {"type": "string"}, "value": {"type": "string"}, "createdAt": {"type": "string", "format": "date-time"}}}}, "responses": {"InternalError": {"description": "Internal error", "schema": {"$ref": "#/definitions/Error"}}, "BadRequest": {"description": "Bad request parameters/data", "schema": {"$ref": "#/definitions/BadRequest"}}}}
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Management service",
+    "description": "Service for VM management"
+  },
+  "host": "emeia-eos.fcsm.io",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1/management",
+  "paths": {
+    "/registerVm": {
+      "post": {
+        "description": "Register Vm in management tool",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Vm and management tool information",
+            "schema": {
+              "$ref": "#/definitions/RegisterVm"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "504": {
+            "description": "Timeout error communicating with management tool"
+          }
+        }
+      }
+    },
+    "/unregisterVm": {
+      "delete": {
+        "summary": "Unregister Vm from management tool",
+        "description": "Unregister Vm from management tool",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Vm information",
+            "schema": {
+              "$ref": "#/definitions/ManageVm"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Given vm was not found",
+            "schema": {
+              "$ref": "#/definitions/HttpNotFoundError"
+            }
+          },
+          "504": {
+            "description": "Timeout error communicating with management tool"
+          }
+        }
+      }
+    },
+    "/isManaged": {
+      "get": {
+        "summary": "Check if a vm is managed",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Vm information",
+            "schema": {
+              "$ref": "#/definitions/ManageVm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean",
+              "description": "True if VM is managed, false otherwise"
+            }
+          },
+          "404": {
+            "description": "No management information for given VM exists",
+            "schema": {
+              "$ref": "#/definitions/HttpNotFoundError"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/managedVms": {
+      "get": {
+        "summary": "Return list of managed VM ids",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "vmId",
+            "in": "query",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ManagedVms"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/testConnectivity": {
+      "post": {
+        "summary": "Check connection with Vm",
+        "description": "Check connection with Vm",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Vm information",
+            "schema": {
+              "$ref": "#/definitions/ManageVm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean",
+              "description": "True or False if Vm is available"
+            }
+          },
+          "404": {
+            "description": "Given vm was not found",
+            "schema": {
+              "$ref": "#/definitions/HttpNotFoundError"
+            }
+          }
+        }
+      }
+    },
+    "/installApp": {
+      "post": {
+        "summary": "Install application",
+        "description": "Install application",
+        "x-deprecated": true,
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Application and VM information",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean",
+              "description": "True or False if application was installed correctly"
+            }
+          },
+          "404": {
+            "description": "Given vm was not found",
+            "schema": {
+              "$ref": "#/definitions/HttpNotFoundError"
+            }
+          },
+          "504": {
+            "description": "Timeout error communicating with management tool"
+          }
+        }
+      }
+    },
+    "/uninstallApp": {
+      "delete": {
+        "summary": "Uninstall application",
+        "description": "Uninstall application",
+        "x-deprecated": true,
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Application and Vm information",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean",
+              "description": "True or False if application was uninstalled correctly"
+            }
+          },
+          "404": {
+            "description": "Given vm was not found",
+            "schema": {
+              "$ref": "#/definitions/HttpNotFoundError"
+            }
+          },
+          "504": {
+            "description": "Timeout error communicating with management tool"
+          }
+        }
+      }
+    },
+    "/details": {
+      "get": {
+        "summary": "Get vm details",
+        "description": "Get vm details",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Operating system and Vm information",
+            "schema": {
+              "$ref": "#/definitions/VmDetailsParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VmDetails"
+            }
+          },
+          "404": {
+            "description": "Given vm was not found",
+            "schema": {
+              "$ref": "#/definitions/HttpNotFoundError"
+            }
+          },
+          "504": {
+            "description": "Timeout error communicating with management tool"
+          }
+        }
+      }
+    },
+    "/getBootstrapScript": {
+      "get": {
+        "summary": "Get bootstrap script",
+        "description": "Get bootstrap script",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Platform and Vm information",
+            "schema": {
+              "$ref": "#/definitions/BootstrapScript"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BootstrapScriptReturn"
+            }
+          },
+          "400": {
+            "description": "Error while processing input information"
+          }
+        }
+      }
+    },
+    "/unregisterSubscriptionVms": {
+      "delete": {
+        "summary": "Unregister vms from subscription",
+        "description": "Unregister vms from subscription",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "body",
+            "required": true,
+            "description": "Subscription id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Error while processing input information"
+          }
+        }
+      }
+    },
+    "/replaceApps": {
+      "post": {
+        "summary": "Upload apps metadata",
+        "description": "Upload apps metadata",
+        "parameters": [
+          {
+            "name": "X-Tool-Token",
+            "in": "header",
+            "required": true,
+            "description": "A token that gives permission to upload apps for specific tool.",
+            "type": "string"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "Apps metadata",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "apps": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ReplaceApp"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/apps": {
+      "get": {
+        "summary": "List apps",
+        "parameters": [
+          {
+            "name": "tool_id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/App"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/apps/{app_id}": {
+      "get": {
+        "summary": "Get app by id",
+        "parameters": [
+          {
+            "name": "app_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/tools/{tool_id}/apps/{app_name}": {
+      "get": {
+        "summary": "Get app by name",
+        "parameters": [
+          {
+            "name": "tool_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "app_name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/appInstances": {
+      "get": {
+        "summary": "List apps instances",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "subscription id"
+          },
+          {
+            "name": "toolId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional filter"
+          },
+          {
+            "name": "vmId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Optional filter."
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INITIAL",
+              "INSTALLING",
+              "INSTALL_SUCCEEDED",
+              "INSTALL_FAILED",
+              "UNINSTALLING",
+              "UNINSTALL_SUCCEEDED",
+              "UNINSTALL_FAILED"
+            ],
+            "description": "Optional filter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AppInstance"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an app instance",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "subscription id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "vmId",
+                "toolId",
+                "appId"
+              ],
+              "properties": {
+                "vmId": {
+                  "type": "string"
+                },
+                "appId": {
+                  "$ref": "#/definitions/App/properties/id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppInstance"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/appInstances/{app_instance_id}": {
+      "parameters": [
+        {
+          "name": "subscriptionId",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "subscription id"
+        },
+        {
+          "name": "app_instance_id",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ],
+      "get": {
+        "summary": "Get an app instance",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppInstance"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an app instance",
+        "description": "It is allowed to delete app instances that are in one of the following states: INITIAL, INSTALL_FAILED, UNINSTALL_SUCCEEDED, UNINSTALL_FAILED.\n",
+        "parameters": [
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "type": "boolean",
+            "description": "Forcely delete app_instance not checking the state. This option is only available for administrators\n",
+            "required": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "App instance not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/appInstances/{app_instance_id}/uninstall": {
+      "parameters": [
+        {
+          "name": "subscriptionId",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "subscription id"
+        },
+        {
+          "name": "app_instance_id",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ],
+      "put": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppInstance"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/tools/{tool_id}/tokens": {
+      "post": {
+        "summary": "Generate a new token for the given tool",
+        "parameters": [
+          {
+            "name": "tool_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "$ref": "#/definitions/ToolToken/properties/name"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ToolToken"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/tools/{tool_id}/tokens/{token_value}": {
+      "delete": {
+        "summary": "Delete the token",
+        "parameters": [
+          {
+            "name": "tool_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "token_value",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegisterVm": {
+      "type": "object",
+      "properties": {
+        "managementToolId": {
+          "type": "string",
+          "description": "Management tool id"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription id"
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Operating system",
+          "enum": [
+            "linux",
+            "windows"
+          ]
+        }
+      }
+    },
+    "ManagedVms": {
+      "type": "object",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "VM id"
+        },
+        "managementToolId": {
+          "type": "string",
+          "description": "Management tool id"
+        }
+      }
+    },
+    "ManageVm": {
+      "type": "object",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "VM id"
+        }
+      }
+    },
+    "Application": {
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Name of application to be installed/uninstalled."
+        },
+        "vmId": {
+          "type": "string",
+          "description": "VM id"
+        }
+      }
+    },
+    "VmDetailsParams": {
+      "type": "object",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "VM id"
+        }
+      }
+    },
+    "VmDetails": {
+      "type": "object",
+      "properties": {
+        "cpuinfo": {
+          "type": "object",
+          "description": "Cpu info"
+        },
+        "diskusage": {
+          "type": "object",
+          "description": "Disk usage info"
+        },
+        "meminfo": {
+          "type": "object",
+          "description": "Memory information"
+        },
+        "netdev": {
+          "type": "object",
+          "description": "Network information"
+        },
+        "uptime": {
+          "type": "object",
+          "description": "Uptime information"
+        },
+        "loadavg": {
+          "type": "object",
+          "description": "Avg load"
+        }
+      }
+    },
+    "BootstrapScript": {
+      "type": "object",
+      "properties": {
+        "vmManagementId": {
+          "type": "string",
+          "description": "Management uuid"
+        }
+      }
+    },
+    "BootstrapScriptReturn": {
+      "type": "object",
+      "properties": {
+        "script": {
+          "type": "string"
+        }
+      },
+      "description": "Generated bootstrap script"
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "BadRequest": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "HttpNotFoundError": {
+      "description": "Resource on requested url does not exists",
+      "properties": {
+        "schema": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Subscrption": {
+      "type": "object",
+      "required": [
+        "subscriptionId"
+      ],
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription id"
+        }
+      }
+    },
+    "ReplaceApp": {
+      "type": "object",
+      "required": [
+        "name",
+        "installCommand",
+        "uninstallCommand",
+        "description"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "installCommand": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "uninstallCommand": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 3000
+        }
+      }
+    },
+    "App": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "installCommand",
+        "uninstallCommand",
+        "description",
+        "toolId",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "installCommand": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "uninstallCommand": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "toolId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Task": {
+      "type": "object",
+      "required": [
+        "id",
+        "toolId",
+        "payload"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "toolId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "payload": {
+          "type": "object",
+          "description": "Management tool-specific information about the task."
+        }
+      }
+    },
+    "AppInstance": {
+      "type": "object",
+      "required": [
+        "id",
+        "createdAt",
+        "subscriptionId",
+        "vmId",
+        "appName",
+        "state",
+        "installTaskId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "vmId": {
+          "type": "string"
+        },
+        "appName": {
+          "$ref": "#/definitions/App/properties/name"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "INITIAL",
+            "INSTALLING",
+            "INSTALL_SUCCEEDED",
+            "INSTALL_FAILED",
+            "UNINSTALLING",
+            "UNINSTALL_SUCCEEDED",
+            "UNINSTALL_FAILED"
+          ]
+        },
+        "installTaskId": {
+          "$ref": "#/definitions/Task/properties/id"
+        },
+        "uninstallTaskId": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Task/properties/id"
+            },
+            {
+              "x-nullable": true
+            }
+          ]
+        },
+        "failureReason": {
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "ToolToken": {
+      "type": "object",
+      "required": [
+        "name",
+        "toolId",
+        "value",
+        "createdAt"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 64
+        },
+        "toolId": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "responses": {
+    "InternalError": {
+      "description": "Internal error",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "BadRequest": {
+      "description": "Bad request parameters/data",
+      "schema": {
+        "$ref": "#/definitions/BadRequest"
+      }
+    }
+  }
+}

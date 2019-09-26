@@ -1,1 +1,545 @@
-{"swagger": "2.0", "info": {"title": "Fujitsu whitelist service", "description": "Whitelist service", "version": "1.0.0"}, "host": "emeia-eos.fcsm.io", "schemes": ["https"], "produces": ["application/json"], "basePath": "/api/v1/whitelist", "paths": {"/imageOS": {"get": {"summary": "Get image type (OS) for a image", "parameters": [{"$ref": "#/parameters/imageName"}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/OSDetails"}}, "500": {"$ref": "#/responses/500Error"}}}}, "/osList": {"get": {"summary": "Get os types and distributions as a list", "responses": {"200": {"description": "OK", "schema": {"type": "array", "items": {"$ref": "#/definitions/OSDetails"}}}, "500": {"$ref": "#/responses/500Error"}}}}, "/images": {"post": {"summary": "Add single image to whitelist", "parameters": [{"$ref": "#/parameters/subscriptionId"}, {"name": "image", "in": "body", "required": true, "description": "Image details", "schema": {"$ref": "#/definitions/ImageAdd"}}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/Image"}}, "404": {"description": "Unknown subscription id was passed"}, "400": {"description": "Error saving data or subscription for unsupported platform was passed"}, "500": {"$ref": "#/responses/500Error"}}}, "get": {"summary": "Get images from whitelist", "parameters": [{"$ref": "#/parameters/subscriptionId"}, {"$ref": "#/parameters/name"}, {"$ref": "#/parameters/limit"}, {"$ref": "#/parameters/page"}, {"$ref": "#/parameters/private"}], "responses": {"200": {"description": "List of the images", "schema": {"$ref": "#/definitions/Whitelist"}}, "400": {"description": "Subscription for unsupported platform was passed"}, "404": {"description": "Unknown subscription id was passed"}, "500": {"description": "Error while retrieving flavors"}}}, "delete": {"summary": "Delete whitelist", "parameters": [{"$ref": "#/parameters/subscriptionId"}], "responses": {"200": {"description": "Whitelist was deleted"}, "400": {"description": "Subscription for unsupported platform was passed"}, "404": {"description": "Unknown subscription id was passed"}, "500": {"$ref": "#/responses/500Error"}}}}, "/images/{imageId}": {"get": {"summary": "Get single image", "parameters": [{"$ref": "#/parameters/subscriptionId"}, {"$ref": "#/parameters/imageId"}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/Image"}}, "400": {"description": "Subscription for unsupported platform was passed"}, "404": {"description": "Unknown subscription id or image id was passed"}, "500": {"description": "Error while retrieving flavors"}}}, "put": {"summary": "Update operating system for image", "description": "Please use PATCH method. This action will be removed on 14.05.2019", "deprecated": true, "parameters": [{"$ref": "#/parameters/subscriptionId"}, {"$ref": "#/parameters/imageId"}, {"name": "os", "in": "body", "required": true, "description": "Image details", "schema": {"$ref": "#/definitions/ImageUpdate"}}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/Image"}}, "400": {"description": "OS should be one of values linux, windows, unknown or subscription for unsupported platform was passed"}, "404": {"description": "Unknown subscription id or image id was passed"}, "500": {"$ref": "#/responses/500Error"}}}, "delete": {"summary": "Remove image from whitelist", "parameters": [{"$ref": "#/parameters/subscriptionId"}, {"$ref": "#/parameters/imageId"}], "responses": {"200": {"description": "OK"}, "400": {"description": "Subscription for unsupported platform was passed"}, "404": {"description": "Unknown subscription id or image id was passed"}, "500": {"$ref": "#/responses/500Error"}}}, "patch": {"summary": "Update operating system for image", "parameters": [{"$ref": "#/parameters/subscriptionId"}, {"$ref": "#/parameters/imageId"}, {"name": "os", "in": "body", "required": true, "description": "Image details", "schema": {"$ref": "#/definitions/ImageUpdate"}}], "responses": {"200": {"description": "OK", "schema": {"$ref": "#/definitions/Image"}}, "400": {"description": "OS should be one of values linux, windows, unknown or subscription for unsupported platform was passed"}, "404": {"description": "Unknown subscription id or image id was passed"}, "500": {"$ref": "#/responses/500Error"}}}}}, "definitions": {"OSDetails": {"type": "object", "description": "Operating system details", "properties": {"type": {"type": "string", "enum": ["linux", "windows", "unknown"]}, "distribution": {"type": "string", "x-nullable": true}}}, "OSDetailsAddUpdate": {"type": "object", "description": "Operating system details to add/update", "required": ["type", "distribution"], "properties": {"type": {"type": "string", "enum": ["linux", "windows", "unknown"]}, "distribution": {"type": "string"}}}, "ImageAdd": {"type": "object", "description": "Image data", "required": ["id", "name", "minDiskInGb", "maxDiskInGb", "minRamInMb", "os", "isPrivate"], "properties": {"id": {"type": "string", "description": "Id of an image returned by `/api/v1/*/compute/publicImages` or `/api/v1/*/compute/privateImages` endpoint"}, "name": {"type": "string"}, "minDiskInGb": {"type": "integer"}, "maxDiskInGb": {"type": "integer"}, "minRamInMb": {"type": "integer"}, "os": {"$ref": "#/definitions/OSDetailsAddUpdate"}, "isPrivate": {"type": "boolean", "description": "This field describes if images is a private or public one"}}}, "ImageUpdate": {"type": "object", "description": "Operating system", "required": ["os"], "properties": {"os": {"$ref": "#/definitions/OSDetailsAddUpdate"}}}, "Flavor": {"type": "object", "description": "Flavor", "properties": {"id": {"type": "string", "description": "Flavor id"}, "name": {"type": "string", "description": "Flavor name"}, "diskInGb": {"type": "integer", "description": "Disk size in GB"}, "ramInMb": {"type": "integer", "description": "Memory size in MB"}, "vcpus": {"type": "integer", "description": "Number of virtual CPUs"}, "ephemeralDiskInGb": {"type": "integer", "description": "VM ephemeral disk size in GB"}, "compatibleVolumeTypeIds": {"type": "array", "description": "List of compatible volume types", "items": {"type": "string"}}}}, "Whitelist": {"type": "object", "description": "Whitelist object", "properties": {"images": {"type": "array", "items": {"$ref": "#/definitions/Image"}}, "page": {"type": "integer", "description": "Current page to display"}, "nextPage": {"type": "integer", "description": "Next page to display. If there are no more items it is null", "x-nullabe": true}}}, "Image": {"type": "object", "description": "Image", "properties": {"id": {"type": "string", "description": "Image id"}, "name": {"type": "string", "description": "Image name"}, "minDiskInGb": {"type": "integer", "description": "Minimal disk size"}, "maxDiskInGb": {"type": "integer", "description": "Maximum disk size"}, "minRamInMb": {"type": "integer", "description": "Minimal ram size"}, "os": {"$ref": "#/definitions/OSDetails"}, "compatibleFlavors": {"type": "array", "items": {"$ref": "#/definitions/Flavor"}}, "isPrivate": {"type": "boolean", "description": "This field describes if image is private `true` or public `false` one"}}}, "HttpError": {"type": "object", "required": ["message"], "properties": {"message": {"type": "string"}}}}, "parameters": {"subscriptionId": {"name": "subscriptionId", "required": true, "in": "query", "type": "string", "format": "uuid", "description": "Subscription id"}, "imageId": {"name": "imageId", "required": true, "in": "path", "type": "string", "description": "Image id"}, "imageName": {"name": "name", "required": true, "in": "query", "type": "string", "description": "Image name to specify OS"}, "name": {"name": "name", "required": false, "in": "query", "type": "string", "description": "Image name to filter by"}, "limit": {"name": "limit", "required": false, "default": 10, "in": "query", "type": "integer", "description": "Limit of images to show"}, "page": {"name": "page", "required": false, "default": 1, "in": "query", "type": "integer", "description": "Number of the page for pagination"}, "private": {"name": "isPrivate", "required": false, "in": "query", "type": "boolean", "description": "Parameter to filter public/ private images. If it is set to true return private images, if it is set to false return public images, if it is not passed return all images."}}, "responses": {"500Error": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/HttpError"}}}}
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Fujitsu whitelist service",
+    "description": "Whitelist service",
+    "version": "1.0.0"
+  },
+  "host": "emeia-eos.fcsm.io",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "basePath": "/api/v1/whitelist",
+  "paths": {
+    "/imageOS": {
+      "get": {
+        "summary": "Get image type (OS) for a image",
+        "parameters": [
+          {
+            "$ref": "#/parameters/imageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSDetails"
+            }
+          },
+          "500": {
+            "$ref": "#/responses/500Error"
+          }
+        }
+      }
+    },
+    "/osList": {
+      "get": {
+        "summary": "Get os types and distributions as a list",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OSDetails"
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/responses/500Error"
+          }
+        }
+      }
+    },
+    "/images": {
+      "post": {
+        "summary": "Add single image to whitelist",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "required": true,
+            "description": "Image details",
+            "schema": {
+              "$ref": "#/definitions/ImageAdd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "404": {
+            "description": "Unknown subscription id was passed"
+          },
+          "400": {
+            "description": "Error saving data or subscription for unsupported platform was passed"
+          },
+          "500": {
+            "$ref": "#/responses/500Error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get images from whitelist",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/name"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/private"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of the images",
+            "schema": {
+              "$ref": "#/definitions/Whitelist"
+            }
+          },
+          "400": {
+            "description": "Subscription for unsupported platform was passed"
+          },
+          "404": {
+            "description": "Unknown subscription id was passed"
+          },
+          "500": {
+            "description": "Error while retrieving flavors"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete whitelist",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Whitelist was deleted"
+          },
+          "400": {
+            "description": "Subscription for unsupported platform was passed"
+          },
+          "404": {
+            "description": "Unknown subscription id was passed"
+          },
+          "500": {
+            "$ref": "#/responses/500Error"
+          }
+        }
+      }
+    },
+    "/images/{imageId}": {
+      "get": {
+        "summary": "Get single image",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/imageId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "400": {
+            "description": "Subscription for unsupported platform was passed"
+          },
+          "404": {
+            "description": "Unknown subscription id or image id was passed"
+          },
+          "500": {
+            "description": "Error while retrieving flavors"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update operating system for image",
+        "description": "Please use PATCH method. This action will be removed on 14.05.2019",
+        "deprecated": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/imageId"
+          },
+          {
+            "name": "os",
+            "in": "body",
+            "required": true,
+            "description": "Image details",
+            "schema": {
+              "$ref": "#/definitions/ImageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "400": {
+            "description": "OS should be one of values linux, windows, unknown or subscription for unsupported platform was passed"
+          },
+          "404": {
+            "description": "Unknown subscription id or image id was passed"
+          },
+          "500": {
+            "$ref": "#/responses/500Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove image from whitelist",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/imageId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Subscription for unsupported platform was passed"
+          },
+          "404": {
+            "description": "Unknown subscription id or image id was passed"
+          },
+          "500": {
+            "$ref": "#/responses/500Error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update operating system for image",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/imageId"
+          },
+          {
+            "name": "os",
+            "in": "body",
+            "required": true,
+            "description": "Image details",
+            "schema": {
+              "$ref": "#/definitions/ImageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "400": {
+            "description": "OS should be one of values linux, windows, unknown or subscription for unsupported platform was passed"
+          },
+          "404": {
+            "description": "Unknown subscription id or image id was passed"
+          },
+          "500": {
+            "$ref": "#/responses/500Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OSDetails": {
+      "type": "object",
+      "description": "Operating system details",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "linux",
+            "windows",
+            "unknown"
+          ]
+        },
+        "distribution": {
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "OSDetailsAddUpdate": {
+      "type": "object",
+      "description": "Operating system details to add/update",
+      "required": [
+        "type",
+        "distribution"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "linux",
+            "windows",
+            "unknown"
+          ]
+        },
+        "distribution": {
+          "type": "string"
+        }
+      }
+    },
+    "ImageAdd": {
+      "type": "object",
+      "description": "Image data",
+      "required": [
+        "id",
+        "name",
+        "minDiskInGb",
+        "maxDiskInGb",
+        "minRamInMb",
+        "os",
+        "isPrivate"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of an image returned by `/api/v1/*/compute/publicImages` or `/api/v1/*/compute/privateImages` endpoint"
+        },
+        "name": {
+          "type": "string"
+        },
+        "minDiskInGb": {
+          "type": "integer"
+        },
+        "maxDiskInGb": {
+          "type": "integer"
+        },
+        "minRamInMb": {
+          "type": "integer"
+        },
+        "os": {
+          "$ref": "#/definitions/OSDetailsAddUpdate"
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "This field describes if images is a private or public one"
+        }
+      }
+    },
+    "ImageUpdate": {
+      "type": "object",
+      "description": "Operating system",
+      "required": [
+        "os"
+      ],
+      "properties": {
+        "os": {
+          "$ref": "#/definitions/OSDetailsAddUpdate"
+        }
+      }
+    },
+    "Flavor": {
+      "type": "object",
+      "description": "Flavor",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Flavor id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Flavor name"
+        },
+        "diskInGb": {
+          "type": "integer",
+          "description": "Disk size in GB"
+        },
+        "ramInMb": {
+          "type": "integer",
+          "description": "Memory size in MB"
+        },
+        "vcpus": {
+          "type": "integer",
+          "description": "Number of virtual CPUs"
+        },
+        "ephemeralDiskInGb": {
+          "type": "integer",
+          "description": "VM ephemeral disk size in GB"
+        },
+        "compatibleVolumeTypeIds": {
+          "type": "array",
+          "description": "List of compatible volume types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Whitelist": {
+      "type": "object",
+      "description": "Whitelist object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        },
+        "page": {
+          "type": "integer",
+          "description": "Current page to display"
+        },
+        "nextPage": {
+          "type": "integer",
+          "description": "Next page to display. If there are no more items it is null",
+          "x-nullabe": true
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "description": "Image",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Image id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "minDiskInGb": {
+          "type": "integer",
+          "description": "Minimal disk size"
+        },
+        "maxDiskInGb": {
+          "type": "integer",
+          "description": "Maximum disk size"
+        },
+        "minRamInMb": {
+          "type": "integer",
+          "description": "Minimal ram size"
+        },
+        "os": {
+          "$ref": "#/definitions/OSDetails"
+        },
+        "compatibleFlavors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Flavor"
+          }
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "This field describes if image is private `true` or public `false` one"
+        }
+      }
+    },
+    "HttpError": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "required": true,
+      "in": "query",
+      "type": "string",
+      "format": "uuid",
+      "description": "Subscription id"
+    },
+    "imageId": {
+      "name": "imageId",
+      "required": true,
+      "in": "path",
+      "type": "string",
+      "description": "Image id"
+    },
+    "imageName": {
+      "name": "name",
+      "required": true,
+      "in": "query",
+      "type": "string",
+      "description": "Image name to specify OS"
+    },
+    "name": {
+      "name": "name",
+      "required": false,
+      "in": "query",
+      "type": "string",
+      "description": "Image name to filter by"
+    },
+    "limit": {
+      "name": "limit",
+      "required": false,
+      "default": 10,
+      "in": "query",
+      "type": "integer",
+      "description": "Limit of images to show"
+    },
+    "page": {
+      "name": "page",
+      "required": false,
+      "default": 1,
+      "in": "query",
+      "type": "integer",
+      "description": "Number of the page for pagination"
+    },
+    "private": {
+      "name": "isPrivate",
+      "required": false,
+      "in": "query",
+      "type": "boolean",
+      "description": "Parameter to filter public/ private images. If it is set to true return private images, if it is set to false return public images, if it is not passed return all images."
+    }
+  },
+  "responses": {
+    "500Error": {
+      "description": "An unexpected error occurred",
+      "schema": {
+        "$ref": "#/definitions/HttpError"
+      }
+    }
+  }
+}

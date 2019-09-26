@@ -1,1 +1,974 @@
-{"definitions": {"AccessRight": {"properties": {"permissions": {"$ref": "#/definitions/Permissions"}, "subscriptionId": {"type": "string"}}, "type": "object"}, "AccessRights": {"items": {"$ref": "#/definitions/AccessRight"}, "type": "array"}, "Credentials": {"properties": {"email": {"type": "string"}, "password": {"$ref": "#/definitions/Password"}}, "required": ["email", "password"], "type": "object"}, "Error": {"properties": {"message": {"type": "string"}}, "type": "object", "x-error": true}, "Forbidden": {"$ref": "#/definitions/Error", "x-error": true}, "ForgottenPassword": {"properties": {"email": {"type": "string"}}, "required": ["email"], "type": "object"}, "InvalidCredentials": {"$ref": "#/definitions/Error", "x-error": true}, "InvalidInput": {"$ref": "#/definitions/Error", "x-error": true}, "NotFound": {"$ref": "#/definitions/Error", "x-error": true}, "Password": {"format": "password", "maxLength": 72, "minLength": 12, "type": "string"}, "PasswordReset": {"properties": {"email": {"type": "string"}, "newPassword": {"$ref": "#/definitions/Password"}, "token": {"type": "string"}}, "required": ["email", "token", "newPassword"], "type": "object"}, "PasswordUpdate": {"properties": {"currentPassword": {"$ref": "#/definitions/Password"}, "newPassword": {"$ref": "#/definitions/Password"}}, "required": ["currentPassword", "newPassword"], "type": "object"}, "Permissions": {"enum": ["read", "write", "delete"], "type": "string"}, "RoleUpdate": {"properties": {"role": {"enum": ["admin", "user"], "type": "string"}}, "required": ["role"], "type": "object"}, "ServiceUnavailable": {"$ref": "#/definitions/Error", "x-error": true}, "SubscriptionID": {"properties": {"subId": {"type": "string"}}, "required": ["subId"], "type": "object"}, "Token": {"properties": {"email": {"type": "string"}, "token": {"type": "string"}}, "required": ["email", "token"], "type": "object"}, "Unauthorized": {"$ref": "#/definitions/Error", "x-error": true}, "UnexpectedError": {"$ref": "#/definitions/Error", "x-error": true}, "UpdateUser": {"properties": {"name": {"minLength": 1, "type": "string"}}, "required": ["name"], "type": "object"}, "User": {"properties": {"accessRights": {"$ref": "#/definitions/AccessRights"}, "email": {"minLength": 1, "type": "string"}, "id": {"readOnly": true, "type": "string"}, "isInternal": {"type": "boolean"}, "name": {"minLength": 1, "type": "string"}, "role": {"enum": ["admin", "user"], "type": "string"}}, "required": ["name", "email", "role"], "type": "object"}, "Users": {"items": {"$ref": "#/definitions/User"}, "type": "array"}}, "host": "emeia-eos.fcsm.io", "info": {"description": "For managing users", "title": "Fujitsu user service", "version": "1.0.0"}, "paths": {"/checkCredentials": {"post": {"operationId": "checkCredentials", "parameters": [{"in": "body", "name": "credentials", "required": true, "schema": {"$ref": "#/definitions/Credentials"}}], "responses": {"200": {"description": "The user with those credentials", "schema": {"$ref": "#/definitions/User"}}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Invalid credentials", "schema": {"$ref": "#/definitions/InvalidCredentials"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/forgotPassword": {"post": {"operationId": "forgotPassword", "parameters": [{"in": "body", "name": "forgottenPassword", "required": true, "schema": {"$ref": "#/definitions/ForgottenPassword"}}], "responses": {"200": {"description": "Password reset request successfully received"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Cannot send the password reset email or database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/me": {"get": {"operationId": "getMe", "parameters": [{"in": "header", "name": "userId", "required": true, "type": "string"}], "responses": {"200": {"description": "The current user", "schema": {"$ref": "#/definitions/User"}}, "401": {"description": "User is not logged in", "schema": {"$ref": "#/definitions/Unauthorized"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/removeSubscription": {"delete": {"operationId": "removeSubscription", "parameters": [{"enum": ["admin", "user"], "in": "header", "name": "role", "required": true, "type": "string"}, {"in": "header", "name": "external", "required": true, "type": "string"}, {"in": "body", "name": "subscriptionId", "required": true, "schema": {"$ref": "#/definitions/SubscriptionID"}}], "responses": {"200": {"description": "Successfully deleted subscription"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Admin rights are required", "schema": {"$ref": "#/definitions/Forbidden"}}, "404": {"description": "Unknown subscription id", "schema": {"$ref": "#/definitions/NotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/resetPassword": {"post": {"operationId": "resetPassword", "parameters": [{"in": "body", "name": "passwordReset", "required": true, "schema": {"$ref": "#/definitions/PasswordReset"}}], "responses": {"200": {"description": "Password successfully reset"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Invalid token", "schema": {"$ref": "#/definitions/InvalidCredentials"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/users": {"get": {"operationId": "getUsers", "parameters": [{"in": "query", "name": "email", "type": "string"}], "responses": {"200": {"description": "All users in the database", "schema": {"$ref": "#/definitions/Users"}}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Admin rights are required", "schema": {"$ref": "#/definitions/Forbidden"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}, "parameters": [{"enum": ["admin", "user"], "in": "header", "name": "role", "required": true, "type": "string"}], "post": {"operationId": "createUser", "parameters": [{"in": "body", "name": "user", "required": true, "schema": {"$ref": "#/definitions/User"}}, {"in": "header", "name": "email", "required": true, "type": "string"}], "responses": {"200": {"description": "The newly created user", "schema": {"$ref": "#/definitions/User"}}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Admin rights are required", "schema": {"$ref": "#/definitions/Forbidden"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Cannot send the password reset email or database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/users/{user_id}": {"delete": {"operationId": "deleteUser", "parameters": [{"in": "header", "name": "userId", "required": true, "type": "string"}, {"enum": ["admin", "user"], "in": "header", "name": "role", "required": true, "type": "string"}], "responses": {"200": {"description": "Successfully deleted the user"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Admin rights are required and admins cannot delete themselves", "schema": {"$ref": "#/definitions/Forbidden"}}, "404": {"description": "Unknown user id", "schema": {"$ref": "#/definitions/NotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}, "get": {"operationId": "getUser", "parameters": [{"enum": ["admin", "user"], "in": "header", "name": "role", "required": true, "type": "string"}], "responses": {"200": {"description": "The user with the given user id", "schema": {"$ref": "#/definitions/User"}}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Admin rights are required", "schema": {"$ref": "#/definitions/Forbidden"}}, "404": {"description": "Unknown user id", "schema": {"$ref": "#/definitions/NotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}, "parameters": [{"in": "path", "name": "user_id", "required": true, "type": "string"}], "put": {"operationId": "updateUser", "parameters": [{"in": "body", "name": "update", "required": true, "schema": {"$ref": "#/definitions/UpdateUser"}}, {"in": "header", "name": "userId", "required": true, "type": "string"}, {"in": "header", "name": "email", "required": true, "type": "string"}], "responses": {"200": {"description": "Successfully updated the user"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Users can only update their own data", "schema": {"$ref": "#/definitions/Forbidden"}}, "404": {"description": "Unknown user id", "schema": {"$ref": "#/definitions/NotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/users/{user_id}/setAccessRights": {"parameters": [{"in": "path", "name": "user_id", "required": true, "type": "string"}, {"in": "header", "name": "email", "required": true, "type": "string"}, {"in": "header", "name": "userId", "required": true, "type": "string"}, {"enum": ["admin", "user"], "in": "header", "name": "role", "required": true, "type": "string"}], "put": {"operationId": "setAccessRights", "parameters": [{"in": "body", "name": "accessRightsUpdate", "required": true, "schema": {"$ref": "#/definitions/AccessRights"}}], "responses": {"200": {"description": "Successfully updated access rights"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Admin rights are required and admins cannot change their own permissions", "schema": {"$ref": "#/definitions/Forbidden"}}, "404": {"description": "Unknown user id", "schema": {"$ref": "#/definitions/NotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/users/{user_id}/setPassword": {"parameters": [{"in": "path", "name": "user_id", "required": true, "type": "string"}, {"in": "header", "name": "userId", "required": true, "type": "string"}, {"enum": ["admin", "user"], "in": "header", "name": "role", "required": true, "type": "string"}], "put": {"operationId": "setPassword", "parameters": [{"in": "body", "name": "email", "required": true, "schema": {"$ref": "#/definitions/PasswordUpdate"}}], "responses": {"200": {"description": "Successfully updated the password"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Cannot change another user's password and the old password must be correct", "schema": {"$ref": "#/definitions/Forbidden"}}, "404": {"description": "Unknown user id", "schema": {"$ref": "#/definitions/NotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/users/{user_id}/setRole": {"parameters": [{"in": "path", "name": "user_id", "required": true, "type": "string"}, {"in": "header", "name": "email", "required": true, "type": "string"}, {"in": "header", "name": "userId", "required": true, "type": "string"}, {"enum": ["admin", "user"], "in": "header", "name": "role", "required": true, "type": "string"}], "put": {"operationId": "setRole", "parameters": [{"in": "body", "name": "roleUpdate", "required": true, "schema": {"$ref": "#/definitions/RoleUpdate"}}], "responses": {"200": {"description": "Successfully updated role"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Admin rights are required and admins cannot change their own role", "schema": {"$ref": "#/definitions/Forbidden"}}, "404": {"description": "Unknown user id", "schema": {"$ref": "#/definitions/NotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}, "/validateToken": {"post": {"operationId": "validateToken", "parameters": [{"in": "body", "name": "token", "required": true, "schema": {"$ref": "#/definitions/Token"}}], "responses": {"200": {"description": "Valid token"}, "400": {"description": "Input data is invalid", "schema": {"$ref": "#/definitions/InvalidInput"}}, "403": {"description": "Invalid or unknown token", "schema": {"$ref": "#/definitions/InvalidCredentials"}}, "404": {"description": "No user for this token found", "schema": {"$ref": "#/definitions/NotFound"}}, "500": {"description": "An unexpected error occurred", "schema": {"$ref": "#/definitions/UnexpectedError"}}, "503": {"description": "Database unavailable", "schema": {"$ref": "#/definitions/ServiceUnavailable"}}}}}}, "produces": ["application/json"], "schemes": ["https"], "swagger": "2.0", "basePath": "/api/v1/user"}
+{
+  "definitions": {
+    "AccessRight": {
+      "properties": {
+        "permissions": {
+          "$ref": "#/definitions/Permissions"
+        },
+        "subscriptionId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccessRights": {
+      "items": {
+        "$ref": "#/definitions/AccessRight"
+      },
+      "type": "array"
+    },
+    "Credentials": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "$ref": "#/definitions/Password"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ],
+      "type": "object"
+    },
+    "Error": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "x-error": true
+    },
+    "Forbidden": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "ForgottenPassword": {
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ],
+      "type": "object"
+    },
+    "InvalidCredentials": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "InvalidInput": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "NotFound": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "Password": {
+      "format": "password",
+      "maxLength": 72,
+      "minLength": 12,
+      "type": "string"
+    },
+    "PasswordReset": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "newPassword": {
+          "$ref": "#/definitions/Password"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "token",
+        "newPassword"
+      ],
+      "type": "object"
+    },
+    "PasswordUpdate": {
+      "properties": {
+        "currentPassword": {
+          "$ref": "#/definitions/Password"
+        },
+        "newPassword": {
+          "$ref": "#/definitions/Password"
+        }
+      },
+      "required": [
+        "currentPassword",
+        "newPassword"
+      ],
+      "type": "object"
+    },
+    "Permissions": {
+      "enum": [
+        "read",
+        "write",
+        "delete"
+      ],
+      "type": "string"
+    },
+    "RoleUpdate": {
+      "properties": {
+        "role": {
+          "enum": [
+            "admin",
+            "user"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "role"
+      ],
+      "type": "object"
+    },
+    "ServiceUnavailable": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "SubscriptionID": {
+      "properties": {
+        "subId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "subId"
+      ],
+      "type": "object"
+    },
+    "Token": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "token"
+      ],
+      "type": "object"
+    },
+    "Unauthorized": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "UnexpectedError": {
+      "$ref": "#/definitions/Error",
+      "x-error": true
+    },
+    "UpdateUser": {
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "User": {
+      "properties": {
+        "accessRights": {
+          "$ref": "#/definitions/AccessRights"
+        },
+        "email": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "isInternal": {
+          "type": "boolean"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "admin",
+            "user"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "role"
+      ],
+      "type": "object"
+    },
+    "Users": {
+      "items": {
+        "$ref": "#/definitions/User"
+      },
+      "type": "array"
+    }
+  },
+  "host": "emeia-eos.fcsm.io",
+  "info": {
+    "description": "For managing users",
+    "title": "Fujitsu user service",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/checkCredentials": {
+      "post": {
+        "operationId": "checkCredentials",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Credentials"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user with those credentials",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Invalid credentials",
+            "schema": {
+              "$ref": "#/definitions/InvalidCredentials"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/forgotPassword": {
+      "post": {
+        "operationId": "forgotPassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "forgottenPassword",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ForgottenPassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset request successfully received"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Cannot send the password reset email or database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "operationId": "getMe",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The current user",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "User is not logged in",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/removeSubscription": {
+      "delete": {
+        "operationId": "removeSubscription",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "external",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "subscriptionId",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted subscription"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Admin rights are required",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "404": {
+            "description": "Unknown subscription id",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/resetPassword": {
+      "post": {
+        "operationId": "resetPassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "passwordReset",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordReset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password successfully reset"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Invalid token",
+            "schema": {
+              "$ref": "#/definitions/InvalidCredentials"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "operationId": "getUsers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All users in the database",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Admin rights are required",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "post": {
+        "operationId": "createUser",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "in": "header",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The newly created user",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Admin rights are required",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Cannot send the password reset email or database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "delete": {
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the user"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Admin rights are required and admins cannot delete themselves",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "404": {
+            "description": "Unknown user id",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The user with the given user id",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Admin rights are required",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "404": {
+            "description": "Unknown user id",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUser"
+            }
+          },
+          {
+            "in": "header",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the user"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Users can only update their own data",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "404": {
+            "description": "Unknown user id",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/setAccessRights": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "header",
+          "name": "email",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "header",
+          "name": "userId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "setAccessRights",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "accessRightsUpdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessRights"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated access rights"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Admin rights are required and admins cannot change their own permissions",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "404": {
+            "description": "Unknown user id",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/setPassword": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "header",
+          "name": "userId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "setPassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "email",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the password"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Cannot change another user's password and the old password must be correct",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "404": {
+            "description": "Unknown user id",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/setRole": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "header",
+          "name": "email",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "header",
+          "name": "userId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "setRole",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "roleUpdate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated role"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Admin rights are required and admins cannot change their own role",
+            "schema": {
+              "$ref": "#/definitions/Forbidden"
+            }
+          },
+          "404": {
+            "description": "Unknown user id",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    },
+    "/validateToken": {
+      "post": {
+        "operationId": "validateToken",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Valid token"
+          },
+          "400": {
+            "description": "Input data is invalid",
+            "schema": {
+              "$ref": "#/definitions/InvalidInput"
+            }
+          },
+          "403": {
+            "description": "Invalid or unknown token",
+            "schema": {
+              "$ref": "#/definitions/InvalidCredentials"
+            }
+          },
+          "404": {
+            "description": "No user for this token found",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          },
+          "500": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/UnexpectedError"
+            }
+          },
+          "503": {
+            "description": "Database unavailable",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailable"
+            }
+          }
+        }
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "basePath": "/api/v1/user"
+}

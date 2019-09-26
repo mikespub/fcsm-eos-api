@@ -4,7 +4,8 @@
     "title": "Combined FCSM EOS API",
     "version": "1.2.0"
   },
-  "servers": [{
+  "servers": [
+    {
       "url": "https://emeia-eos.fcsm.io"
     }
   ],
@@ -13,7 +14,8 @@
       "get": {
         "description": "Retrieve all metrics",
         "operationId": "get_metrics",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "startDate",
             "in": "query",
             "description": "Start date for showing metrics (YYYY-MM-DD)",
@@ -21,7 +23,8 @@
               "type": "string",
               "format": "date"
             }
-          }, {
+          },
+          {
             "name": "endDate",
             "in": "query",
             "description": "End date for showing metrics (YYYY-MM-DD)",
@@ -43,14 +46,17 @@
             }
           }
         },
-        "tags": ["analytics"]
+        "tags": [
+          "analytics"
+        ]
       }
     },
     "/api/v1/analytics/platforms/{platformId}": {
       "get": {
         "description": "Retrieve metrics for specific platform",
         "operationId": "get_platform_metrics",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "platformId",
             "in": "path",
             "required": true,
@@ -72,7 +78,9 @@
             }
           }
         },
-        "tags": ["analytics"]
+        "tags": [
+          "analytics"
+        ]
       }
     },
     "/api/v1/analytics/summary": {
@@ -91,7 +99,9 @@
             }
           }
         },
-        "tags": ["analytics"]
+        "tags": [
+          "analytics"
+        ]
       }
     },
     "/api/v1/analytics/summaryUsage": {
@@ -110,7 +120,9 @@
             }
           }
         },
-        "tags": ["analytics"]
+        "tags": [
+          "analytics"
+        ]
       }
     },
     "/api/v1/analytics/platformsUsage": {
@@ -129,7 +141,9 @@
             }
           }
         },
-        "tags": ["analytics"]
+        "tags": [
+          "analytics"
+        ]
       }
     },
     "/api/v1/analytics/operatingSystems": {
@@ -148,7 +162,9 @@
             }
           }
         },
-        "tags": ["analytics"]
+        "tags": [
+          "analytics"
+        ]
       }
     },
     "/api/v1/auth/externalProviders": {
@@ -197,14 +213,20 @@
             }
           }
         },
-        "tags": ["auth"]
+        "tags": [
+          "auth"
+        ]
       },
-      "parameters": [{
+      "parameters": [
+        {
           "in": "header",
           "name": "role",
           "schema": {
             "type": "string",
-            "enum": ["admin", "user"]
+            "enum": [
+              "admin",
+              "user"
+            ]
           }
         }
       ],
@@ -263,7 +285,9 @@
             }
           }
         },
-        "tags": ["auth"]
+        "tags": [
+          "auth"
+        ]
       }
     },
     "/api/v1/auth/externalProviders/{providerId}": {
@@ -305,7 +329,9 @@
             }
           }
         },
-        "tags": ["auth"]
+        "tags": [
+          "auth"
+        ]
       },
       "get": {
         "description": "Configured external identity provider by id",
@@ -362,16 +388,23 @@
             }
           }
         },
-        "tags": ["auth"]
+        "tags": [
+          "auth"
+        ]
       },
-      "parameters": [{
+      "parameters": [
+        {
           "in": "header",
           "name": "role",
           "schema": {
             "type": "string",
-            "enum": ["admin", "user"]
+            "enum": [
+              "admin",
+              "user"
+            ]
           }
-        }, {
+        },
+        {
           "in": "path",
           "name": "providerId",
           "required": true,
@@ -436,7 +469,9 @@
             }
           }
         },
-        "tags": ["auth"]
+        "tags": [
+          "auth"
+        ]
       }
     },
     "/api/v1/user/checkCredentials": {
@@ -504,7 +539,9 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/forgotPassword": {
@@ -555,13 +592,16 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/me": {
       "get": {
         "operationId": "getMe",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "userId",
             "required": true,
@@ -612,21 +652,28 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/removeSubscription": {
       "delete": {
         "operationId": "removeSubscription",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "role",
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "external",
             "required": true,
@@ -700,7 +747,9 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/resetPassword": {
@@ -761,13 +810,16 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/users": {
       "get": {
         "operationId": "getUsers",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "query",
             "name": "email",
             "schema": {
@@ -827,21 +879,28 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       },
-      "parameters": [{
+      "parameters": [
+        {
           "in": "header",
           "name": "role",
           "required": true,
           "schema": {
             "type": "string",
-            "enum": ["admin", "user"]
+            "enum": [
+              "admin",
+              "user"
+            ]
           }
         }
       ],
       "post": {
         "operationId": "createUser",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "email",
             "required": true,
@@ -912,26 +971,33 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/users/{user_id}": {
       "delete": {
         "operationId": "deleteUser",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "userId",
             "required": true,
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "role",
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
           }
         ],
@@ -990,17 +1056,23 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       },
       "get": {
         "operationId": "getUser",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "role",
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
           }
         ],
@@ -1066,9 +1138,12 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       },
-      "parameters": [{
+      "parameters": [
+        {
           "in": "path",
           "name": "user_id",
           "required": true,
@@ -1079,14 +1154,16 @@
       ],
       "put": {
         "operationId": "updateUser",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "userId",
             "required": true,
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "email",
             "required": true,
@@ -1160,38 +1237,47 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/users/{user_id}/setAccessRights": {
-      "parameters": [{
+      "parameters": [
+        {
           "in": "path",
           "name": "user_id",
           "required": true,
           "schema": {
             "type": "string"
           }
-        }, {
+        },
+        {
           "in": "header",
           "name": "email",
           "required": true,
           "schema": {
             "type": "string"
           }
-        }, {
+        },
+        {
           "in": "header",
           "name": "userId",
           "required": true,
           "schema": {
             "type": "string"
           }
-        }, {
+        },
+        {
           "in": "header",
           "name": "role",
           "required": true,
           "schema": {
             "type": "string",
-            "enum": ["admin", "user"]
+            "enum": [
+              "admin",
+              "user"
+            ]
           }
         }
       ],
@@ -1262,31 +1348,39 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/users/{user_id}/setPassword": {
-      "parameters": [{
+      "parameters": [
+        {
           "in": "path",
           "name": "user_id",
           "required": true,
           "schema": {
             "type": "string"
           }
-        }, {
+        },
+        {
           "in": "header",
           "name": "userId",
           "required": true,
           "schema": {
             "type": "string"
           }
-        }, {
+        },
+        {
           "in": "header",
           "name": "role",
           "required": true,
           "schema": {
             "type": "string",
-            "enum": ["admin", "user"]
+            "enum": [
+              "admin",
+              "user"
+            ]
           }
         }
       ],
@@ -1357,38 +1451,47 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/users/{user_id}/setRole": {
-      "parameters": [{
+      "parameters": [
+        {
           "in": "path",
           "name": "user_id",
           "required": true,
           "schema": {
             "type": "string"
           }
-        }, {
+        },
+        {
           "in": "header",
           "name": "email",
           "required": true,
           "schema": {
             "type": "string"
           }
-        }, {
+        },
+        {
           "in": "header",
           "name": "userId",
           "required": true,
           "schema": {
             "type": "string"
           }
-        }, {
+        },
+        {
           "in": "header",
           "name": "role",
           "required": true,
           "schema": {
             "type": "string",
-            "enum": ["admin", "user"]
+            "enum": [
+              "admin",
+              "user"
+            ]
           }
         }
       ],
@@ -1459,7 +1562,9 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/user/validateToken": {
@@ -1530,7 +1635,9 @@
             }
           }
         },
-        "tags": ["user"]
+        "tags": [
+          "user"
+        ]
       }
     },
     "/api/v1/configuration/platformAccess": {
@@ -1550,7 +1657,9 @@
             }
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       },
       "put": {
         "summary": "Set platform access configutation",
@@ -1575,7 +1684,9 @@
             "description": "Empty configuration given"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/platformAccess/{platform_id}": {
@@ -1583,7 +1694,8 @@
         "summary": "Get platform access value",
         "description": "Get platform access value",
         "operationId": "get_platform_access",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "platform_id",
             "in": "path",
             "required": true,
@@ -1606,7 +1718,9 @@
             }
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/mailProviders": {
@@ -1630,7 +1744,9 @@
             }
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       },
       "post": {
         "summary": "Add provider data",
@@ -1654,7 +1770,9 @@
             "description": "Wrong provider service or provider name already exists"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/mailProviders/{provider_id}": {
@@ -1662,7 +1780,8 @@
         "summary": "Get provider data",
         "description": "Get provider data",
         "operationId": "get_mail_provider",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/config.provider_id"
           }
         ],
@@ -1681,13 +1800,16 @@
             "description": "Provider id does not exist"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       },
       "put": {
         "summary": "Edit provider",
         "description": "Edit provider",
         "operationId": "edit_mail_provider",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/config.provider_id"
           }
         ],
@@ -1709,12 +1831,15 @@
             "description": "Provider id does not exist"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       },
       "delete": {
         "summary": "Delete provider",
         "description": "Delete provider",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/config.provider_id"
           }
         ],
@@ -1729,7 +1854,9 @@
             "description": "Provider id does not exist"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/mailProviders/default": {
@@ -1755,14 +1882,17 @@
             "description": "More than one default provider set"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/mailProviders/default/{provider_id}": {
       "put": {
         "summary": "Set default mail provider",
         "description": "Set default mail provider",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/config.provider_id"
           }
         ],
@@ -1781,12 +1911,15 @@
             "description": "Provider id does not exist"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       },
       "delete": {
         "summary": "Unset default mail provider",
         "description": "Unset mail provider as default",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/config.provider_id"
           }
         ],
@@ -1798,7 +1931,9 @@
             "description": "Provider id does not exist"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/managementToolTypes": {
@@ -1817,7 +1952,9 @@
             }
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/managementTools": {
@@ -1836,7 +1973,9 @@
             }
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       },
       "post": {
         "summary": "Create new management tool",
@@ -1867,14 +2006,17 @@
             "description": "Invalid management tool type or url format or error saving data in database"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/managementTools/{tool_id}": {
       "get": {
         "summary": "Get specified management tool",
         "description": "Get specified management tool",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/config.tool_id"
           }
         ],
@@ -1896,12 +2038,15 @@
             "description": "Unknown tool id"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       },
       "put": {
         "summary": "Update specified management tool",
         "description": "Update specified management tool",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/config.tool_id"
           }
         ],
@@ -1934,7 +2079,9 @@
             "description": "Unknown tool id"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/configuration/logo": {
@@ -1952,7 +2099,9 @@
                     "format": "binary"
                   }
                 },
-                "required": ["logo"]
+                "required": [
+                  "logo"
+                ]
               }
             }
           }
@@ -1977,7 +2126,9 @@
             "description": "Error while saving logo image"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       },
       "get": {
         "summary": "Get logo image",
@@ -1989,7 +2140,9 @@
             "description": "There is no image stored yet"
           }
         },
-        "tags": ["config"]
+        "tags": [
+          "config"
+        ]
       }
     },
     "/api/v1/subscription/subscriptions": {
@@ -1997,27 +2150,31 @@
         "summary": "Get subscriptions",
         "description": "Retrieve list of all subscriptions",
         "operationId": "getSubscriptions",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "role",
             "in": "header",
             "required": true,
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "name": "subscriptions",
             "in": "header",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "name": "username",
             "in": "query",
             "description": "Return only subscriptions to which given user has an access to",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "name": "platformId",
             "in": "query",
             "description": "Filter subscription by given platform id (openStack , aws, k5, ...).",
@@ -2044,13 +2201,16 @@
             "$ref": "#/components/responses/subscr.InternalError"
           }
         },
-        "tags": ["subscr"]
+        "tags": [
+          "subscr"
+        ]
       },
       "post": {
         "summary": "Create subscription",
         "description": "Create new subscription. Provided credentials are validated against target platform",
         "operationId": "createSubscription",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "userid",
             "in": "header",
             "required": true,
@@ -2096,7 +2256,9 @@
             }
           }
         },
-        "tags": ["subscr"]
+        "tags": [
+          "subscr"
+        ]
       }
     },
     "/api/v1/subscription/subscriptions/{subscription_id}": {
@@ -2104,7 +2266,8 @@
         "summary": "Get subscription",
         "description": "Get single subscription for specified subscription_id",
         "operationId": "getSubscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/subscr.subscription_id"
           }
         ],
@@ -2126,13 +2289,16 @@
             "$ref": "#/components/responses/subscr.InternalError"
           }
         },
-        "tags": ["subscr"]
+        "tags": [
+          "subscr"
+        ]
       },
       "delete": {
         "summary": "Delete subscription",
         "description": "Delete subscription for given id",
         "operationId": "deleteSubscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/subscr.subscription_id"
           }
         ],
@@ -2147,13 +2313,16 @@
             "$ref": "#/components/responses/subscr.InternalError"
           }
         },
-        "tags": ["subscr"]
+        "tags": [
+          "subscr"
+        ]
       },
       "put": {
         "summary": "Modify subscription",
         "description": "Modify subscription for given id",
         "operationId": "updateSubscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/subscr.subscription_id"
           }
         ],
@@ -2192,7 +2361,9 @@
             "$ref": "#/components/responses/subscr.InternalError"
           }
         },
-        "tags": ["subscr"]
+        "tags": [
+          "subscr"
+        ]
       }
     },
     "/api/v1/subscription/subscriptions/{subscription_id}/tokens": {
@@ -2200,7 +2371,8 @@
         "summary": "Get token",
         "description": "Get token for a subscription",
         "operationId": "get_token",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/subscr.subscription_id"
           }
         ],
@@ -2222,7 +2394,9 @@
             "description": "Error during fetching token from platform"
           }
         },
-        "tags": ["subscr"]
+        "tags": [
+          "subscr"
+        ]
       }
     },
     "/api/v1/subscription/validateVm": {
@@ -2245,7 +2419,9 @@
               "*/*": {
                 "schema": {
                   "type": "object",
-                  "required": ["isCompliant"],
+                  "required": [
+                    "isCompliant"
+                  ],
                   "properties": {
                     "isCompliant": {
                       "type": "boolean"
@@ -2262,7 +2438,9 @@
             "$ref": "#/components/responses/subscr.InternalError"
           }
         },
-        "tags": ["subscr"]
+        "tags": [
+          "subscr"
+        ]
       }
     },
     "/api/v1/subscription/validateWorkshift": {
@@ -2285,7 +2463,9 @@
               "*/*": {
                 "schema": {
                   "type": "object",
-                  "required": ["isCompliant"],
+                  "required": [
+                    "isCompliant"
+                  ],
                   "properties": {
                     "isCompliant": {
                       "type": "boolean"
@@ -2302,7 +2482,9 @@
             "$ref": "#/components/responses/subscr.InternalError"
           }
         },
-        "tags": ["subscr"]
+        "tags": [
+          "subscr"
+        ]
       }
     },
     "/api/v1/management/registerVm": {
@@ -2327,7 +2509,9 @@
             "description": "Timeout error communicating with management tool"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/unregisterVm": {
@@ -2355,7 +2539,9 @@
             "description": "Timeout error communicating with management tool"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/isManaged": {
@@ -2391,20 +2577,24 @@
             "description": "Internal server error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/managedVms": {
       "get": {
         "summary": "Return list of managed VM ids",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "subscriptionId",
             "in": "query",
             "required": true,
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "name": "vmId",
             "in": "query",
             "required": false,
@@ -2431,7 +2621,9 @@
             "description": "Internal server error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/testConnectivity": {
@@ -2464,7 +2656,9 @@
             }
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/installApp": {
@@ -2509,7 +2703,9 @@
             "description": "Timeout error communicating with management tool"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/uninstallApp": {
@@ -2554,7 +2750,9 @@
             "description": "Timeout error communicating with management tool"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/details": {
@@ -2597,7 +2795,9 @@
             "description": "Timeout error communicating with management tool"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/getBootstrapScript": {
@@ -2630,7 +2830,9 @@
             "description": "Error while processing input information"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/unregisterSubscriptionVms": {
@@ -2656,14 +2858,17 @@
             "description": "Error while processing input information"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/replaceApps": {
       "post": {
         "summary": "Upload apps metadata",
         "description": "Upload apps metadata",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "X-Tool-Token",
             "in": "header",
             "required": true,
@@ -2706,13 +2911,16 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/apps": {
       "get": {
         "summary": "List apps",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "tool_id",
             "in": "query",
             "required": false,
@@ -2743,13 +2951,16 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/apps/{app_id}": {
       "get": {
         "summary": "Get app by id",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "app_id",
             "in": "path",
             "required": true,
@@ -2776,13 +2987,16 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/tools/{tool_id}/apps/{app_name}": {
       "get": {
         "summary": "Get app by name",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "tool_id",
             "in": "path",
             "required": true,
@@ -2790,7 +3004,8 @@
               "type": "string",
               "format": "uuid"
             }
-          }, {
+          },
+          {
             "name": "app_name",
             "in": "path",
             "required": true,
@@ -2817,13 +3032,16 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/appInstances": {
       "get": {
         "summary": "List apps instances",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "subscriptionId",
             "in": "query",
             "required": true,
@@ -2832,7 +3050,8 @@
               "type": "string",
               "format": "uuid"
             }
-          }, {
+          },
+          {
             "name": "toolId",
             "in": "query",
             "required": false,
@@ -2841,7 +3060,8 @@
               "type": "string",
               "format": "uuid"
             }
-          }, {
+          },
+          {
             "name": "vmId",
             "in": "query",
             "required": false,
@@ -2849,14 +3069,23 @@
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "name": "state",
             "in": "query",
             "required": false,
             "description": "Optional filter.",
             "schema": {
               "type": "string",
-              "enum": ["INITIAL", "INSTALLING", "INSTALL_SUCCEEDED", "INSTALL_FAILED", "UNINSTALLING", "UNINSTALL_SUCCEEDED", "UNINSTALL_FAILED"]
+              "enum": [
+                "INITIAL",
+                "INSTALLING",
+                "INSTALL_SUCCEEDED",
+                "INSTALL_FAILED",
+                "UNINSTALLING",
+                "UNINSTALL_SUCCEEDED",
+                "UNINSTALL_FAILED"
+              ]
             }
           }
         ],
@@ -2881,11 +3110,14 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       },
       "post": {
         "summary": "Create an app instance",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "subscriptionId",
             "in": "query",
             "required": true,
@@ -2901,7 +3133,11 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["vmId", "toolId", "appId"],
+                "required": [
+                  "vmId",
+                  "toolId",
+                  "appId"
+                ],
                 "properties": {
                   "vmId": {
                     "type": "string"
@@ -2933,11 +3169,14 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/appInstances/{app_instance_id}": {
-      "parameters": [{
+      "parameters": [
+        {
           "name": "subscriptionId",
           "in": "query",
           "required": true,
@@ -2946,7 +3185,8 @@
             "type": "string",
             "format": "uuid"
           }
-        }, {
+        },
+        {
           "name": "app_instance_id",
           "in": "path",
           "required": true,
@@ -2954,12 +3194,16 @@
             "type": "string",
             "format": "uuid"
           }
-        }, {
+        },
+        {
           "name": "role",
           "in": "header",
           "schema": {
             "type": "string",
-            "enum": ["admin", "user"]
+            "enum": [
+              "admin",
+              "user"
+            ]
           }
         }
       ],
@@ -2983,12 +3227,15 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       },
       "delete": {
         "summary": "Delete an app instance",
         "description": "It is allowed to delete app instances that are in one of the following states: INITIAL, INSTALL_FAILED, UNINSTALL_SUCCEEDED, UNINSTALL_FAILED.\n",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "forceDelete",
             "in": "query",
             "description": "Forcely delete app_instance not checking the state. This option is only available for administrators\n",
@@ -3015,11 +3262,14 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/appInstances/{app_instance_id}/uninstall": {
-      "parameters": [{
+      "parameters": [
+        {
           "name": "subscriptionId",
           "in": "query",
           "required": true,
@@ -3028,7 +3278,8 @@
             "type": "string",
             "format": "uuid"
           }
-        }, {
+        },
+        {
           "name": "app_instance_id",
           "in": "path",
           "required": true,
@@ -3057,13 +3308,16 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/tools/{tool_id}/tokens": {
       "post": {
         "summary": "Generate a new token for the given tool",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "tool_id",
             "in": "path",
             "required": true,
@@ -3078,7 +3332,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["name"],
+                "required": [
+                  "name"
+                ],
                 "properties": {
                   "name": {
                     "$ref": "#/components/schemas/mgmt.ToolToken/properties/name"
@@ -3110,13 +3366,16 @@
             "description": "Service Unavailable"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/management/tools/{tool_id}/tokens/{token_value}": {
       "delete": {
         "summary": "Delete the token",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "tool_id",
             "in": "path",
             "required": true,
@@ -3124,7 +3383,8 @@
               "type": "string",
               "format": "uuid"
             }
-          }, {
+          },
+          {
             "name": "token_value",
             "in": "path",
             "required": true,
@@ -3144,7 +3404,9 @@
             "description": "Internal Server Error"
           }
         },
-        "tags": ["mgmt"]
+        "tags": [
+          "mgmt"
+        ]
       }
     },
     "/api/v1/tag/tags": {
@@ -3183,19 +3445,26 @@
             }
           }
         },
-        "tags": ["tag"]
+        "tags": [
+          "tag"
+        ]
       },
       "post": {
         "description": "Creates tag with given name and values",
         "operationId": "CreateTag",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "role",
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "email",
             "schema": {
@@ -3266,21 +3535,28 @@
             }
           }
         },
-        "tags": ["tag"]
+        "tags": [
+          "tag"
+        ]
       }
     },
     "/api/v1/tag/tags/{tagName}": {
       "delete": {
         "description": "Delete tag with given name",
         "operationId": "DeleteTag",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "role",
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "email",
             "schema": {
@@ -3343,7 +3619,9 @@
             }
           }
         },
-        "tags": ["tag"]
+        "tags": [
+          "tag"
+        ]
       },
       "get": {
         "operationId": "GetTag",
@@ -3390,9 +3668,12 @@
           }
         },
         "summary": "Returns the specified tag",
-        "tags": ["tag"]
+        "tags": [
+          "tag"
+        ]
       },
-      "parameters": [{
+      "parameters": [
+        {
           "in": "path",
           "name": "tagName",
           "required": true,
@@ -3404,14 +3685,19 @@
       "put": {
         "description": "Update some fields of a tag",
         "operationId": "UpdateTag",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "role",
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "email",
             "schema": {
@@ -3485,7 +3771,9 @@
             }
           }
         },
-        "tags": ["tag"]
+        "tags": [
+          "tag"
+        ]
       }
     },
     "/api/v1/notification/email": {
@@ -3512,7 +3800,9 @@
             "description": "unsupported mail provider"
           }
         },
-        "tags": ["notif"]
+        "tags": [
+          "notif"
+        ]
       }
     },
     "/api/v1/webhook/contentTypes": {
@@ -3551,7 +3841,9 @@
           }
         },
         "summary": "Get available content types for webhooks",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       }
     },
     "/api/v1/webhook/eventTypes": {
@@ -3590,7 +3882,9 @@
           }
         },
         "summary": "Get available event types for webhooks",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       }
     },
     "/api/v1/webhook/webhooks": {
@@ -3629,22 +3923,29 @@
           }
         },
         "summary": "Get list of defined webhooks",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       },
       "post": {
         "operationId": "createWebhook",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "email",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "role",
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
           }
         ],
@@ -3705,24 +4006,31 @@
           }
         },
         "summary": "Create a new webhook",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       }
     },
     "/api/v1/webhook/webhooks/{webhook_id}": {
       "delete": {
         "operationId": "deleteWebhook",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "email",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "role",
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
           }
         ],
@@ -3782,7 +4090,9 @@
           }
         },
         "summary": "Delete specified webhook",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       },
       "get": {
         "operationId": "getSingleWebhook",
@@ -3829,9 +4139,12 @@
           }
         },
         "summary": "Get single webhook",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       },
-      "parameters": [{
+      "parameters": [
+        {
           "in": "path",
           "name": "webhook_id",
           "required": true,
@@ -3842,18 +4155,23 @@
       ],
       "put": {
         "operationId": "updateWebhook",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "email",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "role",
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
           }
         ],
@@ -3924,31 +4242,39 @@
           }
         },
         "summary": "Update specified webhook",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       }
     },
     "/api/v1/webhook/webhooks/{webhook_id}/disable": {
       "delete": {
         "operationId": "disableWebhook",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "email",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "path",
             "name": "webhook_id",
             "required": true,
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "role",
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
           }
         ],
@@ -4018,31 +4344,39 @@
           }
         },
         "summary": "Disable specified webhook",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       }
     },
     "/api/v1/webhook/webhooks/{webhook_id}/enable": {
       "put": {
         "operationId": "enableWebhook",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "header",
             "name": "email",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "path",
             "name": "webhook_id",
             "required": true,
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "in": "header",
             "name": "role",
             "schema": {
               "type": "string",
-              "enum": ["admin", "user"]
+              "enum": [
+                "admin",
+                "user"
+              ]
             }
           }
         ],
@@ -4112,13 +4446,16 @@
           }
         },
         "summary": "Enable specified webhook",
-        "tags": ["webhook"]
+        "tags": [
+          "webhook"
+        ]
       }
     },
     "/api/v1/whitelist/imageOS": {
       "get": {
         "summary": "Get image type (OS) for a image",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/img_whitelist.imageName"
           }
         ],
@@ -4137,7 +4474,9 @@
             "$ref": "#/components/responses/img_whitelist.500Error"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       }
     },
     "/api/v1/whitelist/osList": {
@@ -4161,13 +4500,16 @@
             "$ref": "#/components/responses/img_whitelist.500Error"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       }
     },
     "/api/v1/whitelist/images": {
       "post": {
         "summary": "Add single image to whitelist",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/img_whitelist.subscriptionId"
           }
         ],
@@ -4203,19 +4545,26 @@
             "$ref": "#/components/responses/img_whitelist.500Error"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       },
       "get": {
         "summary": "Get images from whitelist",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/img_whitelist.subscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/img_whitelist.name"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/img_whitelist.limit"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/img_whitelist.page"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/img_whitelist.private"
           }
         ],
@@ -4240,11 +4589,14 @@
             "description": "Error while retrieving flavors"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       },
       "delete": {
         "summary": "Delete whitelist",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/img_whitelist.subscriptionId"
           }
         ],
@@ -4262,15 +4614,19 @@
             "$ref": "#/components/responses/img_whitelist.500Error"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       }
     },
     "/api/v1/whitelist/images/{imageId}": {
       "get": {
         "summary": "Get single image",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/img_whitelist.subscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/img_whitelist.imageId"
           }
         ],
@@ -4295,15 +4651,19 @@
             "description": "Error while retrieving flavors"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       },
       "put": {
         "summary": "Update operating system for image",
         "description": "Please use PATCH method. This action will be removed on 14.05.2019",
         "deprecated": true,
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/img_whitelist.subscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/img_whitelist.imageId"
           }
         ],
@@ -4331,13 +4691,17 @@
             "$ref": "#/components/responses/img_whitelist.500Error"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       },
       "delete": {
         "summary": "Remove image from whitelist",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/img_whitelist.subscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/img_whitelist.imageId"
           }
         ],
@@ -4355,13 +4719,17 @@
             "$ref": "#/components/responses/img_whitelist.500Error"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       },
       "patch": {
         "summary": "Update operating system for image",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/img_whitelist.subscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/img_whitelist.imageId"
           }
         ],
@@ -4389,14 +4757,17 @@
             "$ref": "#/components/responses/img_whitelist.500Error"
           }
         },
-        "tags": ["img_whitelist"]
+        "tags": [
+          "img_whitelist"
+        ]
       }
     },
     "/api/v1/vmware/compute/availabilityZones": {
       "get": {
         "description": "List all Availability Zones",
         "operationId": "vmware_service.resources.availability_zones.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -4417,14 +4788,17 @@
           }
         },
         "summary": "List availability zones",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/flavors": {
       "get": {
         "description": "Get the list of all flavors",
         "operationId": "vmware_service.resources.flavors.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -4446,16 +4820,20 @@
           }
         },
         "summary": "List flavors",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/flavors/{flavorId}": {
       "get": {
         "description": "Get specific flavor by id",
         "operationId": "vmware_service.resources.flavor.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Flavor id",
             "in": "path",
             "name": "flavorId",
@@ -4479,16 +4857,20 @@
           }
         },
         "summary": "Get flavor by id",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/images": {
       "get": {
         "description": "The endpoint is used only by the analytics service and should be deprecated in favor of whitelist/images.",
         "operationId": "vmware_service.resources.images.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.ImageName"
           }
         ],
@@ -4510,7 +4892,9 @@
           }
         },
         "summary": "Get images",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/images/{imageId}": {
@@ -4518,9 +4902,11 @@
         "deprecated": true,
         "description": "Get specific images by id",
         "operationId": "vmware_service.resources.image.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Image id",
             "in": "path",
             "name": "imageId",
@@ -4544,16 +4930,20 @@
           }
         },
         "summary": "Get image by id",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/interfaces": {
       "get": {
         "description": "List of network interfaces",
         "operationId": "vmware_service.resources.interfaces.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Filter interfaces for VM id",
             "in": "query",
             "name": "vmId",
@@ -4580,14 +4970,17 @@
           }
         },
         "summary": "List network interfaces",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/keypairs": {
       "get": {
         "description": "List all keypairs",
         "operationId": "vmware_service.resources.keypairs.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -4608,14 +5001,17 @@
           }
         },
         "summary": "List keypairs",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/keypairs/generate": {
       "post": {
         "description": "Create a new keypair",
         "operationId": "vmware_service.resources.keypairs.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -4644,14 +5040,17 @@
           }
         },
         "summary": "Create a new keypair",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/keypairs/import": {
       "post": {
         "description": "Import a new public keypair",
         "operationId": "vmware_service.resources.keypairs.upload",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -4680,16 +5079,20 @@
           }
         },
         "summary": "Import a keypair",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/keypairs/{keypairId}": {
       "delete": {
         "description": "Delete a specific keypair",
         "operationId": "vmware_service.resources.keypair.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Keypair id",
             "in": "path",
             "name": "keypairId",
@@ -4705,16 +5108,20 @@
           }
         },
         "summary": "Delete a keypair",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/networks": {
       "get": {
         "description": "List all networks",
         "operationId": "vmware_service.resources.networks.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Availability zone to filter by",
             "in": "query",
             "name": "availabilityZone",
@@ -4740,16 +5147,20 @@
           }
         },
         "summary": "List networks",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/networks/{networkId}/subnets": {
       "get": {
         "description": "List all subnets which belong to the given network",
         "operationId": "vmware_service.resources.subnets.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Network id",
             "in": "path",
             "name": "networkId",
@@ -4757,7 +5168,8 @@
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "description": "Availability zone to filter by",
             "in": "query",
             "name": "availabilityZone",
@@ -4783,18 +5195,23 @@
           }
         },
         "summary": "List network subnets",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/privateImages": {
       "get": {
         "description": "Get private images",
         "operationId": "vmware_service.resources.images.get_private",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.ImageName"
-          }, {
+          },
+          {
             "description": "Image id to filter by",
             "in": "query",
             "name": "id",
@@ -4824,16 +5241,20 @@
           }
         },
         "summary": "Get private images",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/privateImages/{imageId}": {
       "get": {
         "description": "Get specific private image by id",
         "operationId": "vmware_service.resources.image.get_private",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Image id",
             "in": "path",
             "name": "imageId",
@@ -4849,18 +5270,23 @@
           }
         },
         "summary": "Get private image by id",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/publicImages": {
       "get": {
         "description": "Get public images",
         "operationId": "vmware_service.resources.images.get_public",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.ImageName"
-          }, {
+          },
+          {
             "description": "Image id to filter by",
             "in": "query",
             "name": "id",
@@ -4890,16 +5316,20 @@
           }
         },
         "summary": "Get public images",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/publicImages/{imageId}": {
       "get": {
         "description": "Get specific public image by id",
         "operationId": "vmware_service.resources.image.get_public",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Image id",
             "in": "path",
             "name": "imageId",
@@ -4926,7 +5356,9 @@
           }
         },
         "summary": "Get public image by id",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/regions": {
@@ -4950,16 +5382,20 @@
           }
         },
         "summary": "List regions",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/securityGroups": {
       "get": {
         "description": "List of security groups. The result is always an empty list. There are no security groups in VMWare.",
         "operationId": "vmware_service.resources.security_groups.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "VM id",
             "in": "query",
             "name": "vmId",
@@ -4986,16 +5422,20 @@
           }
         },
         "summary": "List security groups",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/snapshots": {
       "get": {
         "description": "Get list of all snapshots",
         "operationId": "vmware_service.resources.snapshots.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMIdQuery"
           }
         ],
@@ -5005,12 +5445,15 @@
           }
         },
         "summary": "List snapshots",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       },
       "post": {
         "description": "Create a new snapshot",
         "operationId": "vmware_service.resources.snapshots.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -5031,16 +5474,20 @@
           }
         },
         "summary": "Create a new snapshot",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/snapshots/{snapshotId}": {
       "delete": {
         "description": "Delete snapshot",
         "operationId": "vmware_service.resources.snapshot.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "snapshot id",
             "in": "path",
             "name": "snapshotId",
@@ -5056,7 +5503,9 @@
           }
         },
         "summary": "Delete snapshot",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/validateSubscription": {
@@ -5086,16 +5535,20 @@
           }
         },
         "summary": "Validate subscription",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/vms": {
       "get": {
         "description": "List all virtual machines",
         "operationId": "vmware_service.resources.vms.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.AvailabilityZoneId"
           }
         ],
@@ -5116,12 +5569,15 @@
           }
         },
         "summary": "List VMs",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       },
       "post": {
         "description": "Create a new VM",
         "operationId": "vmware_service.resources.vms.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -5150,16 +5606,20 @@
           }
         },
         "summary": "Create a VM",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/vms/{vmId}": {
       "delete": {
         "description": "Delete a VM",
         "operationId": "vmware_service.resources.vm.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5169,14 +5629,18 @@
           }
         },
         "summary": "Delete a VM",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       },
       "get": {
         "description": "Get virtual machine by id",
         "operationId": "vmware_service.resources.vm.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5193,14 +5657,18 @@
           }
         },
         "summary": "Get VM by id",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       },
       "patch": {
         "description": "Modify VM properties. Currently it is possible to modify the VM flavor.",
         "operationId": "vmware_service.resources.vm.patch",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5222,18 +5690,23 @@
           }
         },
         "summary": "Update VM",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/vms/{vmId}/command/{action}": {
       "put": {
         "description": "Execute action on a VM. Actions are start, poweroff, softReboot, hardReboot.",
         "operationId": "vmware_service.resources.vm_command.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
-          }, {
+          },
+          {
             "description": "Power action to be invoked on the VM",
             "in": "path",
             "name": "action",
@@ -5249,16 +5722,20 @@
           }
         },
         "summary": "Execute a power action on a VM",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/vms/{vmId}/details": {
       "get": {
         "description": "Get VM details",
         "operationId": "vmware_service.resources.vm_details.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5280,16 +5757,20 @@
           }
         },
         "summary": "Get VM details",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/vms/{vmId}/management": {
       "get": {
         "description": "Check if management service for the VM is available",
         "operationId": "vmware_service.resources.management.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5306,16 +5787,20 @@
           }
         },
         "summary": "Get VM management status",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/vms/{vmId}/password": {
       "get": {
         "description": "Get the password in an encrypted form for the virtual machine",
         "operationId": "vmware_service.resources.vm_password.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5332,16 +5817,20 @@
           }
         },
         "summary": "Get the VM password",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/vms/{vmId}/setTag": {
       "put": {
         "description": "Set a tag value for a VM",
         "operationId": "vmware_service.resources.vm_tag.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5362,16 +5851,20 @@
           }
         },
         "summary": "Tag VM",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/vms/{vmId}/workshift": {
       "delete": {
         "description": "Delete the VM Workshift",
         "operationId": "vmware_service.resources.vm_workshift.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.VMId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -5390,14 +5883,18 @@
           }
         },
         "summary": "Delete the VM Workshift",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       },
       "post": {
         "description": "Create a VM Workshift",
         "operationId": "vmware_service.resources.vm_workshifts.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5435,14 +5932,18 @@
           }
         },
         "summary": "Add a workshift to the VM",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       },
       "put": {
         "description": "Update the VM Workshift",
         "operationId": "vmware_service.resources.vm_workshift.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMId"
           }
         ],
@@ -5480,23 +5981,28 @@
           }
         },
         "summary": "Update the VM workshift",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/volumeTypes": {
       "get": {
         "description": "Get a list of all volume types user can create volume with",
         "operationId": "vmware_service.resources.volume_types.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "description": "Availability zone to filter by",
             "in": "query",
             "name": "availabilityZoneId",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "description": "If true, show only volumes on which OS can be installed",
             "in": "query",
             "name": "isOsCompatible",
@@ -5522,25 +6028,31 @@
           }
         },
         "summary": "List volume types",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/volumes": {
       "get": {
         "description": "Get list of all volumes",
         "operationId": "vmware_service.resources.volumes.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.FilterVolumeStatus"
-          }, {
+          },
+          {
             "description": "Availability zone to filter by",
             "in": "query",
             "name": "availabilityZone",
             "schema": {
               "type": "string"
             }
-          }, {
+          },
+          {
             "description": "Filter volumes by isOsDisk value",
             "in": "query",
             "name": "isOsDisk",
@@ -5566,12 +6078,15 @@
           }
         },
         "summary": "List volumes",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       },
       "post": {
         "description": "Create a new volume",
         "operationId": "vmware_service.resources.volumes.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
           }
         ],
@@ -5605,16 +6120,20 @@
           }
         },
         "summary": "Create a new volume",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/volumes/{volume_id}": {
       "patch": {
         "description": "Modify volume properties. Currently it is possible to change to volume size.",
         "operationId": "vmware_service.resources.volume.patch",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VolumeId"
           }
         ],
@@ -5636,17 +6155,22 @@
           }
         },
         "summary": "Update a volume",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/vmware/compute/volumes/{volume_id}/detach": {
       "delete": {
         "operationId": "vmware_service.resources.volume_attachment.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/vmware.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VolumeId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/vmware.VMIdQuery"
           }
         ],
@@ -5656,16 +6180,20 @@
           }
         },
         "summary": "Dettaches and deletes a volume",
-        "tags": ["vmware"]
+        "tags": [
+          "vmware"
+        ]
       }
     },
     "/api/v1/azure/compute/publicImages": {
       "get": {
         "operationId": "azure_service.api.public_images.get",
         "summary": "Lists all public images for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.ImageName"
           }
         ],
@@ -5688,16 +6216,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/publicImages/{image_id}": {
       "get": {
         "operationId": "azure_service.api.public_image.get",
         "summary": "Gets a single public image by id",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.ImageId"
           }
         ],
@@ -5728,16 +6260,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/privateImages": {
       "get": {
         "operationId": "azure_service.api.private_images.get",
         "summary": "Lists private images for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.ImageName"
           }
         ],
@@ -5761,16 +6297,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/privateImages/{image_id}": {
       "get": {
         "operationId": "azure_service.api.private_image.get",
         "summary": "Gets a single private image by id",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.ImageId"
           }
         ],
@@ -5779,7 +6319,9 @@
             "$ref": "#/components/responses/azure.NotFound"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/validateSubscription": {
@@ -5819,7 +6361,9 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/images/{image_id}": {
@@ -5827,9 +6371,11 @@
         "operationId": "azure_service.api.image.get",
         "summary": "Gets a single image by id",
         "deprecated": true,
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.ImageId"
           }
         ],
@@ -5860,7 +6406,9 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/regions": {
@@ -5868,7 +6416,8 @@
         "operationId": "azure_service.api.regions.get",
         "summary": "Lists regions",
         "description": "If subscriptionId is not passed as query parameters endpoint returns list of regions not scoped to any subscription. Otherwise it returns regions for specified subscription.\n",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.OptionalSubscriptionId"
           }
         ],
@@ -5891,14 +6440,17 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/availabilityZones": {
       "get": {
         "operationId": "azure_service.api.availability_zone.get",
         "summary": "Lists availability zones for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -5925,14 +6477,17 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/availabilitySets": {
       "get": {
         "operationId": "azure_service.api.availability_sets.get",
         "summary": "Lists availability sets for specified subscription and resource group",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -5960,16 +6515,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/availabilitySets/{availability_set_id}": {
       "get": {
         "operationId": "azure_service.api.availability_set.get",
         "summary": "Gets availability set by id",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.AvailabilitySetId"
           }
         ],
@@ -5994,14 +6553,17 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/resourceGroups": {
       "get": {
         "operationId": "azure_service.api.resource_groups.get",
         "summary": "Lists resource groups",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -6026,12 +6588,15 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "post": {
         "operationId": "azure_service.api.resource_groups.post",
         "summary": "Creates new resource group",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -6072,14 +6637,17 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/flavors": {
       "get": {
         "operationId": "azure_service.api.flavors.get",
         "summary": "Lists flavors for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -6104,16 +6672,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/flavors/{flavor_id}": {
       "get": {
         "operationId": "azure_service.api.flavor.get",
         "summary": "Gets a single flavor by ID",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FlavorId"
           }
         ],
@@ -6138,18 +6710,23 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms": {
       "get": {
         "operationId": "azure_service.api.vms.get",
         "summary": "Lists virtual machines for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterAvailabilitySetId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterAvailabilityZoneId"
           }
         ],
@@ -6183,13 +6760,16 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "post": {
         "operationId": "azure_service.api.vms.post",
         "summary": "Provisions virtual machine according to specified parameters",
         "description": "May provision managed or unmanaged virtual machine in accordance to the `managementToolId` property. If such is set and points to valid `management tool`, virtual machine will have aformentioned tool deployed and it will be possible to install the application on it.\n",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -6214,13 +6794,17 @@
             "$ref": "#/components/responses/azure.NotFound"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}": {
-      "parameters": [{
+      "parameters": [
+        {
           "$ref": "#/components/parameters/azure.SubscriptionId"
-        }, {
+        },
+        {
           "$ref": "#/components/parameters/azure.VMId"
         }
       ],
@@ -6247,7 +6831,9 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "patch": {
         "operationId": "azure_service.api.vm.patch",
@@ -6282,7 +6868,9 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "delete": {
         "operationId": "azure_service.api.vm.delete",
@@ -6305,7 +6893,9 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/workshift": {
@@ -6313,9 +6903,11 @@
         "summary": "Add a workshift to the VM",
         "description": "Create a VM Workshift",
         "operationId": "azure_service.api.vm_workshift.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -6351,15 +6943,19 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "put": {
         "summary": "Update VM Workshift",
         "description": "Update a VM Workshift",
         "operationId": "azure_service.api.vm_workshift.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -6395,15 +6991,19 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "delete": {
         "summary": "Delete VM Workshift",
         "description": "Delete VM Workshift",
         "operationId": "azure_service.api.vm_workshift.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -6421,16 +7021,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/management": {
       "get": {
         "operationId": "azure_service.api.vm_management.get",
         "summary": "Gets specified virtual machine management status",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -6458,7 +7062,9 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/command/{action}": {
@@ -6466,11 +7072,14 @@
         "operationId": "azure_service.api.vm_command.put",
         "summary": "Executes power action on a VM",
         "description": "Executes power action on a VM. Only specified VMPowerAction are allowed.",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMPowerAction"
           }
         ],
@@ -6500,16 +7109,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/password": {
       "get": {
         "operationId": "azure_service.api.vm_password.get",
         "summary": "Gets specified virtual machine encrypted password",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -6540,7 +7153,9 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/details": {
@@ -6548,9 +7163,11 @@
         "operationId": "azure_service.api.vm_details.get",
         "summary": "Gets specified virtual machine details",
         "description": "If specified virtual machine is provision with enabled management details will contain information gathered by management tool. Aither way it will contains basic information\n",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -6590,20 +7207,26 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/volumes": {
       "get": {
         "operationId": "azure_service.api.volumes.get",
         "summary": "Lists volumes for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterVolumeStatus"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterIsOsDisk"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterAvailabilityZone"
           }
         ],
@@ -6635,12 +7258,15 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "post": {
         "operationId": "azure_service.api.volumes.post",
         "summary": "Creates new volume",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -6681,16 +7307,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/volumes/{volume_id}": {
       "get": {
         "operationId": "azure_service.api.volume.get",
         "summary": "Gets a single volume by ID",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VolumeId"
           }
         ],
@@ -6721,14 +7351,18 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "patch": {
         "operationId": "azure_service.api.volume.patch",
         "summary": "Modify volume properties",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VolumeId"
           }
         ],
@@ -6768,14 +7402,18 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "delete": {
         "operationId": "azure_service.api.volume.delete",
         "summary": "Removes volume",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VolumeId"
           }
         ],
@@ -6805,18 +7443,23 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/volumes/{volume_id}/attach": {
       "put": {
         "operationId": "azure_service.api.volume_attachment.put",
         "summary": "Attaches volume",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VolumeId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMIdQuery"
           }
         ],
@@ -6850,18 +7493,23 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/volumes/{volume_id}/detach": {
       "delete": {
         "operationId": "azure_service.api.volume_attachment.delete",
         "summary": "Dettaches volume",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VolumeId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMIdQuery"
           }
         ],
@@ -6888,18 +7536,23 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/volumeTypes": {
       "get": {
         "operationId": "azure_service.api.volume_types.get",
         "summary": "Lists volume types",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterIsOsCompatible"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterAvailabilityZoneId"
           }
         ],
@@ -6931,16 +7584,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/assignFloatingIp": {
       "put": {
         "operationId": "azure_service.api.vm_floating_ip.put",
         "summary": "Assigns a floating public IP v4 to specified VM",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -6971,16 +7628,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/unassignFloatingIp": {
       "delete": {
         "operationId": "azure_service.api.vm_floating_ip.delete",
         "summary": "Unassigns floating public IP from specified VM",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -7004,18 +7665,23 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/securityGroups/{security_group_id}": {
       "put": {
         "operationId": "azure_service.api.vm_security_groups.put",
         "summary": "Assigns a new network security group and unassigns old one",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.SecurityGroupId"
           }
         ],
@@ -7042,16 +7708,21 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "delete": {
         "operationId": "azure_service.api.vm_security_groups.delete",
         "summary": "Unassigns specified security group from specified VM",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.SecurityGroupId"
           }
         ],
@@ -7078,16 +7749,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/vms/{vm_id}/setTag": {
       "put": {
         "operationId": "azure_service.api.vm_tag.put",
         "summary": "Sets/unsets tag in virtual machine",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.VMId"
           }
         ],
@@ -7121,16 +7796,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/keypairs": {
       "get": {
         "operationId": "azure_service.api.keypairs.get",
         "summary": "Lists keypairs",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterAvailabilityZone"
           }
         ],
@@ -7162,16 +7841,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/keypairs/{keypair_id}": {
       "get": {
         "operationId": "azure_service.api.keypair.get",
         "summary": "Gets a single keypair",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.KeypairId"
           }
         ],
@@ -7202,14 +7885,18 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "delete": {
         "operationId": "azure_service.api.keypair.delete",
         "summary": "Delets a single keypair",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.KeypairId"
           }
         ],
@@ -7233,14 +7920,17 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/keypairs/generate": {
       "post": {
         "operationId": "azure_service.api.keypair_generate.post",
         "summary": "Generate a new keypair",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -7281,14 +7971,17 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/keypairs/import": {
       "post": {
         "operationId": "azure_service.api.keypair_import.post",
         "summary": "Import a public key",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -7329,16 +8022,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/networks": {
       "get": {
         "operationId": "azure_service.api.networks.get",
         "summary": "List networks for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterAvailabilityZone"
           }
         ],
@@ -7369,18 +8066,23 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/networks/{network_id}/subnets": {
       "get": {
         "operationId": "azure_service.api.network_subnets.get",
         "summary": "Lists subnets for specified network and subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.NetworkId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterAvailabilityZone"
           }
         ],
@@ -7414,20 +8116,26 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/interfaces": {
       "get": {
         "operationId": "azure_service.api.interfaces.get",
         "summary": "Lists interfaces for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterVMId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterNetworkId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterSubnetId"
           }
         ],
@@ -7458,16 +8166,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/securityGroups": {
       "get": {
         "operationId": "azure_service.api.security_groups.get",
         "summary": "Lists security groups for specified subscription",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterVMId"
           }
         ],
@@ -7498,16 +8210,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/snapshots": {
       "get": {
         "summary": "Get list of all snapshots",
         "operationId": "azure_service.api.snapshots.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.FilterVMId"
           }
         ],
@@ -7538,12 +8254,15 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       },
       "post": {
         "summary": "Create a new snapshot",
         "operationId": "azure_service.api.snapshots.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
           }
         ],
@@ -7585,16 +8304,20 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/azure/compute/snapshots/{snapshot_id}": {
       "delete": {
         "summary": "Delete snapshot",
         "operationId": "azure_service.api.snapshot.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/azure.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/azure.SnapshotId"
           }
         ],
@@ -7615,14 +8338,17 @@
             "$ref": "#/components/responses/azure.UnexpectedError"
           }
         },
-        "tags": ["azure"]
+        "tags": [
+          "azure"
+        ]
       }
     },
     "/api/v1/aws/compute/availabilityZones": {
       "get": {
         "description": "List all availability zones",
         "operationId": "aws_service.api.availability_zones.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
           }
         ],
@@ -7641,13 +8367,16 @@
             "description": "List of availability zones"
           }
         },
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/flavors": {
       "get": {
         "operationId": "aws_service.api.flavors.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
           }
         ],
@@ -7667,15 +8396,19 @@
           }
         },
         "summary": "Lists flavors",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/flavors/{flavor_id}": {
       "get": {
         "operationId": "aws_service.api.flavor.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.FlavorId"
           }
         ],
@@ -7695,16 +8428,20 @@
           }
         },
         "summary": "Get flavor by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/images/{image_id}": {
       "get": {
         "deprecated": true,
         "operationId": "aws_service.api.image.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.ImageId"
           }
         ],
@@ -7727,19 +8464,25 @@
           }
         },
         "summary": "Gets image by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/interfaces": {
       "get": {
         "operationId": "aws_service.api.interfaces.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.FilterVmId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.FilterNetworkId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.FilterSubnetId"
           }
         ],
@@ -7762,17 +8505,22 @@
           }
         },
         "summary": "Gets interfaces for specified subscription",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/keypairs": {
       "get": {
         "operationId": "aws_service.api.keypairs.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZone"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZoneId"
           }
         ],
@@ -7795,13 +8543,16 @@
           }
         },
         "summary": "Lists keypairs",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/keypairs/generate": {
       "post": {
         "operationId": "aws_service.api.keypair_generate.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
           }
         ],
@@ -7834,13 +8585,16 @@
           }
         },
         "summary": "Create a new keypair",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/keypairs/import": {
       "post": {
         "operationId": "aws_service.api.keypair_import.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
           }
         ],
@@ -7873,15 +8627,19 @@
           }
         },
         "summary": "Import a new public key",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/keypairs/{keypair_id}": {
       "delete": {
         "operationId": "aws_service.api.keypair.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.KeypairId"
           }
         ],
@@ -7897,13 +8655,17 @@
           }
         },
         "summary": "Delete keypair by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "get": {
         "operationId": "aws_service.api.keypair.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.KeypairId"
           }
         ],
@@ -7926,17 +8688,22 @@
           }
         },
         "summary": "Get keypair by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/networks": {
       "get": {
         "operationId": "aws_service.api.networks.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZone"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZoneId"
           }
         ],
@@ -7959,19 +8726,25 @@
           }
         },
         "summary": "Gets list of all networks",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/networks/{network_id}/subnets": {
       "get": {
         "operationId": "aws_service.api.network_subnets.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.NetworkId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZoneId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZone"
           }
         ],
@@ -7997,15 +8770,19 @@
           }
         },
         "summary": "Lists subnets of specified network and subscription",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/privateImages": {
       "get": {
         "operationId": "aws_service.api.private_images.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.ImageNameFilter"
           }
         ],
@@ -8031,15 +8808,19 @@
           }
         },
         "summary": "Lists private images",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/privateImages/{image_id}": {
       "get": {
         "operationId": "aws_service.api.private_image.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.ImageId"
           }
         ],
@@ -8062,15 +8843,19 @@
           }
         },
         "summary": "Gets private image by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/publicImages": {
       "get": {
         "operationId": "aws_service.api.public_images.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.ImageNameFilter"
           }
         ],
@@ -8096,15 +8881,19 @@
           }
         },
         "summary": "Lists public images",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/publicImages/{image_id}": {
       "get": {
         "operationId": "aws_service.api.public_image.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.ImageId"
           }
         ],
@@ -8127,14 +8916,17 @@
           }
         },
         "summary": "Gets public image by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/regions": {
       "get": {
         "description": "Lists regions",
         "operationId": "aws_service.api.regions.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.OptionalSubscriptionId"
           }
         ],
@@ -8153,15 +8945,19 @@
             "description": "List of regions"
           }
         },
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/securityGroups": {
       "get": {
         "operationId": "aws_service.api.security_groups.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.FilterVmId"
           }
         ],
@@ -8187,15 +8983,19 @@
           }
         },
         "summary": "Lists security groups for specified subscription",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/snapshots": {
       "get": {
         "operationId": "aws_service.api.snapshots.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.FilterVmId"
           }
         ],
@@ -8221,11 +9021,14 @@
           }
         },
         "summary": "Lists snapshots",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "post": {
         "operationId": "aws_service.api.snapshots.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
           }
         ],
@@ -8261,15 +9064,19 @@
           }
         },
         "summary": "Creates a new snapshot",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/snapshots/{snapshot_id}": {
       "delete": {
         "operationId": "aws_service.api.snapshot.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.SnapshotId"
           }
         ],
@@ -8288,7 +9095,9 @@
           }
         },
         "summary": "Deletes snapshots",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/validateSubscription": {
@@ -8313,17 +9122,22 @@
             "$ref": "#/components/responses/aws.BadRequest"
           }
         },
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms": {
       "get": {
         "operationId": "aws_service.api.vms.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZoneId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZone"
           }
         ],
@@ -8346,12 +9160,15 @@
           }
         },
         "summary": "Gets list of all vms",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "post": {
         "description": "Create a new virtual machine",
         "operationId": "aws_service.api.vms.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
           }
         ],
@@ -8386,15 +9203,19 @@
             "$ref": "#/components/responses/aws.GatewayTiemout"
           }
         },
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms/{vm_id}": {
       "delete": {
         "operationId": "aws_service.api.vm.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8413,13 +9234,17 @@
           }
         },
         "summary": "Deletes VM by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "get": {
         "operationId": "aws_service.api.vm.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8442,13 +9267,17 @@
           }
         },
         "summary": "Gets vm by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "patch": {
         "operationId": "aws_service.api.vm.patch",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8480,17 +9309,22 @@
           }
         },
         "summary": "Modify VM properties",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms/{vm_id}/command/{action}": {
       "put": {
         "operationId": "aws_service.api.vm_command.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.Action"
           }
         ],
@@ -8512,15 +9346,19 @@
           }
         },
         "summary": "Excecutes power action on a VM",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms/{vm_id}/details": {
       "get": {
         "operationId": "aws_service.api.vm_details.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8546,15 +9384,19 @@
           }
         },
         "summary": "Gets VM details",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms/{vm_id}/management": {
       "get": {
         "operationId": "aws_service.api.vm_management.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8577,16 +9419,20 @@
           }
         },
         "summary": "Gets management status for a VM",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms/{vm_id}/password": {
       "get": {
         "description": "Get encrypted password for a VM",
         "operationId": "aws_service.api.vm_password.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8608,17 +9454,22 @@
             "$ref": "#/components/responses/aws.UnexpectedError"
           }
         },
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms/{vm_id}/securityGroups/{security_group_id}": {
       "delete": {
         "operationId": "aws_service.api.vm_security_group.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.SecurityGroupId"
           }
         ],
@@ -8640,15 +9491,20 @@
           }
         },
         "summary": "Removes Security Group from a specified VM",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "put": {
         "operationId": "aws_service.api.vm_security_group.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.SecurityGroupId"
           }
         ],
@@ -8670,15 +9526,19 @@
           }
         },
         "summary": "Assign Security Group to a specified VM",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms/{vm_id}/setTag": {
       "put": {
         "operationId": "aws_service.api.vm_tag.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8707,15 +9567,19 @@
           }
         },
         "summary": "Set tag value for VM",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/vms/{vm_id}/workshift": {
       "delete": {
         "operationId": "aws_service.api.vm_workshift.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8734,13 +9598,17 @@
           }
         },
         "summary": "Delete VM Workshift",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "post": {
         "operationId": "aws_service.api.vm_workshift.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8777,13 +9645,17 @@
           }
         },
         "summary": "Add a workshift to the VM",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "put": {
         "operationId": "aws_service.api.vm_workshift.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmId"
           }
         ],
@@ -8820,17 +9692,22 @@
           }
         },
         "summary": "Update VM Workshift",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/volumeTypes": {
       "get": {
         "operationId": "aws_service.api.volume_types.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.IsOSCompatible"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZoneId"
           }
         ],
@@ -8853,21 +9730,28 @@
           }
         },
         "summary": "Gets a list of all volume types user can create volume with",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/volumes": {
       "get": {
         "operationId": "aws_service.api.volumes.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZoneId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.AvailabilityZone"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VolumeStatus"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.IsOSDisk"
           }
         ],
@@ -8890,11 +9774,14 @@
           }
         },
         "summary": "Gets list of all volumes",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "post": {
         "operationId": "aws_service.api.volumes.post",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
           }
         ],
@@ -8927,15 +9814,19 @@
           }
         },
         "summary": "Creates a new EBS volume",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/volumes/{volume_id}": {
       "delete": {
         "operationId": "aws_service.api.volume.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VolumeId"
           }
         ],
@@ -8954,13 +9845,17 @@
           }
         },
         "summary": "Deletes volume by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "get": {
         "operationId": "aws_service.api.volume.get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VolumeId"
           }
         ],
@@ -8983,13 +9878,17 @@
           }
         },
         "summary": "Gets volume by id",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       },
       "patch": {
         "operationId": "aws_service.api.volume.patch",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VolumeId"
           }
         ],
@@ -9021,18 +9920,23 @@
           }
         },
         "summary": "Modify volume properties",
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/volumes/{volume_id}/attach": {
       "put": {
         "description": "Attach volume to specified VM",
         "operationId": "aws_service.api.volume_attachment.put",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VolumeId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmIdQuery"
           }
         ],
@@ -9060,18 +9964,23 @@
             "$ref": "#/components/responses/aws.UnexpectedError"
           }
         },
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     },
     "/api/v1/aws/compute/volumes/{volume_id}/detach": {
       "delete": {
         "description": "Detach volume from a specified vm",
         "operationId": "aws_service.api.volume_attachment.delete",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/components/parameters/aws.SubscriptionId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VolumeId"
-          }, {
+          },
+          {
             "$ref": "#/components/parameters/aws.VmIdQuery"
           }
         ],
@@ -9092,7 +10001,9 @@
             "$ref": "#/components/responses/aws.UnexpectedError"
           }
         },
-        "tags": ["aws"]
+        "tags": [
+          "aws"
+        ]
       }
     }
   },
@@ -9487,7 +10398,9 @@
       },
       "analytics.Error": {
         "type": "object",
-        "required": ["message"],
+        "required": [
+          "message"
+        ],
         "properties": {
           "message": {
             "type": "string"
@@ -9511,7 +10424,10 @@
             "type": "string"
           }
         },
-        "required": ["username", "password"],
+        "required": [
+          "username",
+          "password"
+        ],
         "type": "object"
       },
       "auth.Error": {
@@ -9574,7 +10490,15 @@
             "type": "string"
           }
         },
-        "required": ["ssoURL", "providerId", "certificate", "name", "usernameAttribute", "emailAttribute", "groupsAttribute"],
+        "required": [
+          "ssoURL",
+          "providerId",
+          "certificate",
+          "name",
+          "usernameAttribute",
+          "emailAttribute",
+          "groupsAttribute"
+        ],
         "type": "object"
       },
       "auth.SamlConfigs": {
@@ -9589,7 +10513,9 @@
             "type": "string"
           }
         },
-        "required": ["token"],
+        "required": [
+          "token"
+        ],
         "type": "object"
       },
       "auth.UnexpectedError": {
@@ -9621,7 +10547,10 @@
             "$ref": "#/components/schemas/user.Password"
           }
         },
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object"
       },
       "user.Error": {
@@ -9642,7 +10571,9 @@
             "type": "string"
           }
         },
-        "required": ["email"],
+        "required": [
+          "email"
+        ],
         "type": "object"
       },
       "user.InvalidCredentials": {
@@ -9672,7 +10603,11 @@
             "type": "string"
           }
         },
-        "required": ["email", "token", "newPassword"],
+        "required": [
+          "email",
+          "token",
+          "newPassword"
+        ],
         "type": "object"
       },
       "user.PasswordUpdate": {
@@ -9684,21 +10619,33 @@
             "$ref": "#/components/schemas/user.Password"
           }
         },
-        "required": ["currentPassword", "newPassword"],
+        "required": [
+          "currentPassword",
+          "newPassword"
+        ],
         "type": "object"
       },
       "user.Permissions": {
-        "enum": ["read", "write", "delete"],
+        "enum": [
+          "read",
+          "write",
+          "delete"
+        ],
         "type": "string"
       },
       "user.RoleUpdate": {
         "properties": {
           "role": {
-            "enum": ["admin", "user"],
+            "enum": [
+              "admin",
+              "user"
+            ],
             "type": "string"
           }
         },
-        "required": ["role"],
+        "required": [
+          "role"
+        ],
         "type": "object"
       },
       "user.ServiceUnavailable": {
@@ -9710,7 +10657,9 @@
             "type": "string"
           }
         },
-        "required": ["subId"],
+        "required": [
+          "subId"
+        ],
         "type": "object"
       },
       "user.Token": {
@@ -9722,7 +10671,10 @@
             "type": "string"
           }
         },
-        "required": ["email", "token"],
+        "required": [
+          "email",
+          "token"
+        ],
         "type": "object"
       },
       "user.Unauthorized": {
@@ -9738,7 +10690,9 @@
             "type": "string"
           }
         },
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "type": "object"
       },
       "user.User": {
@@ -9762,11 +10716,18 @@
             "type": "string"
           },
           "role": {
-            "enum": ["admin", "user"],
+            "enum": [
+              "admin",
+              "user"
+            ],
             "type": "string"
           }
         },
-        "required": ["name", "email", "role"],
+        "required": [
+          "name",
+          "email",
+          "role"
+        ],
         "type": "object"
       },
       "user.Users": {
@@ -9811,7 +10772,10 @@
       "config.MailProvider": {
         "type": "object",
         "description": "Default mail provider",
-        "required": ["name", "service"],
+        "required": [
+          "name",
+          "service"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -9913,7 +10877,10 @@
       },
       "config.CreateManagementTool": {
         "type": "object",
-        "required": ["name", "endpointUrl"],
+        "required": [
+          "name",
+          "endpointUrl"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -9941,7 +10908,10 @@
       },
       "config.UpdateManagementTool": {
         "type": "object",
-        "required": ["name", "endpointUrl"],
+        "required": [
+          "name",
+          "endpointUrl"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -9969,7 +10939,13 @@
       },
       "subscr.Subscription": {
         "type": "object",
-        "required": ["id", "platformId", "name", "ownerId", "regionId"],
+        "required": [
+          "id",
+          "platformId",
+          "name",
+          "ownerId",
+          "regionId"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -10117,7 +11093,12 @@
       },
       "subscr.CreateSubscription": {
         "type": "object",
-        "required": ["platformId", "name", "policy", "regionId"],
+        "required": [
+          "platformId",
+          "name",
+          "policy",
+          "regionId"
+        ],
         "properties": {
           "platformId": {
             "type": "string",
@@ -10184,7 +11165,9 @@
       },
       "subscr.ModifySubscription": {
         "type": "object",
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -10347,7 +11330,11 @@
       },
       "subscr.Status": {
         "type": "string",
-        "enum": ["optional", "required", "disabled"]
+        "enum": [
+          "optional",
+          "required",
+          "disabled"
+        ]
       },
       "subscr.WorkshiftSchedule": {
         "type": "object",
@@ -10367,7 +11354,15 @@
             "minItems": 1,
             "items": {
               "type": "string",
-              "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+              "enum": [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri",
+                "sat",
+                "sun"
+              ]
             },
             "uniqueItems": true
           }
@@ -10376,7 +11371,9 @@
       },
       "subscr.Error": {
         "type": "object",
-        "required": ["message"],
+        "required": [
+          "message"
+        ],
         "properties": {
           "message": {
             "type": "string"
@@ -10405,7 +11402,10 @@
           "operatingSystem": {
             "type": "string",
             "description": "Operating system",
-            "enum": ["linux", "windows"]
+            "enum": [
+              "linux",
+              "windows"
+            ]
           }
         }
       },
@@ -10502,7 +11502,9 @@
       },
       "mgmt.Error": {
         "type": "object",
-        "required": ["message"],
+        "required": [
+          "message"
+        ],
         "properties": {
           "message": {
             "type": "string"
@@ -10527,7 +11529,9 @@
       },
       "mgmt.Subscrption": {
         "type": "object",
-        "required": ["subscriptionId"],
+        "required": [
+          "subscriptionId"
+        ],
         "properties": {
           "subscriptionId": {
             "type": "string",
@@ -10537,7 +11541,12 @@
       },
       "mgmt.ReplaceApp": {
         "type": "object",
-        "required": ["name", "installCommand", "uninstallCommand", "description"],
+        "required": [
+          "name",
+          "installCommand",
+          "uninstallCommand",
+          "description"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -10562,7 +11571,15 @@
       },
       "mgmt.App": {
         "type": "object",
-        "required": ["id", "name", "installCommand", "uninstallCommand", "description", "toolId", "updatedAt"],
+        "required": [
+          "id",
+          "name",
+          "installCommand",
+          "uninstallCommand",
+          "description",
+          "toolId",
+          "updatedAt"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -10598,7 +11615,11 @@
       },
       "mgmt.Task": {
         "type": "object",
-        "required": ["id", "toolId", "payload"],
+        "required": [
+          "id",
+          "toolId",
+          "payload"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -10616,7 +11637,15 @@
       },
       "mgmt.AppInstance": {
         "type": "object",
-        "required": ["id", "createdAt", "subscriptionId", "vmId", "appName", "state", "installTaskId"],
+        "required": [
+          "id",
+          "createdAt",
+          "subscriptionId",
+          "vmId",
+          "appName",
+          "state",
+          "installTaskId"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -10638,15 +11667,25 @@
           },
           "state": {
             "type": "string",
-            "enum": ["INITIAL", "INSTALLING", "INSTALL_SUCCEEDED", "INSTALL_FAILED", "UNINSTALLING", "UNINSTALL_SUCCEEDED", "UNINSTALL_FAILED"]
+            "enum": [
+              "INITIAL",
+              "INSTALLING",
+              "INSTALL_SUCCEEDED",
+              "INSTALL_FAILED",
+              "UNINSTALLING",
+              "UNINSTALL_SUCCEEDED",
+              "UNINSTALL_FAILED"
+            ]
           },
           "installTaskId": {
             "$ref": "#/components/schemas/mgmt.Task/properties/id"
           },
           "uninstallTaskId": {
-            "allOf": [{
+            "allOf": [
+              {
                 "$ref": "#/components/schemas/mgmt.Task/properties/id"
-              }, {
+              },
+              {
                 "nullable": true
               }
             ]
@@ -10659,7 +11698,12 @@
       },
       "mgmt.ToolToken": {
         "type": "object",
-        "required": ["name", "toolId", "value", "createdAt"],
+        "required": [
+          "name",
+          "toolId",
+          "value",
+          "createdAt"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -10715,7 +11759,11 @@
             "type": "array"
           }
         },
-        "required": ["name", "isRequired", "values"],
+        "required": [
+          "name",
+          "isRequired",
+          "values"
+        ],
         "type": "object"
       },
       "tag.TagNotFound": {
@@ -10737,7 +11785,10 @@
             "type": "array"
           }
         },
-        "required": ["isRequired", "values"],
+        "required": [
+          "isRequired",
+          "values"
+        ],
         "type": "object"
       },
       "tag.TagValue": {
@@ -10752,7 +11803,9 @@
             "type": "string"
           }
         },
-        "required": ["value"],
+        "required": [
+          "value"
+        ],
         "type": "object"
       },
       "tag.Tags": {
@@ -10770,7 +11823,11 @@
       "notif.Message": {
         "type": "object",
         "description": "Send Email",
-        "required": ["subject", "body", "recipients"],
+        "required": [
+          "subject",
+          "body",
+          "recipients"
+        ],
         "properties": {
           "subject": {
             "type": "string",
@@ -10877,7 +11934,12 @@
             "type": "string"
           }
         },
-        "required": ["id", "url", "contentType", "enabled"],
+        "required": [
+          "id",
+          "url",
+          "contentType",
+          "enabled"
+        ],
         "type": "object"
       },
       "webhook.WebhookNotFound": {
@@ -10895,7 +11957,11 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["linux", "windows", "unknown"]
+            "enum": [
+              "linux",
+              "windows",
+              "unknown"
+            ]
           },
           "distribution": {
             "type": "string",
@@ -10906,11 +11972,18 @@
       "img_whitelist.OSDetailsAddUpdate": {
         "type": "object",
         "description": "Operating system details to add/update",
-        "required": ["type", "distribution"],
+        "required": [
+          "type",
+          "distribution"
+        ],
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["linux", "windows", "unknown"]
+            "enum": [
+              "linux",
+              "windows",
+              "unknown"
+            ]
           },
           "distribution": {
             "type": "string"
@@ -10920,7 +11993,15 @@
       "img_whitelist.ImageAdd": {
         "type": "object",
         "description": "Image data",
-        "required": ["id", "name", "minDiskInGb", "maxDiskInGb", "minRamInMb", "os", "isPrivate"],
+        "required": [
+          "id",
+          "name",
+          "minDiskInGb",
+          "maxDiskInGb",
+          "minRamInMb",
+          "os",
+          "isPrivate"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -10950,7 +12031,9 @@
       "img_whitelist.ImageUpdate": {
         "type": "object",
         "description": "Operating system",
-        "required": ["os"],
+        "required": [
+          "os"
+        ],
         "properties": {
           "os": {
             "$ref": "#/components/schemas/img_whitelist.OSDetailsAddUpdate"
@@ -11056,7 +12139,9 @@
       },
       "img_whitelist.HttpError": {
         "type": "object",
-        "required": ["message"],
+        "required": [
+          "message"
+        ],
         "properties": {
           "message": {
             "type": "string"
@@ -11064,7 +12149,12 @@
         }
       },
       "vmware.Action": {
-        "enum": ["start", "poweroff", "softReboot", "hardReboot"],
+        "enum": [
+          "start",
+          "poweroff",
+          "softReboot",
+          "hardReboot"
+        ],
         "example": "start",
         "title": "action",
         "type": "string"
@@ -11082,7 +12172,11 @@
             "type": "string"
           }
         },
-        "required": ["available", "name", "id"],
+        "required": [
+          "available",
+          "name",
+          "id"
+        ],
         "title": "AvailabilityZone",
         "type": "object"
       },
@@ -11099,12 +12193,24 @@
             "type": "string"
           }
         },
-        "required": ["vmId", "name", "description"],
+        "required": [
+          "vmId",
+          "name",
+          "description"
+        ],
         "title": "Craete Snapshot",
         "type": "object"
       },
       "vmware.Day": {
-        "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+        "enum": [
+          "mon",
+          "tue",
+          "wed",
+          "thu",
+          "fri",
+          "sat",
+          "sun"
+        ],
         "example": "mon",
         "title": "Day",
         "type": "string"
@@ -11141,7 +12247,12 @@
             "type": "integer"
           }
         },
-        "required": ["id", "name", "ramInMb", "vcpus"],
+        "required": [
+          "id",
+          "name",
+          "ramInMb",
+          "vcpus"
+        ],
         "title": "Flavor",
         "type": "object"
       },
@@ -11151,7 +12262,9 @@
             "type": "string"
           }
         },
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "title": "GenerateKeypair",
         "type": "object"
       },
@@ -11180,7 +12293,10 @@
             "type": "boolean"
           }
         },
-        "required": ["id", "ip"],
+        "required": [
+          "id",
+          "ip"
+        ],
         "title": "IPv4Address",
         "type": "object"
       },
@@ -11210,7 +12326,14 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "minRamInMb", "minDiskInGb", "maxDiskInGb", "isPrivate"],
+        "required": [
+          "id",
+          "name",
+          "minRamInMb",
+          "minDiskInGb",
+          "maxDiskInGb",
+          "isPrivate"
+        ],
         "title": "Image",
         "type": "object"
       },
@@ -11226,7 +12349,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "publicKey"],
+        "required": [
+          "name",
+          "publicKey"
+        ],
         "title": "ImportKeypair",
         "type": "object"
       },
@@ -11265,7 +12391,12 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "macAddress", "ipv4Addresses"],
+        "required": [
+          "id",
+          "name",
+          "macAddress",
+          "ipv4Addresses"
+        ],
         "title": "Interface",
         "type": "object"
       },
@@ -11280,7 +12411,10 @@
             "type": "string"
           }
         },
-        "required": ["vmId", "subnetId"],
+        "required": [
+          "vmId",
+          "subnetId"
+        ],
         "title": "InterfaceAttachment",
         "type": "object"
       },
@@ -11296,7 +12430,11 @@
             "type": "string"
           }
         },
-        "required": ["name", "id", "fingerprint"],
+        "required": [
+          "name",
+          "id",
+          "fingerprint"
+        ],
         "title": "Keypair",
         "type": "object"
       },
@@ -11306,7 +12444,9 @@
             "$ref": "#/components/schemas/vmware.Status"
           }
         },
-        "required": ["status"],
+        "required": [
+          "status"
+        ],
         "title": "Management",
         "type": "object"
       },
@@ -11319,7 +12459,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "id"],
+        "required": [
+          "name",
+          "id"
+        ],
         "title": "Network",
         "type": "object"
       },
@@ -11341,7 +12484,12 @@
             "type": "string"
           }
         },
-        "required": ["name", "id", "fingerprint", "privateKey"],
+        "required": [
+          "name",
+          "id",
+          "fingerprint",
+          "privateKey"
+        ],
         "title": "NewKeypair",
         "type": "object"
       },
@@ -11364,7 +12512,13 @@
             "type": "string"
           }
         },
-        "required": ["size", "typeId", "availabilityZone", "name", "vmId"],
+        "required": [
+          "size",
+          "typeId",
+          "availabilityZone",
+          "name",
+          "vmId"
+        ],
         "title": "NewVolume",
         "type": "object"
       },
@@ -11387,12 +12541,25 @@
             "type": "string"
           }
         },
-        "required": ["encryptedPassword"],
+        "required": [
+          "encryptedPassword"
+        ],
         "title": "Password",
         "type": "object"
       },
       "vmware.PowerState": {
-        "enum": ["running", "unknown", "noState", "pending", "paused", "stopped", "crashed", "terminated", "terminating", "rebooting"],
+        "enum": [
+          "running",
+          "unknown",
+          "noState",
+          "pending",
+          "paused",
+          "stopped",
+          "crashed",
+          "terminated",
+          "terminating",
+          "rebooting"
+        ],
         "example": "running",
         "title": "PowerState",
         "type": "string"
@@ -11423,7 +12590,14 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "minRamInMb", "minDiskInGb", "maxDiskInGb", "isPrivate"],
+        "required": [
+          "id",
+          "name",
+          "minRamInMb",
+          "minDiskInGb",
+          "maxDiskInGb",
+          "isPrivate"
+        ],
         "title": "PublicPrivateImage",
         "type": "object"
       },
@@ -11436,7 +12610,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "id"],
+        "required": [
+          "name",
+          "id"
+        ],
         "title": "Region",
         "type": "object"
       },
@@ -11459,12 +12636,22 @@
             "type": "string"
           }
         },
-        "required": ["id", "vmId", "name", "createdAt", "description"],
+        "required": [
+          "id",
+          "vmId",
+          "name",
+          "createdAt",
+          "description"
+        ],
         "title": "Snapshot",
         "type": "object"
       },
       "vmware.Status": {
-        "enum": ["available", "notAvailable", "notEnabled"],
+        "enum": [
+          "available",
+          "notAvailable",
+          "notEnabled"
+        ],
         "example": "available",
         "title": "Status",
         "type": "string"
@@ -11481,7 +12668,9 @@
             "type": "string"
           }
         },
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "title": "Subnet",
         "type": "object"
       },
@@ -11500,7 +12689,12 @@
             "type": "string"
           }
         },
-        "required": ["username", "password", "authenticationUrl", "regionId"],
+        "required": [
+          "username",
+          "password",
+          "authenticationUrl",
+          "regionId"
+        ],
         "title": "Subscription",
         "type": "object"
       },
@@ -11520,7 +12714,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "value"],
+        "required": [
+          "name",
+          "value"
+        ],
         "title": "Tag",
         "type": "object"
       },
@@ -11537,7 +12734,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "value"],
+        "required": [
+          "name",
+          "value"
+        ],
         "type": "object"
       },
       "vmware.UpdateVmParams": {
@@ -11642,7 +12842,21 @@
             "$ref": "#/components/schemas/vmware.OptionalWorkshift"
           }
         },
-        "required": ["id", "name", "powerState", "allowedPowerActions", "flavorId", "volumes", "interfaces", "isManaged", "managementToolId", "imageId", "keypairId", "tags", "availabilityZoneId"],
+        "required": [
+          "id",
+          "name",
+          "powerState",
+          "allowedPowerActions",
+          "flavorId",
+          "volumes",
+          "interfaces",
+          "isManaged",
+          "managementToolId",
+          "imageId",
+          "keypairId",
+          "tags",
+          "availabilityZoneId"
+        ],
         "title": "VM",
         "type": "object"
       },
@@ -11719,7 +12933,17 @@
             "$ref": "#/components/schemas/vmware.OptionalWorkshift"
           }
         },
-        "required": ["name", "imageId", "flavorId", "keypairId", "volumeSize", "volumeTypeId", "securityGroups", "availabilityZone", "tags"],
+        "required": [
+          "name",
+          "imageId",
+          "flavorId",
+          "keypairId",
+          "volumeSize",
+          "volumeTypeId",
+          "securityGroups",
+          "availabilityZone",
+          "tags"
+        ],
         "title": "VMCreate",
         "type": "object"
       },
@@ -11737,7 +12961,10 @@
             "type": "string"
           }
         },
-        "required": ["key", "value"],
+        "required": [
+          "key",
+          "value"
+        ],
         "title": "VM details",
         "type": "object"
       },
@@ -11785,7 +13012,17 @@
             "uniqueItems": true
           }
         },
-        "required": ["id", "name", "powerState", "flavorId", "imageId", "isManaged", "managementToolId", "availabilityZoneId", "tags"],
+        "required": [
+          "id",
+          "name",
+          "powerState",
+          "flavorId",
+          "imageId",
+          "isManaged",
+          "managementToolId",
+          "availabilityZoneId",
+          "tags"
+        ],
         "title": "VmSimple",
         "type": "object"
       },
@@ -11814,7 +13051,10 @@
                 "type": "string"
               }
             },
-            "required": ["device", "vmId"],
+            "required": [
+              "device",
+              "vmId"
+            ],
             "type": "object"
           },
           "id": {
@@ -11846,7 +13086,15 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "sizeInGb", "status", "typeId", "isOsDisk", "attachment"],
+        "required": [
+          "id",
+          "name",
+          "sizeInGb",
+          "status",
+          "typeId",
+          "isOsDisk",
+          "attachment"
+        ],
         "type": "object"
       },
       "vmware.VolumeId": {
@@ -11854,7 +13102,12 @@
         "type": "string"
       },
       "vmware.VolumeStatus": {
-        "enum": ["available", "inUse", "error", "unknown"],
+        "enum": [
+          "available",
+          "inUse",
+          "error",
+          "unknown"
+        ],
         "type": "string"
       },
       "vmware.VolumeType": {
@@ -11982,7 +13235,11 @@
       "azure.VolumeTypeId": {
         "type": "string",
         "example": "Premium_LRS",
-        "enum": ["Premium_LRS", "Standard_LRS", "StandardSSD_LRS"]
+        "enum": [
+          "Premium_LRS",
+          "Standard_LRS",
+          "StandardSSD_LRS"
+        ]
       },
       "azure.NetworkId": {
         "type": "string",
@@ -12030,7 +13287,13 @@
       },
       "azure.Snapshot": {
         "type": "object",
-        "required": ["id", "vmId", "name", "createdAt", "description"],
+        "required": [
+          "id",
+          "vmId",
+          "name",
+          "createdAt",
+          "description"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.SnapshotId"
@@ -12054,7 +13317,11 @@
       },
       "azure.CreateSnapshot": {
         "type": "object",
-        "required": ["vmId", "name", "description"],
+        "required": [
+          "vmId",
+          "name",
+          "description"
+        ],
         "properties": {
           "vmId": {
             "type": "string"
@@ -12070,7 +13337,10 @@
       },
       "azure.Region": {
         "type": "object",
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.RegionId"
@@ -12089,7 +13359,14 @@
       "azure.PublicPrivateImage": {
         "type": "object",
         "description": "An image that can be used to provision virtual machine",
-        "required": ["id", "name", "minDiskInGb", "maxDiskInGb", "minRamInMb", "isPrivate"],
+        "required": [
+          "id",
+          "name",
+          "minDiskInGb",
+          "maxDiskInGb",
+          "minRamInMb",
+          "isPrivate"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.ImageId"
@@ -12127,7 +13404,11 @@
       },
       "azure.AvailabilityZone": {
         "type": "object",
-        "required": ["id", "name", "isAvailable"],
+        "required": [
+          "id",
+          "name",
+          "isAvailable"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.AvailabilityZoneId"
@@ -12155,7 +13436,11 @@
       },
       "azure.AvailabilitySet": {
         "type": "object",
-        "required": ["id", "name", "resourceGroupId"],
+        "required": [
+          "id",
+          "name",
+          "resourceGroupId"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.AvailabilitySetId"
@@ -12172,7 +13457,14 @@
       },
       "azure.Flavor": {
         "type": "object",
-        "required": ["id", "name", "ramInMb", "vcpus", "diskInGb", "compatibleVolumeTypeIds"],
+        "required": [
+          "id",
+          "name",
+          "ramInMb",
+          "vcpus",
+          "diskInGb",
+          "compatibleVolumeTypeIds"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.FlavorId"
@@ -12212,9 +13504,11 @@
             "readOnly": true,
             "description": "List of volume types that can be attached to this virtual machine as data volumes",
             "items": {
-              "allOf": [{
+              "allOf": [
+                {
                   "$ref": "#/components/schemas/azure.VolumeTypeId"
-                }, {
+                },
+                {
                   "uniqueItems": true
                 }
               ]
@@ -12224,7 +13518,18 @@
       },
       "azure.VMSimple": {
         "type": "object",
-        "required": ["id", "name", "isManaged", "managementToolId", "flavorId", "imageId", "powerState", "availabilityZoneId", "availabilityZone", "tags"],
+        "required": [
+          "id",
+          "name",
+          "isManaged",
+          "managementToolId",
+          "flavorId",
+          "imageId",
+          "powerState",
+          "availabilityZoneId",
+          "availabilityZone",
+          "tags"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.VMId"
@@ -12237,9 +13542,11 @@
             "deprecated": true
           },
           "managementToolId": {
-            "anyOf": [{
+            "anyOf": [
+              {
                 "$ref": "#/components/schemas/azure.ManagementToolId"
-              }, {
+              },
+              {
                 "nullable": true
               }
             ]
@@ -12248,16 +13555,23 @@
             "$ref": "#/components/schemas/azure.FlavorId"
           },
           "imageId": {
-            "anyOf": [{
+            "anyOf": [
+              {
                 "$ref": "#/components/schemas/azure.ImageId"
-              }, {
+              },
+              {
                 "nullable": true
               }
             ]
           },
           "powerState": {
             "type": "string",
-            "enum": ["unknown", "running", "stopped", "pending"]
+            "enum": [
+              "unknown",
+              "running",
+              "stopped",
+              "pending"
+            ]
           },
           "createdAt": {
             "type": "string",
@@ -12270,17 +13584,21 @@
           },
           "availabilityZone": {
             "description": "Deprecated after 3 months. Please use `availabilityZoneId`",
-            "allOf": [{
+            "allOf": [
+              {
                 "$ref": "#/components/schemas/azure.AvailabilityZoneId"
-              }, {
+              },
+              {
                 "deprecated": true
               }
             ]
           },
           "availabilitySetId": {
-            "anyOf": [{
+            "anyOf": [
+              {
                 "$ref": "#/components/schemas/azure.AvailabilitySetId"
-              }, {
+              },
+              {
                 "nullable": true
               }
             ]
@@ -12308,11 +13626,18 @@
         }
       },
       "azure.VMExtended": {
-        "allOf": [{
+        "allOf": [
+          {
             "$ref": "#/components/schemas/azure.VMSimple"
-          }, {
+          },
+          {
             "type": "object",
-            "required": ["interfaceIds", "volumeIds", "allowedPowerActions", "status"],
+            "required": [
+              "interfaceIds",
+              "volumeIds",
+              "allowedPowerActions",
+              "status"
+            ],
             "properties": {
               "interfaceIds": {
                 "type": "array",
@@ -12361,7 +13686,11 @@
               "status": {
                 "type": "string",
                 "readOnly": true,
-                "enum": ["ok", "error", "pending"]
+                "enum": [
+                  "ok",
+                  "error",
+                  "pending"
+                ]
               },
               "statusMessage": {
                 "type": "string",
@@ -12379,9 +13708,17 @@
               "flavorId": "Standard_A1",
               "imageId": "Canonical.UbuntuServer1404LTS-ARM.1.0.54",
               "powerState": "running",
-              "interfaceIds": ["nic-my-auzre-vm-DefaultNetworkingvn404"],
-              "volumeIds": ["PROVISIONING-TEST~my-azure-vm_OsDisk_1_8d07c99dc9284284b9ead23870579161"],
-              "allowedPowerActions": ["poweroff", "softReboot", "hardReboot"],
+              "interfaceIds": [
+                "nic-my-auzre-vm-DefaultNetworkingvn404"
+              ],
+              "volumeIds": [
+                "PROVISIONING-TEST~my-azure-vm_OsDisk_1_8d07c99dc9284284b9ead23870579161"
+              ],
+              "allowedPowerActions": [
+                "poweroff",
+                "softReboot",
+                "hardReboot"
+              ],
               "status": "ok",
               "workshift": null
             }
@@ -12390,7 +13727,16 @@
       },
       "azure.VMCreateData": {
         "type": "object",
-        "required": ["name", "imageId", "flavorId", "keypairId", "volumeSize", "volumeTypeId", "tags", "resourceGroupId"],
+        "required": [
+          "name",
+          "imageId",
+          "flavorId",
+          "keypairId",
+          "volumeSize",
+          "volumeTypeId",
+          "tags",
+          "resourceGroupId"
+        ],
         "description": "Provisioning properties for virtual machine. Note the deprecated fields. Look at the descriptions of each deprecated field to see their valid counterparts. Having both, deprecated and valid, fields present in the request is treated as an error with the exception for \"securityGroupIds\" aliasing \"securityGroups\" and \"availabilityZoneId\" aliasing \"availabilityZone\".\nConstraints:\n- \"flavorId\" - flavor identifier must point to a valid flavor that is\n  compatible with selected image (via \"imageId\") and selected\n  volumeType (via \"volumeTypeId\"). Also, if you are trying to provision a managed VM\n  with Windows operating system flavor should have at least 3.5GB of RAM.\n- \"imageId\" - image identifier defined in whitelist for Azure subscription.\n  Image ID must point to a valid image therefore it must exist,\n  have a known operating system and have a non empty list of\n  compatible flavors.\n- \"keypairId\" - keypair identifier. Works differently, based on on OS of the image\n  (via \"imageId\"). For Windows machines it is used to encrypt the initial password to log in to the machine.\n  For linux machines it is used as a SSH key that is uploaded to the machine\n- \"volumeTypeId\" - A type of the OS volume. It has point to valid volume type\n  therefore it must exist and have a list of known compatible flavors\n- \"volumeSize\" - size of the OS volume. Note that the size cannot be larger than\n  1000GB and smaller than minimum disk size defined by an image (via \"imageId\")\n- \"tags\"- tags (name and value) to be assigned to this VM. This list can be empty if\n  you opt out from tagging the virtual machine. However, if there are\n  required tags defined in the system, all of those have to be included here. This list cannot\n  contain duplicated tags (via \"name\") and all \"name\"s as well as each \"value\" assigned to it must be known\n  to the system. Provided any of those prerequisites is not met, an error is returned.\n- \"workshift\"- This can be set or not. Note that it must be set and\n  match the workshift defined in subscription if the latter\n  enforces it as well it must not be set if the subscription disallows workshifts. If you are unsure as to\n  what is permitted here, you may consult a workshift policy defined for your subscription\n\nImplementation details:\n- access via password is not set for Linux machines, only SSH-ing into\n  the machine is enabled\n- if VM is to be managed, a special agent is installed on the machine to\n  enable any operations, such as application installation\n",
         "properties": {
           "name": {
@@ -12451,9 +13797,11 @@
             }
           },
           "avalabilityZone": {
-            "allOf": [{
+            "allOf": [
+              {
                 "$ref": "#/components/schemas/azure.AvailabilityZoneId"
-              }, {
+              },
+              {
                 "deprecated": true,
                 "description": "\"availabilityZone\" is deprecated in favor of \"availabilityZoneId\" and will be removed in 3 months."
               }
@@ -12486,9 +13834,11 @@
             "description": "\"managementEnabled\" is deprecated in favor of \"managementToolId\" and will be removed in 3 months."
           },
           "managementToolId": {
-            "anyOf": [{
+            "anyOf": [
+              {
                 "$ref": "#/components/schemas/azure.ManagementToolId"
-              }, {
+              },
+              {
                 "nullable": true
               }
             ]
@@ -12498,12 +13848,20 @@
       "azure.VMPowerAction": {
         "type": "string",
         "uniqueItems": true,
-        "enum": ["start", "poweroff", "softReboot", "hardReboot"]
+        "enum": [
+          "start",
+          "poweroff",
+          "softReboot",
+          "hardReboot"
+        ]
       },
       "azure.VolumeAttachment": {
         "type": "object",
         "nullable": true,
-        "required": ["device", "vmId"],
+        "required": [
+          "device",
+          "vmId"
+        ],
         "properties": {
           "device": {
             "type": "string",
@@ -12517,7 +13875,18 @@
       },
       "azure.Volume": {
         "type": "object",
-        "required": ["id", "name", "createdAt", "sizeInGb", "status", "typeId", "isOsDisk", "tags", "attachment", "availabilityZoneId"],
+        "required": [
+          "id",
+          "name",
+          "createdAt",
+          "sizeInGb",
+          "status",
+          "typeId",
+          "isOsDisk",
+          "tags",
+          "attachment",
+          "availabilityZoneId"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.VolumeId"
@@ -12576,7 +13945,10 @@
       "azure.Tag": {
         "type": "object",
         "description": "Tag that is assigned to the virtual machine",
-        "required": ["name", "value"],
+        "required": [
+          "name",
+          "value"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -12591,7 +13963,10 @@
       "azure.TagUpdate": {
         "type": "object",
         "description": "Tag update data. It will unset tag from a VM if null value is passed.",
-        "required": ["name", "value"],
+        "required": [
+          "name",
+          "value"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -12607,7 +13982,10 @@
       "azure.Workshift": {
         "type": "object",
         "description": "Workshift for this VM composed out of start (when to start) and stop (when to stop) virtual machine\n",
-        "required": ["start", "stop"],
+        "required": [
+          "start",
+          "stop"
+        ],
         "properties": {
           "start": {
             "$ref": "#/components/schemas/azure.WorkshiftSchedule"
@@ -12618,9 +13996,11 @@
         }
       },
       "azure.OptionalWorkshift": {
-        "anyOf": [{
+        "anyOf": [
+          {
             "$ref": "#/components/schemas/azure.Workshift"
-          }, {
+          },
+          {
             "type": "object",
             "nullable": true
           }
@@ -12629,7 +14009,11 @@
       "azure.WorkshiftSchedule": {
         "type": "object",
         "description": "Describes when power state of a VM should be affected. It is composed out of hour:minute and list of days when aforementioned power state change should happen\n",
-        "required": ["hour", "minute", "days"],
+        "required": [
+          "hour",
+          "minute",
+          "days"
+        ],
         "properties": {
           "minute": {
             "type": "integer",
@@ -12647,16 +14031,32 @@
             "minItems": 1,
             "items": {
               "type": "string",
-              "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+              "enum": [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri",
+                "sat",
+                "sun"
+              ]
             },
             "uniqueItems": true,
-            "example": ["mon", "sun"]
+            "example": [
+              "mon",
+              "sun"
+            ]
           }
         }
       },
       "azure.Keypair": {
         "type": "object",
-        "required": ["id", "name", "fingerprint", "publicKey"],
+        "required": [
+          "id",
+          "name",
+          "fingerprint",
+          "publicKey"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.KeypairId"
@@ -12679,7 +14079,9 @@
       "azure.KeypairGenerate": {
         "type": "object",
         "description": "Requests body to generate a keypair. The public and private keys will be generated for the user.\n",
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "$ref": "#/components/schemas/azure.KeypairName"
@@ -12692,7 +14094,10 @@
       "azure.KeypairImport": {
         "type": "object",
         "description": "Requests body to import a keypair.\n",
-        "required": ["name", "publicKey"],
+        "required": [
+          "name",
+          "publicKey"
+        ],
         "properties": {
           "name": {
             "$ref": "#/components/schemas/azure.KeypairName"
@@ -12708,12 +14113,16 @@
         }
       },
       "azure.GeneratedKeypair": {
-        "allOf": [{
+        "allOf": [
+          {
             "$ref": "#/components/schemas/azure.Keypair"
-          }, {
+          },
+          {
             "type": "object",
             "description": "Remember that private keypair must be downloaded/saved on the disk in order to use it when accessing the virtual machine or decoding its password. It will not be possible to retrieve later.\n",
-            "required": ["privateKey"],
+            "required": [
+              "privateKey"
+            ],
             "properties": {
               "privateKey": {
                 "type": "string",
@@ -12734,7 +14143,12 @@
       },
       "azure.VolumeStatus": {
         "type": "string",
-        "enum": ["available", "inUse", "error", "unknown"]
+        "enum": [
+          "available",
+          "inUse",
+          "error",
+          "unknown"
+        ]
       },
       "azure.VolumeType": {
         "type": "object",
@@ -12765,7 +14179,12 @@
       },
       "azure.CreateVolume": {
         "type": "object",
-        "required": ["name", "size", "typeId", "resourceGroupId"],
+        "required": [
+          "name",
+          "size",
+          "typeId",
+          "resourceGroupId"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -12787,17 +14206,21 @@
           },
           "availabilityZone": {
             "description": "Deprecated after 3 months. Please use `availabilityZoneId`",
-            "allOf": [{
+            "allOf": [
+              {
                 "$ref": "#/components/schemas/azure.AvailabilityZoneId"
-              }, {
+              },
+              {
                 "deprecated": true
               }
             ]
           },
           "vmId": {
-            "anyOf": [{
+            "anyOf": [
+              {
                 "$ref": "#/components/schemas/azure.VMId"
-              }, {
+              },
+              {
                 "nullable": true
               }
             ]
@@ -12806,7 +14229,9 @@
       },
       "azure.PatchVolume": {
         "type": "object",
-        "required": ["sizeInGb"],
+        "required": [
+          "sizeInGb"
+        ],
         "properties": {
           "sizeInGb": {
             "type": "integer"
@@ -12815,7 +14240,11 @@
       },
       "azure.Network": {
         "type": "object",
-        "required": ["id", "name", "addressPrefix"],
+        "required": [
+          "id",
+          "name",
+          "addressPrefix"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.NetworkId"
@@ -12832,7 +14261,11 @@
       },
       "azure.Subnet": {
         "type": "object",
-        "required": ["id", "name", "cidr"],
+        "required": [
+          "id",
+          "name",
+          "cidr"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.SubnetId"
@@ -12849,7 +14282,14 @@
       },
       "azure.IPv4Address": {
         "type": "object",
-        "required": ["id", "name", "allowedActions", "isDirectlyAssociated", "isFloating", "isPublic"],
+        "required": [
+          "id",
+          "name",
+          "allowedActions",
+          "isDirectlyAssociated",
+          "isFloating",
+          "isPublic"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.Ipv4AddressId"
@@ -12891,12 +14331,17 @@
       },
       "azure.InterfaceAttachment": {
         "type": "object",
-        "required": ["vmId", "subnetId"],
+        "required": [
+          "vmId",
+          "subnetId"
+        ],
         "properties": {
           "vmId": {
-            "anyOf": [{
+            "anyOf": [
+              {
                 "$ref": "#/components/schemas/azure.VMId"
-              }, {
+              },
+              {
                 "nullable": true
               }
             ]
@@ -12908,7 +14353,15 @@
       },
       "azure.Interface": {
         "type": "object",
-        "required": ["id", "name", "primary", "networkId", "networkName", "ipv4Addresses", "attachment"],
+        "required": [
+          "id",
+          "name",
+          "primary",
+          "networkId",
+          "networkName",
+          "ipv4Addresses",
+          "attachment"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.InterfaceId"
@@ -12946,7 +14399,10 @@
       },
       "azure.SecurityGroup": {
         "type": "object",
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
             "$ref": "#/components/schemas/azure.SecurityGroupId"
@@ -12959,7 +14415,11 @@
       },
       "azure.VmFloatingIp": {
         "type": "object",
-        "required": ["id", "floatingIpAddress", "interfaceId"],
+        "required": [
+          "id",
+          "floatingIpAddress",
+          "interfaceId"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -12978,18 +14438,27 @@
       },
       "azure.ManagementStatus": {
         "type": "object",
-        "required": ["status"],
+        "required": [
+          "status"
+        ],
         "properties": {
           "status": {
             "type": "string",
             "readOnly": true,
-            "enum": ["available", "notAvailable", "notEnabled"]
+            "enum": [
+              "available",
+              "notAvailable",
+              "notEnabled"
+            ]
           }
         }
       },
       "azure.ResourceGroup": {
         "type": "object",
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -13005,7 +14474,9 @@
       },
       "azure.CreateResourceGroup": {
         "type": "object",
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -13017,7 +14488,10 @@
       },
       "azure.VmDetails": {
         "type": "object",
-        "required": ["key", "value"],
+        "required": [
+          "key",
+          "value"
+        ],
         "properties": {
           "key": {
             "type": "string",
@@ -13033,7 +14507,9 @@
       },
       "azure.EncryptedPassword": {
         "type": "object",
-        "required": ["encryptedPassword"],
+        "required": [
+          "encryptedPassword"
+        ],
         "properties": {
           "encryptedPassword": {
             "type": "string",
@@ -13053,7 +14529,9 @@
       "azure.Error": {
         "type": "object",
         "description": "An error response",
-        "required": ["message"],
+        "required": [
+          "message"
+        ],
         "properties": {
           "message": {
             "type": "string",
@@ -13063,7 +14541,13 @@
       },
       "azure.Subscription": {
         "type": "object",
-        "required": ["regionId", "spUsername", "spPassword", "platformSubscriptionId", "tenantId"],
+        "required": [
+          "regionId",
+          "spUsername",
+          "spPassword",
+          "platformSubscriptionId",
+          "tenantId"
+        ],
         "properties": {
           "regionId": {
             "type": "string",
@@ -13118,7 +14602,9 @@
             "type": "string"
           }
         },
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "type": "object"
       },
       "aws.CreateSnapshotParams": {
@@ -13133,7 +14619,11 @@
             "type": "string"
           }
         },
-        "required": ["vmId", "name", "description"],
+        "required": [
+          "vmId",
+          "name",
+          "description"
+        ],
         "type": "object"
       },
       "aws.CreateVolumeParams": {
@@ -13161,7 +14651,11 @@
             "type": "string"
           }
         },
-        "required": ["size", "typeId", "name"],
+        "required": [
+          "size",
+          "typeId",
+          "name"
+        ],
         "type": "object"
       },
       "aws.EncryptedPassword": {
@@ -13170,7 +14664,9 @@
             "type": "string"
           }
         },
-        "required": ["encryptedPassword"],
+        "required": [
+          "encryptedPassword"
+        ],
         "type": "object"
       },
       "aws.Error": {
@@ -13179,7 +14675,9 @@
             "type": "string"
           }
         },
-        "required": ["message"],
+        "required": [
+          "message"
+        ],
         "type": "object"
       },
       "aws.Flavor": {
@@ -13218,7 +14716,14 @@
             "type": "integer"
           }
         },
-        "required": ["id", "name", "ramInMb", "diskInGb", "vcpus", "compatibleVolumeTypeIds"],
+        "required": [
+          "id",
+          "name",
+          "ramInMb",
+          "diskInGb",
+          "vcpus",
+          "compatibleVolumeTypeIds"
+        ],
         "type": "object"
       },
       "aws.IPv4Address": {
@@ -13253,7 +14758,15 @@
             "type": "string"
           }
         },
-        "required": ["id", "ip", "name", "allowedActions", "isDirectlyAssociated", "isFloating", "isPublic"],
+        "required": [
+          "id",
+          "ip",
+          "name",
+          "allowedActions",
+          "isDirectlyAssociated",
+          "isFloating",
+          "isPublic"
+        ],
         "type": "object"
       },
       "aws.Image": {
@@ -13283,7 +14796,14 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "minRamInMb", "minDiskInGb", "maxDiskInGb", "isPrivate"],
+        "required": [
+          "id",
+          "name",
+          "minRamInMb",
+          "minDiskInGb",
+          "maxDiskInGb",
+          "isPrivate"
+        ],
         "type": "object"
       },
       "aws.ImportKeypair": {
@@ -13298,7 +14818,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "publicKey"],
+        "required": [
+          "name",
+          "publicKey"
+        ],
         "type": "object"
       },
       "aws.Interface": {
@@ -13328,7 +14851,15 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "networkId", "networkName", "ipv4Addresses", "attachment", "macAddress"],
+        "required": [
+          "id",
+          "name",
+          "networkId",
+          "networkName",
+          "ipv4Addresses",
+          "attachment",
+          "macAddress"
+        ],
         "type": "object"
       },
       "aws.InterfaceAttachment": {
@@ -13341,7 +14872,10 @@
             "type": "string"
           }
         },
-        "required": ["vmId", "subnetId"],
+        "required": [
+          "vmId",
+          "subnetId"
+        ],
         "type": "object"
       },
       "aws.Keypair": {
@@ -13364,14 +14898,23 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "fingerprint", "privateKey"],
+        "required": [
+          "id",
+          "name",
+          "fingerprint",
+          "privateKey"
+        ],
         "type": "object"
       },
       "aws.ManagementStatus": {
         "description": "Management status information",
         "properties": {
           "status": {
-            "enum": ["notAvailable", "notEnabled", "available"],
+            "enum": [
+              "notAvailable",
+              "notEnabled",
+              "available"
+            ],
             "type": "string"
           }
         },
@@ -13391,7 +14934,11 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "addressPrefix"],
+        "required": [
+          "id",
+          "name",
+          "addressPrefix"
+        ],
         "type": "object"
       },
       "aws.NetworkId": {
@@ -13408,13 +14955,18 @@
             "type": "string"
           }
         },
-        "required": ["device", "vmId"],
+        "required": [
+          "device",
+          "vmId"
+        ],
         "type": "object"
       },
       "aws.OptionalWorkshift": {
-        "anyOf": [{
+        "anyOf": [
+          {
             "$ref": "#/components/schemas/aws.Workshift"
-          }, {
+          },
+          {
             "nullable": true,
             "type": "object"
           }
@@ -13432,7 +14984,10 @@
             "type": "string"
           }
         },
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "type": "object"
       },
       "aws.SecurityGroup": {
@@ -13444,7 +14999,10 @@
             "type": "string"
           }
         },
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "type": "object"
       },
       "aws.Snapshot": {
@@ -13466,7 +15024,13 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "description", "vmId", "createdAt"],
+        "required": [
+          "id",
+          "name",
+          "description",
+          "vmId",
+          "createdAt"
+        ],
         "type": "object"
       },
       "aws.Subnet": {
@@ -13493,7 +15057,12 @@
             "type": "string"
           }
         },
-        "required": ["id", "name", "cidr", "availabilityZoneId"],
+        "required": [
+          "id",
+          "name",
+          "cidr",
+          "availabilityZoneId"
+        ],
         "type": "object"
       },
       "aws.SubscriptionId": {
@@ -13526,7 +15095,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "value"],
+        "required": [
+          "name",
+          "value"
+        ],
         "type": "object"
       },
       "aws.UpdateVmParams": {
@@ -13544,7 +15116,9 @@
             "type": "integer"
           }
         },
-        "required": ["sizeInGb"],
+        "required": [
+          "sizeInGb"
+        ],
         "type": "object"
       },
       "aws.VMCreate": {
@@ -13634,7 +15208,15 @@
             "$ref": "#/components/schemas/aws.OptionalWorkshift"
           }
         },
-        "required": ["name", "imageId", "flavorId", "keypairId", "volumeSize", "volumeTypeId", "tags"],
+        "required": [
+          "name",
+          "imageId",
+          "flavorId",
+          "keypairId",
+          "volumeSize",
+          "volumeTypeId",
+          "tags"
+        ],
         "type": "object"
       },
       "aws.VMDetail": {
@@ -13646,13 +15228,18 @@
             "type": "string"
           }
         },
-        "required": ["key", "value"],
+        "required": [
+          "key",
+          "value"
+        ],
         "type": "object"
       },
       "aws.VMExtended": {
-        "allOf": [{
+        "allOf": [
+          {
             "$ref": "#/components/schemas/aws.VMSimple"
-          }, {
+          },
+          {
             "properties": {
               "allowedPowerActions": {
                 "items": {
@@ -13680,7 +15267,11 @@
                 "uniqueItems": true
               },
               "status": {
-                "enum": ["ok", "error", "pending"],
+                "enum": [
+                  "ok",
+                  "error",
+                  "pending"
+                ],
                 "readOnly": true,
                 "type": "string"
               },
@@ -13708,13 +15299,23 @@
                 "$ref": "#/components/schemas/aws.OptionalWorkshift"
               }
             },
-            "required": ["interfaceIds", "volumeIds", "allowedPowerActions", "status"],
+            "required": [
+              "interfaceIds",
+              "volumeIds",
+              "allowedPowerActions",
+              "status"
+            ],
             "type": "object"
           }
         ]
       },
       "aws.VMPowerAction": {
-        "enum": ["start", "poweroff", "softReboot", "hardReboot"],
+        "enum": [
+          "start",
+          "poweroff",
+          "softReboot",
+          "hardReboot"
+        ],
         "type": "string",
         "uniqueItems": true
       },
@@ -13755,7 +15356,15 @@
             "type": "string"
           },
           "powerState": {
-            "enum": ["unknown", "running", "stopped", "pending", "noState", "terminating", "terminated"],
+            "enum": [
+              "unknown",
+              "running",
+              "stopped",
+              "pending",
+              "noState",
+              "terminating",
+              "terminated"
+            ],
             "type": "string"
           },
           "tags": {
@@ -13768,7 +15377,18 @@
             "uniqueItems": true
           }
         },
-        "required": ["id", "name", "isManaged", "managementToolId", "flavorId", "imageId", "powerState", "tags", "availabilityZoneId", "availabilityZone"],
+        "required": [
+          "id",
+          "name",
+          "isManaged",
+          "managementToolId",
+          "flavorId",
+          "imageId",
+          "powerState",
+          "tags",
+          "availabilityZoneId",
+          "availabilityZone"
+        ],
         "type": "object"
       },
       "aws.ValidateSubscription": {
@@ -13786,7 +15406,11 @@
             "type": "string"
           }
         },
-        "required": ["accessKey", "secretKey", "regionId"],
+        "required": [
+          "accessKey",
+          "secretKey",
+          "regionId"
+        ],
         "type": "object"
       },
       "aws.Volume": {
@@ -13843,7 +15467,18 @@
             "$ref": "#/components/schemas/aws.VolumeTypeId"
           }
         },
-        "required": ["id", "createdAt", "sizeInGb", "status", "name", "availabilityZoneId", "attachment", "typeId", "isOsDisk", "tags"],
+        "required": [
+          "id",
+          "createdAt",
+          "sizeInGb",
+          "status",
+          "name",
+          "availabilityZoneId",
+          "attachment",
+          "typeId",
+          "isOsDisk",
+          "tags"
+        ],
         "type": "object"
       },
       "aws.VolumeAttachment": {
@@ -13856,11 +15491,21 @@
             "type": "string"
           }
         },
-        "required": ["device", "vmId"],
+        "required": [
+          "device",
+          "vmId"
+        ],
         "type": "object"
       },
       "aws.VolumeStatus": {
-        "enum": ["available", "inUse", "pending", "error", "deleted", "unknown"],
+        "enum": [
+          "available",
+          "inUse",
+          "pending",
+          "error",
+          "deleted",
+          "unknown"
+        ],
         "type": "string"
       },
       "aws.VolumeType": {
@@ -13888,7 +15533,14 @@
         "type": "object"
       },
       "aws.VolumeTypeId": {
-        "enum": ["gp2", "io1", "st1", "sc1", "standard", "unknown"],
+        "enum": [
+          "gp2",
+          "io1",
+          "st1",
+          "sc1",
+          "standard",
+          "unknown"
+        ],
         "example": "Premium_LRS",
         "type": "string"
       },
@@ -13901,14 +15553,25 @@
             "$ref": "#/components/schemas/aws.WorkshiftSchedule"
           }
         },
-        "required": ["start", "stop"],
+        "required": [
+          "start",
+          "stop"
+        ],
         "type": "object"
       },
       "aws.WorkshiftSchedule": {
         "properties": {
           "days": {
             "items": {
-              "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+              "enum": [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri",
+                "sat",
+                "sun"
+              ],
               "type": "string"
             },
             "minItems": 1,
@@ -13926,7 +15589,11 @@
             "type": "integer"
           }
         },
-        "required": ["hour", "minute", "days"],
+        "required": [
+          "hour",
+          "minute",
+          "days"
+        ],
         "type": "object"
       }
     },
@@ -13956,7 +15623,11 @@
         "description": "Platform id",
         "schema": {
           "type": "string",
-          "enum": ["aws", "azure", "vmware"]
+          "enum": [
+            "aws",
+            "azure",
+            "vmware"
+          ]
         }
       },
       "subscr.subscription_id": {
@@ -14320,7 +15991,12 @@
         "name": "action",
         "required": true,
         "schema": {
-          "enum": ["start", "poweroff", "softReboot", "hardReboot"],
+          "enum": [
+            "start",
+            "poweroff",
+            "softReboot",
+            "hardReboot"
+          ],
           "type": "string"
         }
       },

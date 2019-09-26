@@ -1,1 +1,73 @@
-{"swagger": "2.0", "info": {"version": "1.0.0", "title": "Notify service", "description": "Service for notifications for users"}, "host": "emeia-eos.fcsm.io", "schemes": ["https"], "basePath": "/api/v1/notification", "paths": {"/email": {"post": {"summary": "Send email", "description": "Send email", "operationId": "send_email", "parameters": [{"name": "message", "in": "body", "required": true, "description": "Message data", "schema": {"$ref": "#/definitions/Message"}}], "responses": {"200": {"description": "OK"}, "400": {"description": "unsupported mail provider"}}}}}, "definitions": {"Message": {"type": "object", "description": "Send Email", "required": ["subject", "body", "recipients"], "properties": {"subject": {"type": "string", "description": "Email subject"}, "body": {"type": "string", "description": "Email body"}, "recipients": {"type": "array", "description": "List of recipients email addresses", "items": {"type": "string"}}, "providerId": {"type": "string", "description": "Optional parameter to specify provider id (managed in config service)"}}}}}
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Notify service",
+    "description": "Service for notifications for users"
+  },
+  "host": "emeia-eos.fcsm.io",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1/notification",
+  "paths": {
+    "/email": {
+      "post": {
+        "summary": "Send email",
+        "description": "Send email",
+        "operationId": "send_email",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "body",
+            "required": true,
+            "description": "Message data",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "unsupported mail provider"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Message": {
+      "type": "object",
+      "description": "Send Email",
+      "required": [
+        "subject",
+        "body",
+        "recipients"
+      ],
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Email subject"
+        },
+        "body": {
+          "type": "string",
+          "description": "Email body"
+        },
+        "recipients": {
+          "type": "array",
+          "description": "List of recipients email addresses",
+          "items": {
+            "type": "string"
+          }
+        },
+        "providerId": {
+          "type": "string",
+          "description": "Optional parameter to specify provider id (managed in config service)"
+        }
+      }
+    }
+  }
+}
